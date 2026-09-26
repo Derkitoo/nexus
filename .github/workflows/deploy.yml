@@ -34,7 +34,9 @@ jobs:
         run: npm ci
 
       - name: Build static site with Next.js
-        run: npm run build
+        run: |
+          npm run build
+          touch out/.nojekyll
         env:
           GITHUB_ACTIONS: "true"
 

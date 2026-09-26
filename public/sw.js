@@ -1,15 +1,15 @@
 // Service Worker for BJJ Nexus - Offline PWA Capability
-const CACHE_NAME = 'bjj-nexus-cache-v1';
+const CACHE_NAME = 'bjj-nexus-cache-v2';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/manifest.json',
-  '/icon',
+  './',
+  './manifest.json',
+  './icon.png',
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(ASSETS_TO_CACHE).catch(() => {});
     })
   );
   self.skipWaiting();
@@ -52,7 +52,7 @@ self.addEventListener('fetch', (event) => {
       return fetch(event.request).catch(() => {
         // If offline and request is HTML, return root
         if (event.request.headers.get('accept')?.includes('text/html')) {
-          return caches.match('/');
+          return caches.match('./');
         }
       });
     })

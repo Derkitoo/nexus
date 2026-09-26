@@ -6,7 +6,6 @@ const repoName = 'nexus';
 const nextConfig: NextConfig = {
   output: isGithubPages ? 'export' : undefined,
   basePath: isGithubPages ? `/${repoName}` : '',
-  assetPrefix: isGithubPages ? `/${repoName}/` : '',
   images: {
     unoptimized: true,
   },

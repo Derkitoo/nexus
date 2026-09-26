@@ -2,13 +2,13 @@
   "name": "BJJ Nexus - Tactical GPS",
   "short_name": "BJJ Nexus",
   "description": "Tactical Brazilian Jiu-Jitsu Action-Reaction Flow Engine",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
-      "src": "/icon",
+      "src": "icon.png",
       "sizes": "64x64",
       "type": "image/png"
     }
