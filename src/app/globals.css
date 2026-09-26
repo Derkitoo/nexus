@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  /* Apple iOS Dark Palette (System Dark) */
+  --ios-bg: #000000;
+  --ios-surface: #1c1c1e;
+  --ios-surface-elevated: #2c2c2e;
+  --ios-surface-glass: rgba(28, 28, 30, 0.75);
+  --ios-border: rgba(255, 255, 255, 0.1);
+  --ios-separator: rgba(255, 255, 255, 0.08);
+  
+  --ios-blue: #0a84ff;
+  --ios-green: #30d158;
+  --ios-red: #ff453a;
+  --ios-amber: #ffd60a;
+  --ios-indigo: #5e5ce6;
+  --ios-teal: #64d2ff;
+}
+
+@theme inline {
+  --color-ios-bg: var(--ios-bg);
+  --color-ios-surface: var(--ios-surface);
+  --color-ios-surface-elevated: var(--ios-surface-elevated);
+  --color-ios-blue: var(--ios-blue);
+  --color-ios-green: var(--ios-green);
+  --color-ios-red: var(--ios-red);
+  --color-ios-amber: var(--ios-amber);
+}
+
+html {
+  color-scheme: dark;
+  background-color: #000000;
+}
+
+body {
+  background-color: #000000;
+  color: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* Apple Frosted Glass Materials */
+.ios-glass {
+  background-color: rgba(28, 28, 30, 0.72);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ios-glass-dark {
+  background-color: rgba(18, 18, 20, 0.85);
+  backdrop-filter: blur(30px) saturate(190%);
+  -webkit-backdrop-filter: blur(30px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ios-glass-sheet {
+  background-color: rgba(22, 22, 26, 0.92);
+  backdrop-filter: blur(35px) saturate(200%);
+  -webkit-backdrop-filter: blur(35px) saturate(200%);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Apple Inset Grouped Card */
+.ios-card {
+  background-color: #1c1c1e;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ios-card-interactive {
+  background-color: #1c1c1e;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: transform 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
+.ios-card-interactive:active {
+  transform: scale(0.98);
+  background-color: #242426;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile Viewport Container styled like an iPhone */
+.tactical-viewport-container {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  background-color: #000000;
+  box-shadow: 0 0 70px rgba(0, 0, 0, 0.95);
+}
+
+@media (min-width: 768px) {
+  .tactical-viewport-container {
+    max-width: 460px;
+    margin: 20px auto;
+    min-height: calc(100vh - 40px);
+    border-radius: 44px;
+    border: 8px solid #2c2c2e;
+    overflow: hidden;
+  }
+}
+
+/* Apple Spring Animations */
+@keyframes appleSpringIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-spring-in {
+  animation: appleSpringIn 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Hide scrollbars cleanly */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+  -webkit-tap-highlight-color: transparent;
+}
