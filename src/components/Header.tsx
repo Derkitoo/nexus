@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Compass, ChevronDown, Clock } from 'lucide-react';
+import { Compass, ChevronDown, Clock, Sun, Moon } from 'lucide-react';
 import { UserProfile } from '@/types/bjj';
 import { soundFX } from '@/utils/audioFeedback';
+import { useTheme } from '@/context/ThemeContext';
 
 interface HeaderProps {
   userProfile: UserProfile;
@@ -17,7 +18,7 @@ const BELT_CONFIGS: Record<UserProfile['belt'], { label: string; color: string; 
   Blue: { label: 'Ceinture Bleue', color: 'text-blue-400', bg: 'bg-[#0a84ff]' },
   Purple: { label: 'Ceinture Violette', color: 'text-purple-400', bg: 'bg-[#bf5af2]' },
   Brown: { label: 'Ceinture Marron', color: 'text-amber-500', bg: 'bg-[#a2845e]' },
-  Black: { label: 'Ceinture Noire', color: 'text-red-500', bg: 'bg-[#2c2c2e] border border-red-500/80' }
+  Black: { label: 'Ceinture Noire', color: 'text-red-500', bg: 'bg-[#18181b] border border-red-500/80' }
 };
 
 export const Header: React.FC<HeaderProps> = ({ 
@@ -27,6 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenTimer,
 }) => {
   const currentBelt = BELT_CONFIGS[userProfile.belt];
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-40 ios-glass border-b border-white/10 px-4 pt-3 pb-2.5">
@@ -51,8 +53,21 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Right Actions: Sparring Timer & Belt Passport */}
+        {/* Right Actions: Theme Toggle, Sparring Timer & Belt Passport */}
         <div className="flex items-center gap-2">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 active:scale-95 transition-all border border-white/10 flex items-center justify-center text-white/80 shadow-xs"
+            title={theme === 'light' ? 'Activer le mode Sombre' : 'Activer le mode Clair'}
+          >
+            {theme === 'light' ? (
+              <Moon className="w-4 h-4 text-[#007aff]" />
+            ) : (
+              <Sun className="w-4 h-4 text-[#ffd60a]" />
+            )}
+          </button>
+
           {onOpenTimer && (
             <button
               onClick={() => {

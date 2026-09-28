@@ -92,7 +92,7 @@ export const AppleTabBar: React.FC<AppleTabBarProps> = ({
         </div>
 
         {/* Apple iOS Home Indicator Bar */}
-        <div className="w-32 h-1 bg-white/20 rounded-full mx-auto mt-2 mb-1" />
+        <div className="home-indicator w-32 h-1 bg-white/20 rounded-full mx-auto mt-2 mb-1" />
       </div>
     </nav>
   );

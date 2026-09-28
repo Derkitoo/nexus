@@ -203,7 +203,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen bg-black text-white relative">
+    <div className="flex-1 flex flex-col min-h-screen relative">
       {/* iOS Top Bar (sur Itinéraires, Fight IQ et Journal) */}
       {activeTab !== 'gps' && (
         <Header
