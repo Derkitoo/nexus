@@ -288,7 +288,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             soundFX.playClick();
             onNavigateToTab('journal');
           }}
-          className="ios-card-interactive p-3.5 flex items-center justify-between cursor-pointer border border-[#0a84ff]/25 bg-gradient-to-r from-[#0a84ff]/10 via-[#1c1c1e] to-[#1c1c1e] group"
+          className="ios-card-interactive p-3.5 flex items-center justify-between cursor-pointer border border-[#0a84ff]/25 bg-gradient-to-r from-[#0a84ff]/10 to-transparent dark:from-[#0a84ff]/15 dark:via-[#1c1c1e] dark:to-[#1c1c1e] group"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-[#0a84ff]/20 border border-[#0a84ff]/30 flex items-center justify-center text-[#0a84ff] shrink-0">
@@ -320,7 +320,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {onLaunchDrill && (
         <div
           onClick={onLaunchDrill}
-          className="ios-card-interactive p-4 flex items-center justify-between cursor-pointer border border-[#ffd60a]/20 bg-gradient-to-r from-[#ffd60a]/10 via-[#1c1c1e] to-[#1c1c1e]"
+          className="ios-card-interactive p-4 flex items-center justify-between cursor-pointer border border-[#ffd60a]/25 bg-gradient-to-r from-[#ffd60a]/10 to-transparent dark:from-[#ffd60a]/15 dark:via-[#1c1c1e] dark:to-[#1c1c1e]"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-[#ffd60a]/20 border border-[#ffd60a]/30 flex items-center justify-center text-[#ffd60a] shrink-0">

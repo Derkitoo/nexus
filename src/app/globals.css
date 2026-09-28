@@ -427,3 +427,27 @@ html:not(.dark) textarea.bg-black\/60 {
   color: #1c1c1e !important;
   border-color: rgba(0, 0, 0, 0.1) !important;
 }
+
+/* 10. Inner Containers & Form Elements with dark utility classes in Light Mode */
+html:not(.dark) div.bg-black\/30,
+html:not(.dark) div.bg-black\/40,
+html:not(.dark) div.bg-black\/50,
+html:not(.dark) div.bg-black\/60 {
+  background-color: #f2f2f7 !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) p.bg-black\/40,
+html:not(.dark) p.bg-black\/30 {
+  background-color: #f2f2f7 !important;
+  color: #1c1c1e !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Fallback: Ensure gradients with via-[#1c1c1e] or to-[#1c1c1e] never turn black in light mode */
+html:not(.dark) .via-\[\#1c1c1e\] {
+  --tw-gradient-via: #ffffff !important;
+}
+html:not(.dark) .to-\[\#1c1c1e\] {
+  --tw-gradient-to: #ffffff !important;
+}

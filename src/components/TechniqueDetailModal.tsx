@@ -132,7 +132,7 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
               </div>
 
               {/* Status Segmented Buttons */}
-              <div className="grid grid-cols-4 gap-1 p-0.5 bg-black/40 rounded-xl border border-white/5">
+              <div className="grid grid-cols-4 gap-1 p-0.5 bg-[#e5e5ea] dark:bg-black/40 rounded-xl border border-black/5 dark:border-white/5">
                 <button
                   onClick={() => {
                     soundFX.playClick();
@@ -140,8 +140,8 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
                   }}
                   className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                     currentStatus === 'to_learn'
-                      ? 'bg-white/20 text-white shadow-sm ring-1 ring-white/30'
-                      : 'text-white/40 hover:text-white/70'
+                      ? 'bg-white dark:bg-white/20 text-[#1c1c1e] dark:text-white shadow-sm ring-1 ring-black/10 dark:ring-white/30'
+                      : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
                   }`}
                 >
                   ⚪ Découverte
@@ -154,7 +154,7 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
                   className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                     currentStatus === 'drilling'
                       ? 'bg-[#ffd60a] text-black shadow-sm font-extrabold'
-                      : 'text-white/40 hover:text-white/70'
+                      : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
                   }`}
                 >
                   🟡 Drill
@@ -166,8 +166,8 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
                   }}
                   className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                     currentStatus === 'sparring_ready'
-                      ? 'bg-[#0a84ff] text-white shadow-sm font-extrabold'
-                      : 'text-white/40 hover:text-white/70'
+                      ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-sm font-extrabold'
+                      : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
                   }`}
                 >
                   🔵 Sparring
@@ -180,7 +180,7 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
                   className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                     currentStatus === 'mastered'
                       ? 'bg-[#af52de] text-white shadow-sm font-extrabold'
-                      : 'text-white/40 hover:text-white/70'
+                      : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
                   }`}
                 >
                   🟣 Réflexe
@@ -188,25 +188,25 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
               </div>
 
               {/* Fast Reps Buttons */}
-              <div className="flex items-center justify-between text-xs pt-1 border-t border-white/5">
+              <div className="flex items-center justify-between text-xs pt-1 border-t border-black/5 dark:border-white/5">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] text-white/50">Drill:</span>
+                  <span className="text-[10px] text-[#8e8e93] dark:text-white/50">Drill:</span>
                   <button
                     onClick={() => onUpdateReps(technique.id, 5, 0)}
-                    className="px-2 py-0.5 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-mono font-bold text-[10px]"
+                    className="px-2 py-0.5 rounded-lg bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 active:scale-95 text-[#1c1c1e] dark:text-white font-mono font-bold text-[10px] border border-black/5 dark:border-white/10"
                   >
                     +5 reps
                   </button>
                 </div>
 
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] text-white/50">Combat:</span>
+                  <span className="text-[10px] text-[#8e8e93] dark:text-white/50">Combat:</span>
                   <button
                     onClick={() => {
                       soundFX.playClick();
                       onUpdateReps(technique.id, 0, 1);
                     }}
-                    className="px-2 py-0.5 rounded-lg bg-[#0a84ff]/20 hover:bg-[#0a84ff]/30 text-[#0a84ff] active:scale-95 font-mono font-bold text-[10px]"
+                    className="px-2 py-0.5 rounded-lg bg-[#007aff]/15 dark:bg-[#0a84ff]/20 hover:bg-[#007aff]/25 dark:hover:bg-[#0a84ff]/30 text-[#007aff] dark:text-[#0a84ff] active:scale-95 font-mono font-bold text-[10px] border border-[#007aff]/25 dark:border-transparent"
                   >
                     +1 réussi
                   </button>
