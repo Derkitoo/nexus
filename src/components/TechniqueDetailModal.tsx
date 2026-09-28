@@ -68,8 +68,8 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
   const reactions = technique.reactions || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="ios-card-interactive w-full max-w-lg bg-[#161618] border border-white/15 rounded-t-3xl sm:rounded-3xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl animate-spring-in">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in select-none">
+      <div className="relative w-full max-w-lg bg-[#161618] border border-white/15 rounded-t-3xl sm:rounded-3xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl animate-spring-in">
         
         {/* Modal Header */}
         <div className="p-4 pb-3 flex items-center justify-between border-b border-white/10 shrink-0">

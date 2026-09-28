@@ -121,7 +121,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
               }}
               className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
                 selectedBelt === b
-                  ? 'bg-white text-black shadow-md'
+                  ? 'bg-[#0a84ff] text-white shadow-md'
                   : 'bg-white/10 text-white/60 hover:text-white'
               }`}
             >

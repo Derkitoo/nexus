@@ -161,7 +161,7 @@ export const BeltPassportModal: React.FC<BeltPassportModalProps> = ({
         {/* Content */}
         <div className="overflow-y-auto py-3 space-y-4 flex-1 pr-0.5">
           {/* Authentic BJJ Belt Visual Card (Apple Wallet Style) */}
-          <div className="relative overflow-hidden rounded-2xl p-4 border border-white/15 bg-gradient-to-br from-black/80 to-[#1c1c1e] shadow-xl">
+          <div className="relative overflow-hidden rounded-2xl p-4 border border-white/10 ios-card shadow-lg">
             {celebrating && (
               <div className="absolute inset-0 bg-[#0a84ff]/20 backdrop-blur-xs flex items-center justify-center z-20 animate-spring-in">
                 <span className="text-sm font-black text-white px-4 py-2 rounded-full bg-[#0a84ff] shadow-xl flex items-center gap-1.5">

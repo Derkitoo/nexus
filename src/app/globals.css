@@ -207,9 +207,34 @@ html:not(.dark) .bg-black {
   background-color: #f2f2f7 !important;
 }
 
-html:not(.dark) .bg-\[\#1c1c1e\] {
+html:not(.dark) .bg-\[\#1c1c1e\],
+html:not(.dark) .bg-\[\#161618\],
+html:not(.dark) .bg-\[\#0d0d0f\],
+html:not(.dark) .bg-\[\#18181b\],
+html:not(.dark) .bg-\[\#121214\],
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-950 {
   background-color: #ffffff !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .bg-slate-800 {
+  background-color: #f2f2f7 !important;
+}
+
+html:not(.dark) .border-slate-700,
+html:not(.dark) .border-slate-800 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html:not(.dark) .text-slate-400,
+html:not(.dark) .text-slate-300,
+html:not(.dark) .text-slate-200 {
+  color: #636366 !important;
+}
+
+html:not(.dark) .timer-bg-ring {
+  stroke: #e5e5ea !important;
 }
 
 html:not(.dark) .bg-\[\#2c2c2e\] {
@@ -221,10 +246,6 @@ html:not(.dark) .bg-\[\#2c2c2e\] {
 html:not(.dark) [class*="p-1 rounded-2xl bg-[#1c1c1e]"],
 html:not(.dark) [class*="bg-[#1c1c1e] p-1"] {
   background-color: #e5e5ea !important;
-}
-
-html:not(.dark) .bg-\[\#121214\] {
-  background-color: #ffffff !important;
 }
 
 html:not(.dark) .bg-white\/5 {
@@ -389,9 +410,20 @@ html:not(.dark) .border-\[\#ff453a\]\/30 {
 }
 
 /* 9. Modal Backdrops in Light Mode */
+html:not(.dark) .bg-black\/60,
+html:not(.dark) .bg-black\/70,
 html:not(.dark) .bg-black\/80,
 html:not(.dark) .bg-black\/85,
-html:not(.dark) .bg-black\/90 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(12px) !important;
+html:not(.dark) .bg-black\/90,
+html:not(.dark) .bg-slate-950\/85 {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+html:not(.dark) input.bg-black\/60,
+html:not(.dark) select.bg-black\/60,
+html:not(.dark) textarea.bg-black\/60 {
+  background-color: #f2f2f7 !important;
+  color: #1c1c1e !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
 }
