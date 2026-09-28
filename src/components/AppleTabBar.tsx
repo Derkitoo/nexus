@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Compass, Navigation, Zap, Flame, User } from 'lucide-react';
+import { Compass, Navigation, Zap, Flame, User, BookOpen } from 'lucide-react';
 import { soundFX } from '@/utils/audioFeedback';
 
-export type AppleTab = 'explore' | 'gps' | 'drill' | 'journal';
+export type AppleTab = 'explore' | 'techniques' | 'gps' | 'drill' | 'journal';
 
 interface AppleTabBarProps {
   currentTab: AppleTab;
@@ -22,6 +22,11 @@ export const AppleTabBar: React.FC<AppleTabBarProps> = ({
       id: 'explore' as AppleTab,
       label: 'Itinéraires',
       icon: Compass,
+    },
+    {
+      id: 'techniques' as AppleTab,
+      label: 'Techniques',
+      icon: BookOpen,
     },
     {
       id: 'gps' as AppleTab,

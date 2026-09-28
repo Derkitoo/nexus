@@ -12,6 +12,8 @@ import { CustomSystemModal } from '@/components/CustomSystemModal';
 import { SparringTimerModal } from '@/components/SparringTimerModal';
 import { IBJJFRulesModal } from '@/components/IBJJFRulesModal';
 import { BackupModal } from '@/components/BackupModal';
+import { TechniqueListView } from '@/components/TechniqueListView';
+import { TechniqueDetailModal } from '@/components/TechniqueDetailModal';
 import { AppleTabBar, AppleTab } from '@/components/AppleTabBar';
 import { INITIAL_TECHNIQUES, TACTICAL_SYSTEMS } from '@/data/bjjData';
 import { Technique, TacticalSystem, UserProfile } from '@/types/bjj';
@@ -30,6 +32,8 @@ export default function Home() {
   const [isTimerOpen, setIsTimerOpen] = useState(false);
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isBackupOpen, setIsBackupOpen] = useState(false);
+  const [selectedTechniqueForModal, setSelectedTechniqueForModal] = useState<Technique | null>(null);
+  const [isTechniqueModalOpen, setIsTechniqueModalOpen] = useState(false);
 
   // Dynamic systems and techniques registry
   const [systems, setSystems] = useState<TacticalSystem[]>(TACTICAL_SYSTEMS);
@@ -98,6 +102,28 @@ export default function Home() {
     setActiveTab('gps');
     soundFX.playRouteNav();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenTechniqueModal = (tech: Technique) => {
+    setSelectedTechniqueForModal(tech);
+    setIsTechniqueModalOpen(true);
+  };
+
+  const handleLaunchInGPSFromModal = (techId: string, systemTag?: string) => {
+    setIsTechniqueModalOpen(false);
+    let sysId = systemTag;
+    if (!sysId) {
+      const tech = techniques[techId];
+      const cat = (tech?.category_id || tech?.category || '').toLowerCase();
+      if (cat.includes('pass') || cat.includes('sortie') || cat.includes('défense')) {
+        sysId = 'guard_escapes_system';
+      } else if (cat.includes('sweep') || cat.includes('renversement')) {
+        sysId = 'sweeps_master_system';
+      } else {
+        sysId = 'closed_guard_system';
+      }
+    }
+    handleLaunchGPS(sysId, techId);
   };
 
   const handleLaunchDrill = () => {
@@ -204,7 +230,16 @@ export default function Home() {
         />
       )}
 
-      {/* Tab 2: GPS Flow (Turn-by-turn Navigation) */}
+      {/* Tab 2: Codex & Techniques Catalog (Vue Liste Complète) */}
+      {activeTab === 'techniques' && (
+        <TechniqueListView
+          techniques={techniques}
+          onSelectTechnique={handleOpenTechniqueModal}
+          onLaunchGPS={handleLaunchGPS}
+        />
+      )}
+
+      {/* Tab 3: GPS Flow (Turn-by-turn Navigation) */}
       {activeTab === 'gps' && (
         <GPSView
           system={currentSystem}
@@ -298,6 +333,14 @@ export default function Home() {
             window.location.reload();
           }
         }}
+      />
+
+      {/* Fiche Technique Complète Apple Modal */}
+      <TechniqueDetailModal
+        technique={selectedTechniqueForModal}
+        isOpen={isTechniqueModalOpen}
+        onClose={() => setIsTechniqueModalOpen(false)}
+        onLaunchInGPS={handleLaunchInGPSFromModal}
       />
     </div>
   );
