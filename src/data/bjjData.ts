@@ -24,6 +24,8 @@ export const INITIAL_TECHNIQUES: Record<string, Technique> = {
       { condition: "Il se redresse fortement", nextId: "hip_bump", tacticalTip: "Exploitez son impulsion montante pour le renverser" },
       { condition: "Il avance un bras pour ouvrir les genoux", nextId: "triangle", tacticalTip: "Règle 1 bras dedans, 1 bras dehors" },
       { condition: "Il plonge sa tête vers l'avant", nextId: "guillotine", tacticalTip: "Enserrez la nuque avec le radius sous le menton" },
+      { condition: "Vous décentrez les hanches : balayage ciseaux", nextId: "scissor_sweep", tacticalTip: "Insérez le genou bouclier et fauchez les jambes" },
+      { condition: "Il se lève debout : balayage bûcheron", nextId: "double_ankle_sweep", tacticalTip: "Saisissez les deux chevilles et poussez le bassin" },
       { condition: "Vous êtes à l'intérieur : posture & ouverture", nextId: "standing_guard_break", tacticalTip: "Contrôlez les poignets et dressez-vous en posture haute" }
     ]
   },
@@ -261,6 +263,7 @@ export const INITIAL_TECHNIQUES: Record<string, Technique> = {
     reactions: [
       { condition: "Il repousse votre pied et avance vers vous", nextId: "straight_ankle_lock", tacticalTip: "Fermez le coude sur le tendon d'Achille" },
       { condition: "Il tourne sa jambe vers l'extérieur pour dégager", nextId: "outside_heel_hook", tacticalTip: "Le talon extérieur est offert en coupe" },
+      { condition: "Élévation de hanches : balayage Single Leg X", nextId: "single_leg_x_sweep", tacticalTip: "Poussez la hanche et effectuez un lever technique" },
       { condition: "Vous devez vous défendre : mettre la botte & dégager le genou", nextId: "leg_lock_defense", tacticalTip: "Mettez la botte immédiatement et poussez le pied de hanche" }
     ]
   },
@@ -331,6 +334,7 @@ export const INITIAL_TECHNIQUES: Record<string, Technique> = {
     reactions: [
       { condition: "Il se penche en avant pour bloquer la hanche", nextId: "dogfight", tacticalTip: "Montez vigoureusement sur les genoux" },
       { condition: "Il recule pour créer de l'espace", nextId: "closed_guard", tacticalTip: "Ramenez vos jambes pour fermer la garde" },
+      { condition: "Attaque du pied lointain : Old School Sweep", nextId: "old_school_sweep", tacticalTip: "Attrapez le pied et montez sur les genoux" },
       { condition: "Vous êtes au-dessus : fendre la demi-garde", nextId: "knee_cut_pass", tacticalTip: "Underhook profond et glissade de genou (Knee Cut)" }
     ]
   },
@@ -754,10 +758,140 @@ export const INITIAL_TECHNIQUES: Record<string, Technique> = {
       { condition: "Le genou est dégagé : vous avancez", nextId: "knee_cut_pass", tacticalTip: "Montez en contre-attaque sur ses hanches" },
       { condition: "Il persiste sur la cheville sans contrôle", nextId: "mount_control", tacticalTip: "Passez dessus et sécurisez la position montée" }
     ]
+  },
+
+  // Sweeps & Reversals System Techniques
+  scissor_sweep: {
+    id: "scissor_sweep",
+    name: "Balayage Ciseaux (Scissor Sweep)",
+    category: "Renversement / Balayage",
+    category_id: "sweep",
+    details: [
+      "Ouvrir la garde et décaler les hanches à 45° sur le flanc",
+      "Placer le tibia supérieur en bouclier (Knee Shield) en travers de la poitrine adverse",
+      "Coller la jambe inférieure au ras du tapis et faucher dans un mouvement de ciseaux en tirant la manche"
+    ],
+    troubleshooting: "Chargez son poids sur votre genou bouclier en tirant sur le col avant de déclencher les ciseaux pour alléger ses appuis.",
+    youtube_id: "QhHBgvz5PMs",
+    video_url: "https://www.youtube.com/embed/QhHBgvz5PMs",
+    is_gi: true,
+    is_nogi: true,
+    belt_level: "White",
+    system_tag: "sweeps_master",
+    reactions: [
+      { condition: "L'adversaire chute sur le côté : vous montez", nextId: "mount_control", tacticalTip: "Stabilisez immédiatement la position montée (+4 points)" },
+      { condition: "Il bloque la jambe supérieure", nextId: "flower_sweep", tacticalTip: "Basculez sous son aisselle en Flower Sweep" }
+    ]
+  },
+
+  flower_sweep: {
+    id: "flower_sweep",
+    name: "Balayage Pendule / Flower Sweep",
+    category: "Renversement / Balayage",
+    category_id: "sweep",
+    details: [
+      "Saisir le bas du pantalon ou la cheville opposée sous sa cuisse",
+      "Contrôler la manche du même côté pour lui interdire l'appui au sol",
+      "Lancer la jambe libre dans un mouvement de balancier / pendule circulaire pour basculer son centre de gravité"
+    ],
+    troubleshooting: "Ne forcez pas avec les bras : c'est le swing puissant de votre jambe pendulaire qui génère toute l'inertie.",
+    youtube_id: "E0Qocx_MWew",
+    video_url: "https://www.youtube.com/embed/E0Qocx_MWew",
+    is_gi: true,
+    is_nogi: true,
+    belt_level: "White",
+    system_tag: "sweeps_master",
+    reactions: [
+      { condition: "Renversement réussi : montée directe", nextId: "mount_control", tacticalTip: "Sécurisez la position montée haute" },
+      { condition: "Il s'appuie sur une main en arrière", nextId: "armbar", tacticalTip: "Pivotez les hanches et passez la jambe sur la tête" }
+    ]
+  },
+
+  double_ankle_sweep: {
+    id: "double_ankle_sweep",
+    name: "Balayage Bûcheron (Double Ankle Sweep)",
+    category: "Renversement / Balayage",
+    category_id: "sweep",
+    details: [
+      "Dès que l'adversaire se lève en garde fermée, saisir ses deux chevilles ou talons",
+      "Placer vos deux genoux ou pieds contre ses hanches",
+      "Pousser vigoureusement avec votre bassin en tirant ses deux chevilles vers vous"
+    ],
+    troubleshooting: "Plaquez vos cuisses contre ses jambes pour l'empêcher de sauter par-dessus vos hanches en tombant.",
+    youtube_id: "UQgjc4Z1PSU",
+    video_url: "https://www.youtube.com/embed/UQgjc4Z1PSU",
+    is_gi: true,
+    is_nogi: true,
+    belt_level: "White",
+    system_tag: "sweeps_master",
+    reactions: [
+      { condition: "L'adversaire s'effondre en arrière", nextId: "mount_control", tacticalTip: "Avancez les hanches pour vous asseoir en montée" },
+      { condition: "Il recule une jambe pour garder l'équilibre", nextId: "dlr_tripod_sweep", tacticalTip: "Accrochez le creux poplité en De La Riva Tripod" }
+    ]
+  },
+
+  old_school_sweep: {
+    id: "old_school_sweep",
+    name: "Old School Sweep (Demi-Garde)",
+    category: "Renversement / Balayage",
+    category_id: "sweep",
+    details: [
+      "Obtenir un Underhook profond en demi-garde et monter sur le coude",
+      "Atteindre et verrouiller le pied ou orteils de la jambe lointaine adverse",
+      "Pivoter sur les genoux en étendant sa cheville pour faire s'effondrer ses appuis"
+    ],
+    troubleshooting: "Gardez votre tête collée contre ses côtes pour interdire toute guillotine adverse pendant la remontée.",
+    youtube_id: "w7_EirgxUTQ",
+    video_url: "https://www.youtube.com/embed/w7_EirgxUTQ",
+    is_gi: true,
+    is_nogi: true,
+    belt_level: "Blue",
+    system_tag: "sweeps_master",
+    reactions: [
+      { condition: "L'adversaire bascule sur le flanc", nextId: "side_control", tacticalTip: "Passez dessus et sécurisez les 100 kilos" },
+      { condition: "Il s'affaisse lourdement avec un Whizzer", nextId: "dogfight", tacticalTip: "Fauchez le genou d'appui en Dogfight" }
+    ]
+  },
+
+  single_leg_x_sweep: {
+    id: "single_leg_x_sweep",
+    name: "Balayage Single Leg X (SLX Standup)",
+    category: "Renversement / Balayage",
+    category_id: "sweep",
+    details: [
+      "Enrouler la cuisse adverse avec le pied extérieur calé sur la hanche",
+      "Pincer les deux genoux autour de son fémur pour bloquer la rotation",
+      "Pousser sur sa hanche en levant votre bassin et effectuer un lever technique"
+    ],
+    troubleshooting: "Ne laissez pas son genou tourner vers l'extérieur : gardez une pression constante cheville-genou.",
+    youtube_id: "nR25ggSrCCs",
+    video_url: "https://www.youtube.com/embed/nR25ggSrCCs",
+    is_gi: false,
+    is_nogi: true,
+    belt_level: "Blue",
+    system_tag: "sweeps_master",
+    reactions: [
+      { condition: "L'adversaire tombe : lever technique au-dessus", nextId: "knee_cut_pass", tacticalTip: "Passez la garde immédiatement en Knee Cut" },
+      { condition: "Il garde la cheville offerte au sol", nextId: "straight_ankle_lock", tacticalTip: "Verrouillez l'arête du radius pour la soumission" }
+    ]
   }
 };
 
 export const TACTICAL_SYSTEMS: TacticalSystem[] = [
+  {
+    id: "sweeps_master_system",
+    name: "Système Renversements & Sweeps",
+    rootTechniqueId: "scissor_sweep",
+    description: "Le répertoire complet des balayages fondamentaux et avancés : Ciseaux, Pendule, Hip Bump, Double Ankle, Old School et Single Leg X pour monter et scorer 2 points.",
+    category: "Renversements",
+    is_gi: true,
+    is_nogi: true,
+    difficulty: "Débutant",
+    belt_level: "White",
+    nodeCount: 9,
+    featuredBadge: "Points & Domination",
+    iconName: "RotateCcw"
+  },
   {
     id: "guard_escapes_system",
     name: "Sorties de Garde & Défense",

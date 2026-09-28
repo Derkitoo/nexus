@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   Zap, 
   Crosshair, 
+  RotateCcw,
   ArrowRight, 
   ChevronRight,
   Star,
@@ -34,7 +35,7 @@ interface DashboardViewProps {
   onOpenPassport?: () => void;
 }
 
-type FilterType = 'Tous' | 'Favoris' | 'Sorties & Défense' | 'Gi' | 'No-Gi' | 'Soumissions';
+type FilterType = 'Tous' | 'Favoris' | 'Renversements' | 'Sorties & Défense' | 'Gi' | 'No-Gi' | 'Soumissions';
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   systems,
@@ -80,6 +81,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const filteredSystems = useMemo(() => {
     return systems.filter((sys) => {
       if (activeFilter === 'Favoris' && !favoriteIds.includes(sys.id)) return false;
+      if (activeFilter === 'Renversements' && sys.id !== 'sweeps_master_system' && !sys.description.toLowerCase().includes('balayage') && !sys.description.toLowerCase().includes('sweep') && !sys.description.toLowerCase().includes('renversement')) return false;
       if (activeFilter === 'Sorties & Défense' && sys.id !== 'guard_escapes_system' && !sys.description.toLowerCase().includes('défense') && !sys.description.toLowerCase().includes('sortie')) return false;
       if (activeFilter === 'Gi' && !sys.is_gi) return false;
       if (activeFilter === 'No-Gi' && !sys.is_nogi) return false;
@@ -109,7 +111,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     );
   }, [searchQuery, techniques, activeFilter, favoriteIds]);
 
-  const filters: FilterType[] = ['Tous', 'Favoris', 'Sorties & Défense', 'Gi', 'No-Gi', 'Soumissions'];
+  const filters: FilterType[] = ['Tous', 'Favoris', 'Renversements', 'Sorties & Défense', 'Gi', 'No-Gi', 'Soumissions'];
 
   return (
     <div className="flex-1 flex flex-col p-4 pb-12 space-y-4 animate-spring-in">
@@ -330,11 +332,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div className="flex items-start gap-3">
                     <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${
                       sys.id.includes('guard_escapes') ? 'bg-[#ffd60a]/20 text-[#ffd60a] border border-[#ffd60a]/30' :
+                      sys.id.includes('sweeps') ? 'bg-[#30d158]/20 text-[#30d158] border border-[#30d158]/30' :
                       isClosedGuard ? 'bg-[#0a84ff]/20 text-[#0a84ff] border border-[#0a84ff]/30' :
                       isAshi ? 'bg-[#ff453a]/20 text-[#ff453a] border border-[#ff453a]/30' :
                       'bg-[#30d158]/20 text-[#30d158] border border-[#30d158]/30'
                     }`}>
                       {sys.id.includes('guard_escapes') ? <ShieldCheck className="w-5 h-5" /> :
+                       sys.id.includes('sweeps') ? <RotateCcw className="w-5 h-5" /> :
                        isClosedGuard ? <Shield className="w-5 h-5" /> :
                        isAshi ? <Zap className="w-5 h-5" /> :
                        <Crosshair className="w-5 h-5" />}
