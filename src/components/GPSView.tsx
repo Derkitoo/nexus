@@ -154,6 +154,12 @@ export const GPSView: React.FC<GPSViewProps> = ({
         dot: 'bg-[#30d158]',
       };
     }
+    if (c.includes('pass') || c.includes('sortie') || c.includes('défense') || c.includes('ouverture')) {
+      return {
+        badge: 'bg-[#ffd60a]/20 text-[#ffd60a] border border-[#ffd60a]/30',
+        dot: 'bg-[#ffd60a]',
+      };
+    }
     return {
       badge: 'bg-[#0a84ff]/20 text-[#0a84ff] border border-[#0a84ff]/30',
       dot: 'bg-[#0a84ff]',

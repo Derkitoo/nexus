@@ -19,6 +19,7 @@ export const TechniqueVideoPreview: React.FC<TechniqueVideoPreviewProps> = ({
 
   const isSubmission = technique.category_id === 'submission' || technique.category.toLowerCase().includes('soumission') || technique.category.toLowerCase().includes('attaque');
   const isSweep = technique.category_id === 'sweep' || technique.category.toLowerCase().includes('renversement');
+  const isPass = technique.category_id === 'pass' || technique.category.toLowerCase().includes('sortie') || technique.category.toLowerCase().includes('défense') || technique.category.toLowerCase().includes('passage');
 
   // Extract or build YouTube embed URL
   const youtubeId = technique.youtube_id || (
@@ -128,7 +129,7 @@ export const TechniqueVideoPreview: React.FC<TechniqueVideoPreviewProps> = ({
             <div className="relative w-24 h-24 rounded-full border border-[#0a84ff]/30 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full border-t-2 border-[#0a84ff] animate-spin" style={{ animationDuration: '4s' }} />
               <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-[#1c1c1e]/80 backdrop-blur-sm">
-                <Activity className={`w-7 h-7 ${isSubmission ? 'text-[#ff453a]' : isSweep ? 'text-[#30d158]' : 'text-[#0a84ff]'} animate-pulse`} />
+                <Activity className={`w-7 h-7 ${isSubmission ? 'text-[#ff453a]' : isSweep ? 'text-[#30d158]' : isPass ? 'text-[#ffd60a]' : 'text-[#0a84ff]'} animate-pulse`} />
               </div>
             </div>
 
