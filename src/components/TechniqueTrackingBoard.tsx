@@ -142,30 +142,30 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
       case 'mastered':
         return {
           label: 'Maîtrisé',
-          color: 'bg-[#af52de]/15 text-[#8944ab] dark:text-[#af52de] border-[#af52de]/30',
-          dot: 'bg-[#af52de]',
+          color: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#af52de]/15 dark:text-[#af52de] dark:border-[#af52de]/30',
+          dot: 'bg-purple-600 dark:bg-[#af52de]',
           icon: Sparkles,
         };
       case 'sparring_ready':
         return {
           label: 'Validé Sparring',
-          color: 'bg-[#007aff]/12 dark:bg-[#0a84ff]/15 text-[#007aff] dark:text-[#0a84ff] border-[#007aff]/30 dark:border-[#0a84ff]/30',
-          dot: 'bg-[#007aff] dark:bg-[#0a84ff]',
+          color: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
+          dot: 'bg-blue-600 dark:bg-[#0a84ff]',
           icon: CheckCircle2,
         };
       case 'drilling':
         return {
           label: 'En Drill',
-          color: 'bg-[#ffd60a]/20 text-[#b45309] dark:text-[#ffd60a] border-[#ffd60a]/40',
-          dot: 'bg-[#d97706] dark:bg-[#ffd60a]',
+          color: 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
+          dot: 'bg-amber-500 dark:bg-[#ffd60a]',
           icon: Zap,
         };
       case 'to_learn':
       default:
         return {
           label: 'À Découvrir',
-          color: 'bg-black/5 dark:bg-white/10 text-[#636366] dark:text-white/60 border-black/10 dark:border-white/10',
-          dot: 'bg-black/30 dark:bg-white/40',
+          color: 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-white/10 dark:text-white/60 dark:border-white/10',
+          dot: 'bg-slate-400 dark:bg-white/40',
           icon: Circle,
         };
     }
@@ -175,27 +175,27 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
     const c = (catId || category).toLowerCase();
     if (c.includes('submission') || c.includes('soumission') || c.includes('attaque')) {
       return {
-        badge: 'bg-[#ff3b30]/12 dark:bg-[#ff453a]/15 text-[#dc2626] dark:text-[#ff453a] border border-[#dc2626]/25 dark:border-[#ff453a]/30',
+        badge: 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30',
         label: 'Soumission',
         icon: Zap,
       };
     }
     if (c.includes('sweep') || c.includes('renversement') || c.includes('balayage')) {
       return {
-        badge: 'bg-[#34c759]/15 dark:bg-[#30d158]/15 text-[#15803d] dark:text-[#30d158] border border-[#15803d]/25 dark:border-[#30d158]/30',
+        badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30',
         label: 'Renversement',
         icon: RotateCcw,
       };
     }
     if (c.includes('pass') || c.includes('sortie') || c.includes('défense') || c.includes('ouverture')) {
       return {
-        badge: 'bg-[#ffd60a]/20 text-[#b45309] dark:text-[#ffd60a] border border-[#d97706]/30 dark:border-[#ffd60a]/30',
+        badge: 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
         label: 'Sortie / Défense',
         icon: Shield,
       };
     }
     return {
-      badge: 'bg-[#007aff]/12 dark:bg-[#0a84ff]/15 text-[#007aff] dark:text-[#0a84ff] border border-[#007aff]/25 dark:border-[#0a84ff]/30',
+      badge: 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
       label: 'Position',
       icon: BookOpen,
     };
@@ -219,17 +219,17 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
   return (
     <div className="space-y-4">
       {/* Overview Analytics Card */}
-      <div className="ios-card p-4 space-y-3.5 border border-black/5 dark:border-white/10 shadow-sm">
+      <div className="ios-card p-4 space-y-3.5 border border-slate-200 dark:border-white/10 shadow-xs bg-white dark:bg-[#1c1c1e]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-[#af52de] to-[#0a84ff] flex items-center justify-center text-white shadow-md">
               <Award className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#8e8e93] dark:text-white/40 block">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/40 block">
                 Niveau Global de Maîtrise
               </span>
-              <h2 className="text-base font-extrabold text-[#1c1c1e] dark:text-white tracking-tight">
+              <h2 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Matrice du Codex BJJ
               </h2>
             </div>
@@ -239,27 +239,27 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             <span className="text-2xl font-black text-[#007aff] dark:text-[#0a84ff] font-mono leading-none">
               {stats.progressPercent}%
             </span>
-            <span className="text-[10px] font-medium text-[#8e8e93] dark:text-white/50 block mt-0.5">
+            <span className="text-[10px] font-medium text-slate-500 dark:text-white/50 block mt-0.5">
               {stats.masteredCount + stats.sparringCount} / {stats.total} validées
             </span>
           </div>
         </div>
 
         {/* Apple Fitness Progress Bar */}
-        <div className="w-full h-2.5 bg-[#e5e5ea] dark:bg-white/10 rounded-full overflow-hidden flex p-0.5 gap-0.5">
+        <div className="w-full h-2.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden flex p-0.5 gap-0.5">
           <div 
             style={{ width: `${(stats.masteredCount / stats.total) * 100}%` }}
-            className="h-full bg-[#af52de] rounded-full transition-all duration-500" 
+            className="h-full bg-purple-500 rounded-full transition-all duration-500" 
             title={`Maîtrisées: ${stats.masteredCount}`}
           />
           <div 
             style={{ width: `${(stats.sparringCount / stats.total) * 100}%` }}
-            className="h-full bg-[#007aff] dark:bg-[#0a84ff] rounded-full transition-all duration-500" 
+            className="h-full bg-blue-500 rounded-full transition-all duration-500" 
             title={`Validées Sparring: ${stats.sparringCount}`}
           />
           <div 
             style={{ width: `${(stats.drillingCount / stats.total) * 100}%` }}
-            className="h-full bg-[#ffd60a] rounded-full transition-all duration-500" 
+            className="h-full bg-amber-400 rounded-full transition-all duration-500" 
             title={`En Drill: ${stats.drillingCount}`}
           />
         </div>
@@ -270,62 +270,62 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'mastered' ? 'all' : 'mastered')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'mastered' 
-                ? 'bg-[#af52de]/20 border-[#af52de] ring-1 ring-[#af52de]' 
-                : 'bg-[#f2f2f7] dark:bg-white/5 border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/10'
+                ? 'bg-purple-100 border-purple-300 dark:bg-[#af52de]/20 dark:border-[#af52de] ring-1 ring-purple-300' 
+                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
             }`}
           >
-            <span className="text-[9px] font-bold text-[#af52de] uppercase block truncate">Maîtrisées</span>
-            <span className="text-sm font-black text-[#1c1c1e] dark:text-white font-mono">{stats.masteredCount}</span>
+            <span className="text-[9px] font-bold text-purple-700 dark:text-[#af52de] uppercase block truncate">Maîtrisées</span>
+            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.masteredCount}</span>
           </button>
 
           <button 
             onClick={() => setStatusFilter(statusFilter === 'sparring_ready' ? 'all' : 'sparring_ready')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'sparring_ready' 
-                ? 'bg-[#0a84ff]/20 border-[#0a84ff] ring-1 ring-[#0a84ff]' 
-                : 'bg-[#f2f2f7] dark:bg-white/5 border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/10'
+                ? 'bg-blue-100 border-blue-300 dark:bg-[#0a84ff]/20 dark:border-[#0a84ff] ring-1 ring-blue-300' 
+                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
             }`}
           >
-            <span className="text-[9px] font-bold text-[#007aff] dark:text-[#0a84ff] uppercase block truncate">Validées</span>
-            <span className="text-sm font-black text-[#1c1c1e] dark:text-white font-mono">{stats.sparringCount}</span>
+            <span className="text-[9px] font-bold text-blue-700 dark:text-[#0a84ff] uppercase block truncate">Validées</span>
+            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.sparringCount}</span>
           </button>
 
           <button 
             onClick={() => setStatusFilter(statusFilter === 'drilling' ? 'all' : 'drilling')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'drilling' 
-                ? 'bg-[#ffd60a]/20 border-[#ffd60a] ring-1 ring-[#ffd60a]' 
-                : 'bg-[#f2f2f7] dark:bg-white/5 border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/10'
+                ? 'bg-amber-100 border-amber-300 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a] ring-1 ring-amber-300' 
+                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
             }`}
           >
-            <span className="text-[9px] font-bold text-[#b45309] dark:text-[#ffd60a] uppercase block truncate">En Drill</span>
-            <span className="text-sm font-black text-[#1c1c1e] dark:text-white font-mono">{stats.drillingCount}</span>
+            <span className="text-[9px] font-bold text-amber-700 dark:text-[#ffd60a] uppercase block truncate">En Drill</span>
+            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.drillingCount}</span>
           </button>
 
           <button 
             onClick={() => setStatusFilter(statusFilter === 'to_learn' ? 'all' : 'to_learn')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'to_learn' 
-                ? 'bg-black/10 dark:bg-white/20 border-black/20 dark:border-white/40 ring-1 ring-black/10 dark:ring-white/30' 
-                : 'bg-[#f2f2f7] dark:bg-white/5 border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/10'
+                ? 'bg-slate-200 border-slate-400 text-slate-900 dark:bg-white/20 dark:border-white/40 ring-1 ring-slate-300' 
+                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
             }`}
           >
-            <span className="text-[9px] font-bold text-[#636366] dark:text-white/50 uppercase block truncate">À Découvrir</span>
-            <span className="text-sm font-black text-[#1c1c1e] dark:text-white font-mono">{stats.toLearnCount}</span>
+            <span className="text-[9px] font-bold text-slate-600 dark:text-white/50 uppercase block truncate">À Découvrir</span>
+            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.toLearnCount}</span>
           </button>
         </div>
 
         {/* Cumulative Reps Counters */}
-        <div className="flex items-center justify-between pt-2 border-t border-black/5 dark:border-white/5 text-[11px]">
-          <span className="text-[#636366] dark:text-white/50 flex items-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 text-[#d97706] dark:text-[#ffd60a]" />
+        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-white/5 text-[11px]">
+          <span className="text-slate-600 dark:text-white/50 flex items-center gap-1.5">
+            <Zap className="w-3.5 h-3.5 text-amber-600 dark:text-[#ffd60a]" />
             <span>Répétitions Drill :</span>
-            <strong className="text-[#1c1c1e] dark:text-white font-mono">{stats.totalDrillReps}</strong>
+            <strong className="text-slate-900 dark:text-white font-mono">{stats.totalDrillReps}</strong>
           </span>
-          <span className="text-[#636366] dark:text-white/50 flex items-center gap-1.5">
-            <Flame className="w-3.5 h-3.5 text-[#dc2626] dark:text-[#ff453a]" />
+          <span className="text-slate-600 dark:text-white/50 flex items-center gap-1.5">
+            <Flame className="w-3.5 h-3.5 text-rose-600 dark:text-[#ff453a]" />
             <span>Passées en combat :</span>
-            <strong className="text-[#1c1c1e] dark:text-white font-mono">{stats.totalSparringLandings}</strong>
+            <strong className="text-slate-900 dark:text-white font-mono">{stats.totalSparringLandings}</strong>
           </span>
         </div>
       </div>
@@ -334,32 +334,32 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
       <div className="space-y-2">
         {/* Search Input */}
         <div className="relative">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8e8e93] dark:text-white/40" />
+          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/40" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher une technique à évaluer..."
-            className="w-full bg-white dark:bg-[#161618] text-xs text-[#1c1c1e] dark:text-white placeholder-[#8e8e93] dark:placeholder-white/40 pl-10 pr-9 py-2.5 rounded-2xl border border-black/10 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-sm"
+            className="w-full bg-white dark:bg-[#161618] text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 pl-10 pr-9 py-2.5 rounded-2xl border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-xs"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8e8e93] hover:text-[#1c1c1e] dark:hover:text-white"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white"
             >
               <X className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
 
-        {/* Category Pills */}
+        {/* Category Pills - Harmonious Apple iOS Design */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
           <button
             onClick={() => setCategoryFilter('all')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
               categoryFilter === 'all'
-                ? 'bg-[#1c1c1e] text-white dark:bg-white dark:text-black shadow-md'
-                : 'bg-[#e5e5ea] dark:bg-white/5 text-[#1c1c1e]/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
+                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
             Toutes ({techniqueList.length})
@@ -368,44 +368,44 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setCategoryFilter('defense')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'defense'
-                ? 'bg-[#ffd60a] text-black shadow-md font-extrabold'
-                : 'bg-[#e5e5ea] dark:bg-white/5 text-[#1c1c1e]/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
+                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <Shield className="w-3 h-3 text-[#b45309] dark:text-black" />
+            <Shield className="w-3 h-3 text-amber-600 dark:text-amber-400" />
             <span>Sorties &amp; Défenses</span>
           </button>
           <button
             onClick={() => setCategoryFilter('sweep')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'sweep'
-                ? 'bg-[#30d158] text-black shadow-md font-extrabold'
-                : 'bg-[#e5e5ea] dark:bg-white/5 text-[#1c1c1e]/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
+                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <RotateCcw className="w-3 h-3 text-[#15803d] dark:text-black" />
+            <RotateCcw className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
             <span>Renversements</span>
           </button>
           <button
             onClick={() => setCategoryFilter('submission')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'submission'
-                ? 'bg-[#ff453a] text-white shadow-md font-extrabold'
-                : 'bg-[#e5e5ea] dark:bg-white/5 text-[#1c1c1e]/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
+                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <Zap className="w-3 h-3 text-[#dc2626] dark:text-white" />
+            <Zap className="w-3 h-3 text-rose-600 dark:text-rose-400" />
             <span>Soumissions</span>
           </button>
           <button
             onClick={() => setCategoryFilter('position')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'position'
-                ? 'bg-[#007aff] text-white shadow-md font-extrabold'
-                : 'bg-[#e5e5ea] dark:bg-white/5 text-[#1c1c1e]/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
+                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <BookOpen className="w-3 h-3 text-[#007aff] dark:text-white" />
+            <BookOpen className="w-3 h-3 text-blue-600 dark:text-blue-400" />
             <span>Positions</span>
           </button>
         </div>
@@ -413,7 +413,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
 
       {/* Active Filter Indicator */}
       {(statusFilter !== 'all' || categoryFilter !== 'all' || searchQuery) && (
-        <div className="flex items-center justify-between px-1 text-xs text-[#8e8e93] dark:text-white/50">
+        <div className="flex items-center justify-between px-1 text-xs text-slate-500 dark:text-white/50">
           <span>{filteredTechniques.length} résultat(s) filtré(s)</span>
           <button
             onClick={() => {
@@ -441,7 +441,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
           return (
             <div 
               key={tech.id} 
-              className="ios-card p-3.5 space-y-3 border border-black/5 dark:border-white/10 hover:border-black/15 dark:hover:border-white/20 transition-all shadow-sm"
+              className="ios-card p-3.5 space-y-3 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 transition-all shadow-xs bg-white dark:bg-[#1c1c1e]"
             >
               {/* Row Header */}
               <div className="flex items-start justify-between gap-2">
@@ -450,15 +450,15 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${catStyle.badge}`}>
                       {catStyle.label}
                     </span>
-                    <span className="text-[10px] text-[#8e8e93] dark:text-white/40 font-mono">
+                    <span className="text-[10px] text-slate-500 dark:text-white/40 font-mono">
                       Ceinture {tech.belt_level || 'Blanche'}
                     </span>
-                    <span className="text-[10px] text-[#8e8e93] dark:text-white/40">
+                    <span className="text-[10px] text-slate-500 dark:text-white/40">
                       {tech.is_gi && tech.is_nogi ? 'Gi & No-Gi' : tech.is_gi ? 'Gi' : 'No-Gi'}
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-bold text-[#1c1c1e] dark:text-white leading-tight">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">
                     {tech.name}
                   </h3>
                 </div>
@@ -470,12 +470,12 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                 </div>
               </div>
 
-              {/* 1-Tap Mastery Status Selector (Apple iOS Native Style) */}
+              {/* 1-Tap Mastery Status Selector (Harmonious Apple iOS Native Style) */}
               <div>
-                <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/40 uppercase tracking-wider block mb-1">
+                <label className="text-[10px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-wider block mb-1">
                   Niveau d'Avancement
                 </label>
-                <div className="grid grid-cols-4 gap-1 p-0.5 bg-[#e5e5ea] dark:bg-black/40 rounded-xl border border-black/5 dark:border-white/5">
+                <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/5">
                   <button
                     onClick={() => {
                       soundFX.playClick();
@@ -483,8 +483,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     }}
                     className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                       status === 'to_learn'
-                        ? 'bg-white dark:bg-white/20 text-[#1c1c1e] dark:text-white shadow-sm ring-1 ring-black/10 dark:ring-white/30'
-                        : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+                        ? 'bg-white dark:bg-white/20 text-slate-800 dark:text-white shadow-xs font-bold border border-slate-200/80 dark:border-transparent'
+                        : 'text-slate-500 dark:text-white/40 hover:text-slate-800 dark:hover:text-white/70 hover:bg-slate-200/50'
                     }`}
                   >
                     ⚪ Découverte
@@ -496,8 +496,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     }}
                     className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                       status === 'drilling'
-                        ? 'bg-[#ffd60a] text-black shadow-sm font-extrabold'
-                        : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+                        ? 'bg-amber-100 text-amber-900 border border-amber-300/80 dark:bg-amber-500/25 dark:text-amber-200 dark:border-amber-500/40 shadow-xs font-bold'
+                        : 'text-slate-500 dark:text-white/40 hover:text-amber-700 dark:hover:text-amber-300 hover:bg-amber-50/50'
                     }`}
                   >
                     🟡 Drill
@@ -509,8 +509,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     }}
                     className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                       status === 'sparring_ready'
-                        ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-sm font-extrabold'
-                        : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+                        ? 'bg-blue-100 text-blue-900 border border-blue-300/80 dark:bg-blue-500/25 dark:text-blue-200 dark:border-blue-500/40 shadow-xs font-bold'
+                        : 'text-slate-500 dark:text-white/40 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50/50'
                     }`}
                   >
                     🔵 Sparring
@@ -522,8 +522,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     }}
                     className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
                       status === 'mastered'
-                        ? 'bg-[#af52de] text-white shadow-sm font-extrabold'
-                        : 'text-[#636366] dark:text-white/40 hover:text-[#1c1c1e] dark:hover:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+                        ? 'bg-purple-100 text-purple-900 border border-purple-300/80 dark:bg-purple-500/25 dark:text-purple-200 dark:border-purple-500/40 shadow-xs font-bold'
+                        : 'text-slate-500 dark:text-white/40 hover:text-purple-700 dark:hover:text-purple-300 hover:bg-purple-50/50'
                     }`}
                   >
                     🟣 Réflexe
@@ -532,39 +532,39 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
               </div>
 
               {/* Reps Counters & Actions Row */}
-              <div className="flex items-center justify-between gap-2 pt-1 border-t border-black/5 dark:border-white/5 flex-wrap">
+              <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100 dark:border-white/5 flex-wrap">
                 {/* Drill Reps counter */}
-                <div className="flex items-center gap-1.5 bg-[#f2f2f7] dark:bg-black/30 px-2 py-1 rounded-xl border border-black/5 dark:border-white/5">
-                  <span className="text-[10px] font-bold text-[#636366] dark:text-white/50">Drill:</span>
+                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-xl border border-slate-200/80 dark:border-white/5">
+                  <span className="text-[10px] font-bold text-slate-500 dark:text-white/50">Drill:</span>
                   <button
                     onClick={() => onUpdateReps(tech.id, -5, 0)}
                     disabled={(progress?.drillReps || 0) <= 0}
-                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-black/5 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-[#1c1c1e] dark:text-white border border-black/5 dark:border-white/10 shadow-sm"
+                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-slate-700 dark:text-white border border-slate-200 dark:border-white/10 shadow-xs"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
-                  <span className="text-xs font-mono font-bold text-[#1c1c1e] dark:text-white min-w-[24px] text-center">
+                  <span className="text-xs font-mono font-bold text-slate-900 dark:text-white min-w-[24px] text-center">
                     {progress?.drillReps || 0}
                   </span>
                   <button
                     onClick={() => onUpdateReps(tech.id, 5, 0)}
-                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-black/5 dark:hover:bg-white/20 active:scale-95 flex items-center justify-center text-[#1c1c1e] dark:text-white border border-black/5 dark:border-white/10 shadow-sm"
+                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 active:scale-95 flex items-center justify-center text-slate-700 dark:text-white border border-slate-200 dark:border-white/10 shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
                 </div>
 
                 {/* Sparring Lands counter */}
-                <div className="flex items-center gap-1.5 bg-[#f2f2f7] dark:bg-black/30 px-2 py-1 rounded-xl border border-black/5 dark:border-white/5">
-                  <span className="text-[10px] font-bold text-[#636366] dark:text-white/50">Sparring:</span>
+                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-xl border border-slate-200/80 dark:border-white/5">
+                  <span className="text-[10px] font-bold text-slate-500 dark:text-white/50">Sparring:</span>
                   <button
                     onClick={() => onUpdateReps(tech.id, 0, -1)}
                     disabled={(progress?.sparringSuccessCount || 0) <= 0}
-                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-black/5 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-[#1c1c1e] dark:text-white border border-black/5 dark:border-white/10 shadow-sm"
+                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-slate-700 dark:text-white border border-slate-200 dark:border-white/10 shadow-xs"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
-                  <span className="text-xs font-mono font-bold text-[#1c1c1e] dark:text-white min-w-[20px] text-center">
+                  <span className="text-xs font-mono font-bold text-slate-900 dark:text-white min-w-[20px] text-center">
                     {progress?.sparringSuccessCount || 0}
                   </span>
                   <button
@@ -572,7 +572,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onUpdateReps(tech.id, 0, 1);
                     }}
-                    className="w-5 h-5 rounded-md bg-[#007aff] dark:bg-[#0a84ff] text-white active:scale-95 flex items-center justify-center shadow-sm"
+                    className="w-5 h-5 rounded-md bg-[#007aff] dark:bg-[#0a84ff] text-white active:scale-95 flex items-center justify-center shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -588,8 +588,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     title="Ajouter une note personnelle"
                     className={`p-1.5 rounded-xl border transition-all ${
                       progress?.notes 
-                        ? 'bg-[#ffd60a]/20 border-[#d97706]/40 text-[#b45309] dark:text-[#ffd60a]' 
-                        : 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/10 text-[#636366] dark:text-white/60 hover:text-[#1c1c1e] dark:hover:text-white'
+                        ? 'bg-amber-100 border-amber-300 text-amber-800 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a]/40 dark:text-[#ffd60a]' 
+                        : 'bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/60 hover:text-slate-800 dark:hover:text-white'
                     }`}
                   >
                     <Edit3 className="w-3.5 h-3.5" />
@@ -600,7 +600,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onSelectTechnique(tech);
                     }}
-                    className="px-2.5 py-1.5 rounded-xl bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-[#1c1c1e] dark:text-white text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-black/5 dark:border-transparent"
+                    className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-800 dark:text-white text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-slate-200 dark:border-transparent"
                   >
                     <Play className="w-3 h-3 text-[#ff3b30] dark:text-[#ff453a]" />
                     <span>Fiche</span>
@@ -611,7 +611,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playRouteNav();
                       handleLaunchInGPS(tech);
                     }}
-                    className="px-2.5 py-1.5 rounded-xl bg-[#007aff]/10 dark:bg-[#0a84ff]/20 hover:bg-[#007aff]/20 dark:hover:bg-[#0a84ff]/30 text-[#007aff] dark:text-[#0a84ff] text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-[#007aff]/20 dark:border-transparent"
+                    className="px-2.5 py-1.5 rounded-xl bg-blue-50 dark:bg-[#0a84ff]/20 hover:bg-blue-100 dark:hover:bg-[#0a84ff]/30 text-blue-700 dark:text-[#0a84ff] text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-blue-200 dark:border-transparent"
                   >
                     <Navigation className="w-3 h-3" />
                     <span>GPS</span>
@@ -621,8 +621,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
 
               {/* Expandable Notes Drawer */}
               {isNotesOpen && (
-                <div className="pt-2 border-t border-black/5 dark:border-white/10 space-y-2 animate-fade-in">
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block">
+                <div className="pt-2 border-t border-slate-100 dark:border-white/10 space-y-2 animate-fade-in">
+                  <label className="text-[10px] font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider block">
                     Notes &amp; Réglages Personnels pour {tech.name}
                   </label>
                   <textarea
@@ -630,12 +630,12 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     onChange={(e) => setTempNotes({ ...tempNotes, [tech.id]: e.target.value })}
                     placeholder="Ex: Penser à bien coller la tête sur sa hanche avant d'engager le crochet..."
                     rows={2}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/50 text-xs text-[#1c1c1e] dark:text-white placeholder-[#8e8e93] dark:placeholder-white/30 p-2.5 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] resize-none"
+                    className="w-full bg-slate-50 dark:bg-black/50 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 p-2.5 rounded-xl border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] resize-none"
                   />
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => setExpandedNotesId(null)}
-                      className="px-2.5 py-1 rounded-lg text-[10px] text-[#8e8e93] hover:text-[#1c1c1e] dark:hover:text-white"
+                      className="px-2.5 py-1 rounded-lg text-[10px] text-slate-500 hover:text-slate-800 dark:hover:text-white"
                     >
                       Fermer
                     </button>
@@ -645,7 +645,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                         setExpandedNotesId(null);
                         soundFX.playClick();
                       }}
-                      className="px-3 py-1 rounded-lg bg-[#007aff] dark:bg-[#0a84ff] text-white text-[10px] font-bold shadow-sm active:scale-95 transition-all"
+                      className="px-3 py-1 rounded-lg bg-[#007aff] dark:bg-[#0a84ff] text-white text-[10px] font-bold shadow-xs active:scale-95 transition-all"
                     >
                       Enregistrer
                     </button>

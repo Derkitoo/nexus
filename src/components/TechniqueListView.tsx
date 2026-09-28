@@ -99,31 +99,31 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
     const c = (catId || category).toLowerCase();
     if (c.includes('submission') || c.includes('soumission') || c.includes('attaque')) {
       return {
-        badge: 'bg-[#ff453a]/15 text-[#ff453a] border border-[#ff453a]/30',
-        dot: 'bg-[#ff453a]',
+        badge: 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30',
+        dot: 'bg-rose-500 dark:bg-[#ff453a]',
         label: 'Soumission',
         icon: Zap
       };
     }
     if (c.includes('sweep') || c.includes('renversement') || c.includes('balayage')) {
       return {
-        badge: 'bg-[#30d158]/15 text-[#30d158] border border-[#30d158]/30',
-        dot: 'bg-[#30d158]',
+        badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30',
+        dot: 'bg-emerald-500 dark:bg-[#30d158]',
         label: 'Renversement',
         icon: RotateCcw
       };
     }
     if (c.includes('pass') || c.includes('sortie') || c.includes('défense') || c.includes('ouverture')) {
       return {
-        badge: 'bg-[#ffd60a]/15 text-[#ffd60a] border border-[#ffd60a]/30',
-        dot: 'bg-[#ffd60a]',
+        badge: 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
+        dot: 'bg-amber-500 dark:bg-[#ffd60a]',
         label: 'Sortie / Défense',
         icon: Shield
       };
     }
     return {
-      badge: 'bg-[#0a84ff]/15 text-[#0a84ff] border border-[#0a84ff]/30',
-      dot: 'bg-[#0a84ff]',
+      badge: 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
+      dot: 'bg-[#007aff] dark:bg-[#0a84ff]',
       label: 'Position / Contrôle',
       icon: Compass
     };
@@ -131,12 +131,12 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
 
   const getBeltColor = (belt?: string) => {
     switch (belt?.toLowerCase()) {
-      case 'white': return 'bg-white/20 text-white border-white/30';
-      case 'blue': return 'bg-[#0a84ff]/20 text-[#0a84ff] border-[#0a84ff]/30';
-      case 'purple': return 'bg-[#bf5af2]/20 text-[#bf5af2] border-[#bf5af2]/30';
-      case 'brown': return 'bg-[#ac8e68]/20 text-[#ac8e68] border-[#ac8e68]/30';
-      case 'black': return 'bg-white/10 text-white/90 border-white/40';
-      default: return 'bg-white/10 text-white/70 border-white/20';
+      case 'white': return 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-white/20 dark:text-white dark:border-white/30';
+      case 'blue': return 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#0a84ff]/20 dark:text-[#0a84ff] dark:border-[#0a84ff]/30';
+      case 'purple': return 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#bf5af2]/20 dark:text-[#bf5af2] dark:border-[#bf5af2]/30';
+      case 'brown': return 'bg-amber-50 text-amber-900 border-amber-300 dark:bg-[#ac8e68]/20 dark:text-[#ac8e68] dark:border-[#ac8e68]/30';
+      case 'black': return 'bg-slate-900 text-white border-slate-700 dark:bg-white/10 dark:text-white/90 dark:border-white/40';
+      default: return 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-white/10 dark:text-white/70 dark:border-white/20';
     }
   };
 
@@ -153,22 +153,22 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
       {/* Title Header */}
       <div className="flex items-center justify-between mt-2 mb-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-[#0a84ff]" />
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+            <BookOpen className="w-6 h-6 text-[#007aff] dark:text-[#0a84ff]" />
             Codex BJJ
           </h1>
-          <p className="text-xs text-white/50">
+          <p className="text-xs text-slate-500 dark:text-white/50">
             {filteredTechniques.length} sur {techniqueList.length} techniques répertoriées
           </p>
         </div>
-        <div className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-semibold text-white/70">
+        <div className="px-2.5 py-1 rounded-full bg-slate-200/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-white/70">
           Bibliothèque
         </div>
       </div>
 
       {/* Apple Search Bar */}
       <div className="relative mb-3">
-        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-white/40">
           <Search className="w-4 h-4" />
         </div>
         <input
@@ -176,12 +176,12 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Rechercher par nom, détail, clé..."
-          className="w-full pl-10 pr-9 py-2.5 bg-[#1c1c1e] text-white placeholder-white/40 text-sm rounded-xl border border-white/10 focus:outline-none focus:border-[#0a84ff] focus:ring-1 focus:ring-[#0a84ff] transition-all"
+          className="w-full pl-10 pr-9 py-2.5 bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 text-sm rounded-xl border border-slate-200 dark:border-white/10 focus:outline-none focus:border-[#007aff] focus:ring-1 focus:ring-[#007aff] shadow-xs transition-all"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute inset-y-0 right-0 pr-3 flex items-center text-white/40 hover:text-white"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-700 dark:hover:text-white"
           >
             <X className="w-4 h-4" />
           </button>
@@ -189,16 +189,16 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
       </div>
 
       {/* Category Pills (Horizontal Scroll) */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-2">
+      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2 mb-2">
         <button
           onClick={() => {
             soundFX.playClick();
             setSelectedCategory('all');
           }}
-          className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+          className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
             selectedCategory === 'all'
-              ? 'bg-white text-black font-semibold shadow-sm'
-              : 'bg-[#1c1c1e] text-white/70 hover:text-white border border-white/10'
+              ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+              : 'bg-white dark:bg-[#1c1c1e] text-slate-600 dark:text-white/70 hover:bg-slate-50 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10'
           }`}
         >
           Toutes ({techniqueList.length})
@@ -209,14 +209,14 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
             soundFX.playClick();
             setSelectedCategory('defense');
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
             selectedCategory === 'defense'
-              ? 'bg-[#ffd60a] text-black font-semibold shadow-sm'
-              : 'bg-[#1c1c1e] text-white/70 hover:text-white border border-white/10'
+              ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+              : 'bg-white dark:bg-[#1c1c1e] text-slate-600 dark:text-white/70 hover:bg-slate-50 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10'
           }`}
         >
-          <Shield className="w-3 h-3" />
-          Sorties & Défenses
+          <Shield className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+          <span>Sorties & Défenses</span>
         </button>
 
         <button
@@ -224,14 +224,14 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
             soundFX.playClick();
             setSelectedCategory('sweep');
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
             selectedCategory === 'sweep'
-              ? 'bg-[#30d158] text-black font-semibold shadow-sm'
-              : 'bg-[#1c1c1e] text-white/70 hover:text-white border border-white/10'
+              ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+              : 'bg-white dark:bg-[#1c1c1e] text-slate-600 dark:text-white/70 hover:bg-slate-50 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10'
           }`}
         >
-          <RotateCcw className="w-3 h-3" />
-          Renversements
+          <RotateCcw className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+          <span>Renversements</span>
         </button>
 
         <button
@@ -239,14 +239,14 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
             soundFX.playClick();
             setSelectedCategory('submission');
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
             selectedCategory === 'submission'
-              ? 'bg-[#ff453a] text-white font-semibold shadow-sm'
-              : 'bg-[#1c1c1e] text-white/70 hover:text-white border border-white/10'
+              ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+              : 'bg-white dark:bg-[#1c1c1e] text-slate-600 dark:text-white/70 hover:bg-slate-50 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10'
           }`}
         >
-          <Zap className="w-3 h-3" />
-          Soumissions
+          <Zap className="w-3 h-3 text-rose-600 dark:text-rose-400" />
+          <span>Soumissions</span>
         </button>
 
         <button
@@ -254,41 +254,41 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
             soundFX.playClick();
             setSelectedCategory('position');
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
             selectedCategory === 'position'
-              ? 'bg-[#0a84ff] text-white font-semibold shadow-sm'
-              : 'bg-[#1c1c1e] text-white/70 hover:text-white border border-white/10'
+              ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+              : 'bg-white dark:bg-[#1c1c1e] text-slate-600 dark:text-white/70 hover:bg-slate-50 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10'
           }`}
         >
-          <Compass className="w-3 h-3" />
-          Positions
+          <Compass className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+          <span>Positions</span>
         </button>
       </div>
 
       {/* Sub-Filters: Gi / No-Gi & Belt */}
       <div className="flex items-center justify-between gap-2 mb-4 text-[11px]">
         {/* Gi / No-Gi Toggle */}
-        <div className="flex items-center bg-[#1c1c1e] p-0.5 rounded-lg border border-white/10">
+        <div className="flex items-center bg-slate-200/80 dark:bg-[#1c1c1e] p-0.5 rounded-xl border border-slate-200 dark:border-white/10">
           <button
             onClick={() => setSelectedGi('all')}
-            className={`px-2.5 py-1 rounded-md transition-all ${
-              selectedGi === 'all' ? 'bg-white/15 text-white font-medium' : 'text-white/50'
+            className={`px-2.5 py-1 rounded-lg transition-all text-xs font-medium ${
+              selectedGi === 'all' ? 'bg-white dark:bg-white/15 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-600 dark:text-white/50'
             }`}
           >
             Tous
           </button>
           <button
             onClick={() => setSelectedGi('gi')}
-            className={`px-2.5 py-1 rounded-md transition-all ${
-              selectedGi === 'gi' ? 'bg-white/15 text-white font-medium' : 'text-white/50'
+            className={`px-2.5 py-1 rounded-lg transition-all text-xs font-medium ${
+              selectedGi === 'gi' ? 'bg-white dark:bg-white/15 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-600 dark:text-white/50'
             }`}
           >
             Gi
           </button>
           <button
             onClick={() => setSelectedGi('nogi')}
-            className={`px-2.5 py-1 rounded-md transition-all ${
-              selectedGi === 'nogi' ? 'bg-white/15 text-white font-medium' : 'text-white/50'
+            className={`px-2.5 py-1 rounded-lg transition-all text-xs font-medium ${
+              selectedGi === 'nogi' ? 'bg-white dark:bg-white/15 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-600 dark:text-white/50'
             }`}
           >
             No-Gi
@@ -296,29 +296,29 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
         </div>
 
         {/* Belt Level Filter Select */}
-        <div className="flex items-center gap-1 bg-[#1c1c1e] px-2.5 py-1 rounded-lg border border-white/10 text-white/70">
-          <span className="text-white/40">Ceinture:</span>
+        <div className="flex items-center gap-1.5 bg-white dark:bg-[#1c1c1e] px-2.5 py-1 rounded-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white/70 shadow-xs">
+          <span className="text-slate-400 dark:text-white/40 text-xs">Ceinture:</span>
           <select
             value={selectedBelt}
             onChange={(e) => setSelectedBelt(e.target.value as BeltFilter)}
-            className="bg-transparent text-white font-medium focus:outline-none cursor-pointer"
+            className="bg-transparent text-slate-900 dark:text-white font-bold text-xs focus:outline-none cursor-pointer"
           >
-            <option value="all" className="bg-[#1c1c1e] text-white">Toutes</option>
-            <option value="White" className="bg-[#1c1c1e] text-white">Blanche</option>
-            <option value="Blue" className="bg-[#1c1c1e] text-white">Bleue</option>
-            <option value="Purple" className="bg-[#1c1c1e] text-white">Violette</option>
-            <option value="Brown" className="bg-[#1c1c1e] text-white">Marron</option>
-            <option value="Black" className="bg-[#1c1c1e] text-white">Noire</option>
+            <option value="all" className="bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white">Toutes</option>
+            <option value="White" className="bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white">Blanche</option>
+            <option value="Blue" className="bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white">Bleue</option>
+            <option value="Purple" className="bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white">Violette</option>
+            <option value="Brown" className="bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white">Marron</option>
+            <option value="Black" className="bg-white dark:bg-[#1c1c1e] text-slate-900 dark:text-white">Noire</option>
           </select>
         </div>
       </div>
 
       {/* Techniques List Cards */}
       {filteredTechniques.length === 0 ? (
-        <div className="flex flex-col items-center justify-center p-8 bg-[#1c1c1e]/60 rounded-2xl border border-white/5 text-center my-6">
-          <Layers className="w-10 h-10 text-white/30 mb-3" />
-          <p className="text-sm font-medium text-white/80">Aucune technique trouvée</p>
-          <p className="text-xs text-white/40 mt-1 max-w-[240px]">
+        <div className="flex flex-col items-center justify-center p-8 bg-white dark:bg-[#1c1c1e]/60 rounded-2xl border border-slate-200 dark:border-white/5 text-center my-6 shadow-xs">
+          <Layers className="w-10 h-10 text-slate-400 dark:text-white/30 mb-3" />
+          <p className="text-sm font-bold text-slate-800 dark:text-white/80">Aucune technique trouvée</p>
+          <p className="text-xs text-slate-500 dark:text-white/40 mt-1 max-w-[240px]">
             Essayez de modifier votre recherche ou de réinitialiser les filtres.
           </p>
           <button
@@ -328,7 +328,7 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
               setSelectedBelt('all');
               setSelectedGi('all');
             }}
-            className="mt-4 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-semibold text-white transition-all"
+            className="mt-4 px-3.5 py-1.5 bg-[#007aff] hover:bg-[#0062cc] text-white rounded-xl text-xs font-bold shadow-xs transition-all"
           >
             Réinitialiser les filtres
           </button>
@@ -347,7 +347,7 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
                   soundFX.playClick();
                   onSelectTechnique(tech);
                 }}
-                className="group relative p-3.5 rounded-2xl bg-[#1c1c1e] border border-white/10 hover:border-white/25 transition-all duration-200 cursor-pointer active:scale-[0.985] shadow-sm hover:shadow-md"
+                className="group relative p-3.5 rounded-2xl bg-white dark:bg-[#1c1c1e] border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 transition-all duration-200 cursor-pointer active:scale-[0.985] shadow-xs hover:shadow-sm"
               >
                 {/* Header row: Category pill + Belt + Video tag */}
                 <div className="flex items-center justify-between gap-2 mb-2">
@@ -368,12 +368,12 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
                     )}
 
                     {!tech.is_nogi && tech.is_gi && (
-                      <span className="px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-white/5 border border-white/10 text-white/50 uppercase">
+                      <span className="px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-slate-100 border border-slate-200 dark:bg-white/5 dark:border-white/10 text-slate-500 dark:text-white/50 uppercase">
                         Gi Only
                       </span>
                     )}
                     {tech.is_nogi && !tech.is_gi && (
-                      <span className="px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-white/5 border border-white/10 text-white/50 uppercase">
+                      <span className="px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-slate-100 border border-slate-200 dark:bg-white/5 dark:border-white/10 text-slate-500 dark:text-white/50 uppercase">
                         No-Gi
                       </span>
                     )}
@@ -384,10 +384,10 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
                     {progressMap && progressMap[tech.id] && progressMap[tech.id].status !== 'to_learn' && (
                       <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${
                         progressMap[tech.id].status === 'mastered'
-                          ? 'bg-[#af52de]/20 text-[#af52de] border-[#af52de]/40'
+                          ? 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-[#af52de]/20 dark:text-[#af52de] dark:border-[#af52de]/40'
                           : progressMap[tech.id].status === 'sparring_ready'
-                          ? 'bg-[#0a84ff]/20 text-[#0a84ff] border-[#0a84ff]/40'
-                          : 'bg-[#ffd60a]/20 text-[#d97706] dark:text-[#ffd60a] border-[#ffd60a]/40'
+                          ? 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-[#0a84ff]/20 dark:text-[#0a84ff] dark:border-[#0a84ff]/40'
+                          : 'bg-amber-100 text-amber-800 border-amber-200 dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/40'
                       }`}>
                         {progressMap[tech.id].status === 'mastered' ? '🟣 Maîtrisé' :
                          progressMap[tech.id].status === 'sparring_ready' ? '🔵 Sparring' : '🟡 Drill'}
@@ -396,7 +396,7 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
 
                     {/* Video indicator badge */}
                     {tech.video_url && (
-                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#ff453a]/15 text-[#ff453a] border border-[#ff453a]/30 text-[10px] font-semibold">
+                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30 text-[10px] font-semibold">
                         <Play className="w-2.5 h-2.5 fill-current" />
                         Vidéo
                       </div>
@@ -406,23 +406,23 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
 
                 {/* Technique Name */}
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-base font-bold text-white group-hover:text-[#0a84ff] transition-colors leading-snug">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#007aff] transition-colors leading-snug">
                     {tech.name}
                   </h3>
-                  <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-white/70 group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-0.5" />
+                  <ChevronRight className="w-4 h-4 text-slate-400 dark:text-white/30 group-hover:text-slate-700 dark:group-hover:text-white/70 group-hover:translate-x-0.5 transition-all shrink-0 mt-0.5" />
                 </div>
 
                 {/* First Detail Snippet Preview */}
                 {tech.details && tech.details.length > 0 && (
-                  <p className="text-xs text-white/60 line-clamp-2 mt-1.5 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-white/60 line-clamp-2 mt-1.5 leading-relaxed">
                     {tech.details[0]}
                   </p>
                 )}
 
                 {/* Footer: Reactions count + Direct GPS quick-launch */}
-                <div className="flex items-center justify-between pt-2.5 mt-2.5 border-t border-white/5">
-                  <div className="flex items-center gap-1 text-[11px] text-white/40">
-                    <span className="font-semibold text-white/70">{reactionCount}</span>
+                <div className="flex items-center justify-between pt-2.5 mt-2.5 border-t border-slate-100 dark:border-white/5">
+                  <div className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-white/40">
+                    <span className="font-semibold text-slate-700 dark:text-white/70">{reactionCount}</span>
                     <span>{reactionCount > 1 ? 'suites tactiques' : 'suite tactique'}</span>
                   </div>
 
@@ -434,7 +434,7 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
                         const sysId = getSystemForTech(tech);
                         onLaunchGPS(sysId, tech.id);
                       }}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0a84ff]/15 hover:bg-[#0a84ff]/25 text-[#0a84ff] border border-[#0a84ff]/30 text-[11px] font-semibold transition-all active:scale-95"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 dark:bg-[#0a84ff]/15 dark:hover:bg-[#0a84ff]/25 dark:text-[#0a84ff] dark:border-[#0a84ff]/30 text-[11px] font-semibold transition-all active:scale-95"
                     >
                       <Navigation className="w-3 h-3" />
                       GPS

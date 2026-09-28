@@ -85,17 +85,17 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
   const rules = RULES_BY_BELT[selectedBelt] || RULES_BY_BELT.Blue;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-spring-in select-none">
-      <div className="relative w-full max-w-lg bg-[#161618] border border-white/12 rounded-[32px] p-5 shadow-2xl flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-spring-in select-none">
+      <div className="relative w-full max-w-lg bg-white dark:bg-[#161618] border border-slate-200 dark:border-white/12 rounded-[32px] p-5 shadow-2xl flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#bf5af2]/20 border border-[#bf5af2]/30 flex items-center justify-center text-[#bf5af2]">
+            <div className="w-8 h-8 rounded-full bg-purple-50 dark:bg-[#bf5af2]/20 border border-purple-200 dark:border-[#bf5af2]/30 flex items-center justify-center text-purple-700 dark:text-[#bf5af2]">
               <Scale className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-extrabold text-white leading-tight">Règles &amp; Soumissions IBJJF</h3>
-              <p className="text-[10px] text-white/50">Légalité officielle en compétition</p>
+              <h3 className="text-sm font-extrabold text-slate-900 dark:text-white leading-tight">Règles &amp; Soumissions IBJJF</h3>
+              <p className="text-[10px] text-slate-500 dark:text-white/50">Légalité officielle en compétition</p>
             </div>
           </div>
 
@@ -104,14 +104,14 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
               soundFX.playClick();
               onClose();
             }}
-            className="p-1.5 rounded-full bg-white/10 text-white/60 hover:text-white"
+            className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 dark:bg-white/10 dark:text-white/60 dark:hover:text-white"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Belt Switcher Bar */}
-        <div className="py-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar border-b border-white/10">
+        <div className="py-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar border-b border-slate-100 dark:border-white/10">
           {(['White', 'Blue', 'Purple', 'Brown', 'Black'] as Array<UserProfile['belt']>).map((b) => (
             <button
               key={b}
@@ -121,8 +121,8 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
               }}
               className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
                 selectedBelt === b
-                  ? 'bg-[#0a84ff] text-white shadow-md'
-                  : 'bg-white/10 text-white/60 hover:text-white'
+                  ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-white/10 dark:text-white/60 dark:hover:text-white'
               }`}
             >
               Ceinture {b}
@@ -131,7 +131,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
         </div>
 
         {/* Gi / No-Gi Filter */}
-        <div className="flex bg-[#1c1c1e] p-1 rounded-xl border border-white/10 my-2">
+        <div className="flex bg-slate-100 dark:bg-[#1c1c1e] p-1 rounded-xl border border-slate-200 dark:border-white/10 my-2">
           {(['all', 'gi', 'nogi'] as const).map((m) => (
             <button
               key={m}
@@ -140,7 +140,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
                 setModeFilter(m);
               }}
               className={`flex-1 py-1 rounded-lg text-[11px] font-bold uppercase transition-all ${
-                modeFilter === m ? 'bg-[#2c2c2e] text-white shadow-xs' : 'text-white/40 hover:text-white'
+                modeFilter === m ? 'bg-white dark:bg-[#2c2c2e] text-slate-900 dark:text-white shadow-xs' : 'text-slate-500 dark:text-white/40 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               {m === 'all' ? 'Gi & No-Gi' : m === 'gi' ? 'Gi Uniquement' : 'No-Gi Uniquement'}
@@ -154,14 +154,10 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
             const isGiLegal = rule.giStatus === 'legal';
             const isNoGiLegal = rule.nogiStatus === 'legal';
 
-            if (modeFilter === 'gi' && !isGiLegal && rule.giStatus === 'illegal') {
-              // keep to show illegal icon
-            }
-
             return (
-              <div key={idx} className="ios-card p-3 space-y-1.5">
+              <div key={idx} className="ios-card p-3 space-y-1.5 border border-slate-200 dark:border-white/5 bg-slate-50/60 dark:bg-[#1c1c1e]">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-white leading-tight">
+                  <span className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
                     {rule.technique}
                   </span>
                   
@@ -169,8 +165,8 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
                     {(modeFilter === 'all' || modeFilter === 'gi') && (
                       <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1 border ${
                         isGiLegal 
-                          ? 'bg-[#30d158]/15 text-[#30d158] border-[#30d158]/30' 
-                          : 'bg-[#ff453a]/15 text-[#ff453a] border-[#ff453a]/30'
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30' 
+                          : 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30'
                       }`}>
                         {isGiLegal ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
                         <span>GI</span>
@@ -180,8 +176,8 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
                     {(modeFilter === 'all' || modeFilter === 'nogi') && (
                       <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1 border ${
                         isNoGiLegal 
-                          ? 'bg-[#30d158]/15 text-[#30d158] border-[#30d158]/30' 
-                          : 'bg-[#ff453a]/15 text-[#ff453a] border-[#ff453a]/30'
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30' 
+                          : 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30'
                       }`}>
                         {isNoGiLegal ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
                         <span>NO-GI</span>
@@ -191,7 +187,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
                 </div>
 
                 {rule.note && (
-                  <p className="text-[11px] text-white/50 pl-0.5 leading-tight">
+                  <p className="text-[11px] text-slate-500 dark:text-white/50 pl-0.5 leading-tight">
                     ⚠️ {rule.note}
                   </p>
                 )}
@@ -205,7 +201,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
             soundFX.playClick();
             onClose();
           }}
-          className="mt-2 w-full py-2.5 rounded-2xl bg-white/10 hover:bg-white/15 text-xs font-bold text-white transition-all active:scale-95"
+          className="mt-2 w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white transition-all active:scale-95"
         >
           Fermer l&apos;Aide-Mémoire
         </button>

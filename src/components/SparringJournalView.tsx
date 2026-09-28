@@ -242,10 +242,10 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
       {/* iOS Large Title Header */}
       <div className="pt-2 px-1 flex items-center justify-between">
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#8e8e93] dark:text-white/40 block">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/40 block">
             Centre d'Entraînement BJJ
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1c1c1e] dark:text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Suivi &amp; Progression
           </h1>
         </div>
@@ -256,7 +256,7 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
               soundFX.playClick();
               setIsAddingSession(!isAddingSession);
             }}
-            className="px-3.5 py-1.5 rounded-full bg-[#007aff] dark:bg-[#0a84ff] text-white text-xs font-bold flex items-center gap-1 active:scale-95 transition-all shadow-md"
+            className="px-3.5 py-1.5 rounded-full bg-[#007aff] dark:bg-[#0a84ff] text-white text-xs font-bold flex items-center gap-1 active:scale-95 transition-all shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Séance</span>
@@ -265,7 +265,7 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
       </div>
 
       {/* Top Segmented Bar (Apple iOS Native Style) */}
-      <div className="grid grid-cols-2 p-1 bg-[#e5e5ea] dark:bg-[#1c1c1e] rounded-2xl border border-black/5 dark:border-white/10 shadow-inner">
+      <div className="grid grid-cols-2 p-1 bg-slate-200/80 dark:bg-[#1c1c1e] rounded-2xl border border-slate-200 dark:border-white/10 shadow-xs">
         <button
           onClick={() => {
             soundFX.playClick();
@@ -273,8 +273,8 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
           }}
           className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
             activeSegment === 'techniques'
-              ? 'bg-white dark:bg-[#2c2c2e] text-[#1c1c1e] dark:text-white shadow-sm font-extrabold'
-              : 'text-[#636366] dark:text-white/60 hover:text-[#1c1c1e] dark:hover:text-white'
+              ? 'bg-white dark:bg-[#2c2c2e] text-slate-900 dark:text-white shadow-xs font-extrabold'
+              : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
           <BarChart2 className="w-3.5 h-3.5" />
@@ -288,8 +288,8 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
           }}
           className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
             activeSegment === 'sessions'
-              ? 'bg-white dark:bg-[#2c2c2e] text-[#1c1c1e] dark:text-white shadow-sm font-extrabold'
-              : 'text-[#636366] dark:text-white/60 hover:text-[#1c1c1e] dark:hover:text-white'
+              ? 'bg-white dark:bg-[#2c2c2e] text-slate-900 dark:text-white shadow-xs font-extrabold'
+              : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
           <Calendar className="w-3.5 h-3.5" />
@@ -315,24 +315,24 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
         <div className="space-y-4">
           {/* Apple Fitness Activity Summary Rings/Pills */}
           <div className="grid grid-cols-3 gap-2">
-            <div className="ios-card p-3 text-center space-y-0.5 border border-black/5 dark:border-white/10 shadow-sm">
-              <span className="text-[10px] font-bold text-[#8e8e93] dark:text-white/40 uppercase tracking-wider block">Séances</span>
-              <span className="text-xl font-black text-[#1c1c1e] dark:text-white font-mono">{sessionStats.totalSessions}</span>
+            <div className="ios-card p-3 text-center space-y-0.5 border border-slate-200 dark:border-white/10 bg-white dark:bg-[#1c1c1e] shadow-xs">
+              <span className="text-[10px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-wider block">Séances</span>
+              <span className="text-xl font-black text-slate-900 dark:text-white font-mono">{sessionStats.totalSessions}</span>
             </div>
-            <div className="ios-card p-3 text-center space-y-0.5 border border-[#007aff]/30 dark:border-[#0a84ff]/30 bg-[#007aff]/5 dark:bg-[#0a84ff]/5 shadow-sm">
+            <div className="ios-card p-3 text-center space-y-0.5 border border-blue-200 dark:border-[#0a84ff]/30 bg-blue-50/70 dark:bg-[#0a84ff]/5 shadow-xs">
               <span className="text-[10px] font-bold text-[#007aff] dark:text-[#0a84ff] uppercase tracking-wider block">Temps Tatami</span>
               <span className="text-xl font-black text-[#007aff] dark:text-[#0a84ff] font-mono">{sessionStats.totalHours}h</span>
             </div>
-            <div className="ios-card p-3 text-center space-y-0.5 border border-[#34c759]/30 dark:border-[#30d158]/30 bg-[#34c759]/5 dark:bg-[#30d158]/5 shadow-sm">
-              <span className="text-[10px] font-bold text-[#15803d] dark:text-[#30d158] uppercase tracking-wider block">Rounds</span>
-              <span className="text-xl font-black text-[#15803d] dark:text-[#30d158] font-mono">{sessionStats.totalRounds}</span>
+            <div className="ios-card p-3 text-center space-y-0.5 border border-emerald-200 dark:border-[#30d158]/30 bg-emerald-50/70 dark:bg-[#30d158]/5 shadow-xs">
+              <span className="text-[10px] font-bold text-emerald-700 dark:text-[#30d158] uppercase tracking-wider block">Rounds</span>
+              <span className="text-xl font-black text-emerald-700 dark:text-[#30d158] font-mono">{sessionStats.totalRounds}</span>
             </div>
           </div>
 
           {/* Add Session Form Drawer */}
           {isAddingSession && (
-            <form onSubmit={handleSaveSession} className="ios-card p-4 space-y-3.5 border border-[#007aff]/30 dark:border-[#0a84ff]/40 bg-[#007aff]/5 dark:bg-[#0a84ff]/5 animate-spring-in shadow-md">
-              <div className="flex items-center justify-between pb-1 border-b border-black/5 dark:border-white/10">
+            <form onSubmit={handleSaveSession} className="ios-card p-4 space-y-3.5 border border-blue-200 dark:border-[#0a84ff]/40 bg-blue-50/40 dark:bg-[#0a84ff]/5 animate-spring-in shadow-xs">
+              <div className="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-white/10">
                 <span className="text-xs font-bold text-[#1c1c1e] dark:text-white">Enregistrer une Séance de Tatami</span>
                 <button
                   type="button"
@@ -524,7 +524,7 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
 
           {/* Sessions List */}
           <div className="space-y-2.5 pt-1">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#8e8e93] dark:text-white/40 px-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/40 px-1">
               Historique des Entraînements ({sessions.length})
             </span>
 
@@ -533,28 +533,28 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
               const intBadge = getIntensityBadge(session.intensity);
 
               return (
-                <div key={session.id} className="ios-card p-4 space-y-3 border border-black/5 dark:border-white/10 shadow-sm">
+                <div key={session.id} className="ios-card p-4 space-y-3 border border-slate-200 dark:border-white/10 bg-white dark:bg-[#1c1c1e] shadow-xs">
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider border ${typeBadge.color}`}>
                           {typeBadge.label}
                         </span>
-                        <span className="text-[10px] text-[#8e8e93] dark:text-white/40 flex items-center gap-1 font-mono">
+                        <span className="text-[10px] text-slate-500 dark:text-white/40 flex items-center gap-1 font-mono">
                           <Calendar className="w-3 h-3" />
                           {session.date}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-2 text-xs text-[#636366] dark:text-white/70">
+                      <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-white/70">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5 text-[#007aff] dark:text-[#0a84ff]" />
-                          <strong className="text-[#1c1c1e] dark:text-white font-mono">{session.durationMinutes}m</strong>
+                          <strong className="text-slate-900 dark:text-white font-mono">{session.durationMinutes}m</strong>
                         </span>
                         <span>·</span>
                         <span className="flex items-center gap-1">
-                          <Activity className="w-3.5 h-3.5 text-[#34c759] dark:text-[#30d158]" />
-                          <strong className="text-[#1c1c1e] dark:text-white font-mono">{session.roundsCount} rounds</strong>
+                          <Activity className="w-3.5 h-3.5 text-emerald-600 dark:text-[#30d158]" />
+                          <strong className="text-slate-900 dark:text-white font-mono">{session.roundsCount} rounds</strong>
                         </span>
                         <span>·</span>
                         <span className={`text-[11px] font-bold ${intBadge.color}`}>
@@ -565,7 +565,7 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
 
                     <button
                       onClick={() => handleDeleteSession(session.id)}
-                      className="p-1.5 text-[#8e8e93] hover:text-[#dc2626] dark:hover:text-[#ff453a] transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-[#ff453a] transition-colors"
                       title="Supprimer la séance"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -578,17 +578,17 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                     (session.techniquesWorked && session.techniquesWorked.length > 0)) && (
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {session.submissionsLanded?.map((subId) => (
-                        <span key={subId} className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#ff3b30]/12 dark:bg-[#ff453a]/20 text-[#dc2626] dark:text-[#ff453a] border border-[#dc2626]/25 dark:border-[#ff453a]/30">
+                        <span key={subId} className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 dark:bg-[#ff453a]/20 dark:text-[#ff453a] dark:border-[#ff453a]/30">
                           🎯 {techniques[subId]?.name || subId}
                         </span>
                       ))}
                       {session.sweepsLanded?.map((swpId) => (
-                        <span key={swpId} className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#34c759]/12 dark:bg-[#30d158]/20 text-[#15803d] dark:text-[#30d158] border border-[#15803d]/25 dark:border-[#30d158]/30">
+                        <span key={swpId} className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/30">
                           🔄 {techniques[swpId]?.name || swpId}
                         </span>
                       ))}
                       {session.techniquesWorked?.map((techId) => (
-                        <span key={techId} className="text-[9px] font-medium px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/5 text-[#1c1c1e] dark:text-white/70 border border-black/5 dark:border-white/10">
+                        <span key={techId} className="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-white/70 border border-slate-200 dark:border-white/10">
                           {techniques[techId]?.name || techId}
                         </span>
                       ))}
@@ -596,14 +596,14 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                   )}
 
                   {session.partnerNotes && (
-                    <div className="text-[11px] text-[#636366] dark:text-white/60 flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-[#8e8e93] dark:text-white/40" />
-                      <span>Avec : <strong className="text-[#1c1c1e] dark:text-white">{session.partnerNotes}</strong></span>
+                    <div className="text-[11px] text-slate-600 dark:text-white/60 flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-slate-400 dark:text-white/40" />
+                      <span>Avec : <strong className="text-slate-900 dark:text-white">{session.partnerNotes}</strong></span>
                     </div>
                   )}
 
                   {session.sparringNotes && (
-                    <p className="text-xs text-[#1c1c1e] dark:text-white/80 bg-[#f2f2f7] dark:bg-black/40 p-2.5 rounded-xl border border-black/5 dark:border-white/5 leading-relaxed italic">
+                    <p className="text-xs text-slate-800 dark:text-white/80 bg-slate-50 dark:bg-black/40 p-2.5 rounded-xl border border-slate-200 dark:border-white/5 leading-relaxed italic">
                       « {session.sparringNotes} »
                     </p>
                   )}

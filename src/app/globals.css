@@ -71,43 +71,73 @@ html.dark body {
   color: #f5f5f7;
 }
 
-/* Apple Frosted Glass Materials */
+/* Apple Frosted Glass Materials (Light mode default) */
 .ios-glass {
-  background-color: rgba(28, 28, 30, 0.72);
+  background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(25px) saturate(180%);
   -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+html.dark .ios-glass {
+  background-color: rgba(28, 28, 30, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .ios-glass-dark {
-  background-color: rgba(18, 18, 20, 0.85);
+  background-color: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(30px) saturate(190%);
   -webkit-backdrop-filter: blur(30px) saturate(190%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+html.dark .ios-glass-dark {
+  background-color: rgba(18, 18, 20, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ios-glass-sheet {
-  background-color: rgba(22, 22, 26, 0.92);
+  background-color: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(35px) saturate(200%);
   -webkit-backdrop-filter: blur(35px) saturate(200%);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.06);
+}
+html.dark .ios-glass-sheet {
+  background-color: rgba(22, 22, 26, 0.92);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
 }
 
-/* Apple Inset Grouped Card */
+/* Apple Inset Grouped Card (Light mode default) */
 .ios-card {
-  background-color: #1c1c1e;
+  background-color: #ffffff;
   border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+html.dark .ios-card {
+  background-color: #1c1c1e;
   border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: none;
 }
 
 .ios-card-interactive {
-  background-color: #1c1c1e;
+  background-color: #ffffff;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   transition: transform 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
 }
 .ios-card-interactive:active {
+  transform: scale(0.98);
+  background-color: #f2f2f7;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+html.dark .ios-card-interactive {
+  background-color: #1c1c1e;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: none;
+}
+html.dark .ios-card-interactive:active {
   transform: scale(0.98);
   background-color: #242426;
   border-color: rgba(255, 255, 255, 0.15);
@@ -287,6 +317,27 @@ html:not(.dark) .active\:bg-white\/10:active {
 /* 4. Text Contrast */
 html:not(.dark) .text-white {
   color: #1c1c1e !important;
+}
+
+/* Preserve crisp white text inside filled colored buttons, badges, and chips */
+html:not(.dark) .bg-\[\#007aff\],
+html:not(.dark) .bg-\[\#0a84ff\],
+html:not(.dark) .bg-\[\#30d158\],
+html:not(.dark) .bg-\[\#ff453a\],
+html:not(.dark) .bg-blue-600,
+html:not(.dark) .bg-blue-500,
+html:not(.dark) .bg-emerald-600,
+html:not(.dark) .bg-rose-600,
+html:not(.dark) .bg-purple-600,
+html:not(.dark) [class*="bg-[#007aff]"] .text-white,
+html:not(.dark) [class*="bg-[#0a84ff]"] .text-white,
+html:not(.dark) [class*="bg-blue-600"] .text-white,
+html:not(.dark) button.bg-\[\#007aff\],
+html:not(.dark) button.bg-\[\#0a84ff\],
+html:not(.dark) button[class*="bg-[#007aff]"] *,
+html:not(.dark) button[class*="bg-[#0a84ff]"] *,
+html:not(.dark) button[class*="bg-blue-600"] * {
+  color: #ffffff !important;
 }
 
 html:not(.dark) .text-white\/90 {

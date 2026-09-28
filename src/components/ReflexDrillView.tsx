@@ -141,22 +141,22 @@ export const ReflexDrillView: React.FC<{ onFinishDrill: (points: number) => void
   if (isFinished) {
     return (
       <div className="flex-1 flex flex-col p-4 pb-12 items-center justify-center text-center space-y-4 animate-spring-in max-w-md mx-auto w-full">
-        <div className="w-16 h-16 rounded-3xl bg-[#0a84ff]/20 border border-[#0a84ff]/30 flex items-center justify-center text-[#0a84ff]">
+        <div className="w-16 h-16 rounded-3xl bg-blue-50 dark:bg-[#0a84ff]/20 border border-blue-200 dark:border-[#0a84ff]/30 flex items-center justify-center text-[#007aff] dark:text-[#0a84ff] shadow-xs">
           <Award className="w-8 h-8" />
         </div>
         <div className="space-y-1">
-          <h2 className="text-xl font-extrabold text-white tracking-tight">Session Terminée</h2>
-          <p className="text-xs text-white/50">Performance de décision sous pression</p>
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Session Terminée</h2>
+          <p className="text-xs text-slate-500 dark:text-white/50">Performance de décision sous pression</p>
         </div>
 
-        <div className="ios-card p-5 w-full space-y-3">
+        <div className="bg-white dark:bg-[#1c1c1e] border border-slate-200 dark:border-white/10 rounded-2xl p-5 w-full space-y-3 shadow-xs">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-white/60">Score :</span>
-            <span className="font-mono text-[#30d158] font-extrabold text-base">{score} PTS</span>
+            <span className="text-slate-600 dark:text-white/60 font-medium">Score :</span>
+            <span className="font-mono text-emerald-600 dark:text-[#30d158] font-extrabold text-base">{score} PTS</span>
           </div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-white/60">Réussite :</span>
-            <span className="font-mono text-[#0a84ff] font-bold">
+            <span className="text-slate-600 dark:text-white/60 font-medium">Réussite :</span>
+            <span className="font-mono text-[#007aff] dark:text-[#0a84ff] font-bold">
               {Math.round((score / (SCENARIOS.length * 150)) * SCENARIOS.length)} / {SCENARIOS.length}
             </span>
           </div>
@@ -164,7 +164,7 @@ export const ReflexDrillView: React.FC<{ onFinishDrill: (points: number) => void
 
         <button
           onClick={handleRestart}
-          className="w-full py-3.5 rounded-2xl bg-[#0a84ff] hover:bg-[#0a84ff]/90 text-white font-bold text-xs shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2"
+          className="w-full py-3.5 rounded-2xl bg-[#007aff] hover:bg-[#0062cc] text-white font-bold text-xs shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
         >
           <RotateCcw className="w-4 h-4" />
           <span>Recommencer l&apos;entraînement</span>
@@ -176,48 +176,50 @@ export const ReflexDrillView: React.FC<{ onFinishDrill: (points: number) => void
   return (
     <div className="flex-1 flex flex-col p-4 pb-12 space-y-3.5 animate-spring-in max-w-md mx-auto w-full">
       {/* HUD Bar */}
-      <div className="flex items-center justify-between ios-card p-3">
-        <div className="flex items-center gap-1.5 text-xs text-white/70">
-          <Flame className="w-4 h-4 text-[#ffd60a]" />
+      <div className="flex items-center justify-between bg-white dark:bg-[#1c1c1e] border border-slate-200 dark:border-white/10 rounded-2xl p-3 shadow-xs">
+        <div className="flex items-center gap-1.5 text-xs text-slate-700 dark:text-white/70">
+          <Flame className="w-4 h-4 text-amber-500" />
           <span className="font-bold">Série : {streak}</span>
         </div>
 
         <div className="flex items-center gap-2">
           <div className={`flex items-center gap-1 text-xs font-mono font-bold px-2.5 py-0.5 rounded-full ${
-            timeLeft <= 2 ? 'bg-[#ff453a]/20 text-[#ff453a] animate-pulse' : 'bg-white/10 text-[#0a84ff]'
+            timeLeft <= 2 
+              ? 'bg-rose-100 text-rose-700 dark:bg-[#ff453a]/20 dark:text-[#ff453a] animate-pulse' 
+              : 'bg-blue-50 text-[#007aff] dark:bg-white/10 dark:text-[#0a84ff]'
           }`}>
             <Timer className="w-3.5 h-3.5" />
             <span>{timeLeft}s</span>
           </div>
 
-          <span className="text-xs font-mono font-bold text-[#30d158]">
+          <span className="text-xs font-mono font-bold text-emerald-600 dark:text-[#30d158]">
             {score} pts
           </span>
         </div>
       </div>
 
       {/* Scenario Inset Card */}
-      <div className="ios-card p-4 space-y-2">
-        <div className="flex items-center justify-between text-[10px] text-white/40 font-mono">
+      <div className="bg-white dark:bg-[#1c1c1e] border border-slate-200 dark:border-white/10 rounded-2xl p-4 space-y-2.5 shadow-xs">
+        <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-white/40 font-mono">
           <span>{currentIndex + 1} / {SCENARIOS.length}</span>
-          <span className="px-2 py-0.5 rounded-full bg-white/10 text-white/80">
+          <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-white/80 font-sans font-medium text-[11px]">
             {scenario.position}
           </span>
         </div>
 
-        <div className="space-y-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#ffd60a] flex items-center gap-1">
+        <div className="space-y-1.5 p-3 rounded-xl bg-amber-50/70 dark:bg-amber-500/10 border border-amber-200/80 dark:border-amber-500/20">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-[#ffd60a] flex items-center gap-1">
             <Zap className="w-3.5 h-3.5" />
             Action Adverse :
           </span>
-          <p className="text-sm font-bold text-white leading-snug">
+          <p className="text-sm font-bold text-slate-900 dark:text-white leading-snug">
             « {scenario.opponentAction} »
           </p>
         </div>
       </div>
 
       <div className="text-center pt-1">
-        <span className="text-[11px] font-bold text-white/40 uppercase tracking-wider">
+        <span className="text-[11px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-wider">
           Réaction tactique optimale ?
         </span>
       </div>
@@ -229,14 +231,14 @@ export const ReflexDrillView: React.FC<{ onFinishDrill: (points: number) => void
           const isCorrect = techId === scenario.correctNextId;
           const isChosen = selectedAnswer === techId;
 
-          let btnClass = 'bg-[#1c1c1e] border-white/10 text-white hover:bg-white/10';
+          let btnClass = 'bg-white hover:bg-slate-50 border-slate-200 text-slate-900 dark:bg-[#1c1c1e] dark:border-white/10 dark:text-white dark:hover:bg-white/10 shadow-xs';
           if (isAnswered) {
             if (isCorrect) {
-              btnClass = 'bg-[#30d158]/20 border-[#30d158] text-[#30d158]';
+              btnClass = 'bg-emerald-50 border-emerald-400 text-emerald-800 dark:bg-[#30d158]/20 dark:border-[#30d158] dark:text-[#30d158] font-bold';
             } else if (isChosen && !isCorrect) {
-              btnClass = 'bg-[#ff453a]/20 border-[#ff453a] text-[#ff453a]';
+              btnClass = 'bg-rose-50 border-rose-400 text-rose-800 dark:bg-[#ff453a]/20 dark:border-[#ff453a] dark:text-[#ff453a] font-bold';
             } else {
-              btnClass = 'bg-black/30 border-white/5 text-white/30 opacity-40';
+              btnClass = 'bg-slate-50 border-slate-200 text-slate-400 opacity-40 dark:bg-black/30 dark:border-white/5 dark:text-white/30';
             }
           }
 
@@ -249,15 +251,15 @@ export const ReflexDrillView: React.FC<{ onFinishDrill: (points: number) => void
             >
               <div>
                 <span className="text-xs font-bold block">{tech ? tech.name : techId}</span>
-                <span className="text-[10px] text-white/40">{tech ? tech.category : ''}</span>
+                <span className="text-[10px] text-slate-500 dark:text-white/40">{tech ? tech.category : ''}</span>
               </div>
 
               {isAnswered && (
                 <div>
                   {isCorrect ? (
-                    <CheckCircle2 className="w-5 h-5 text-[#30d158]" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-[#30d158]" />
                   ) : isChosen ? (
-                    <XCircle className="w-5 h-5 text-[#ff453a]" />
+                    <XCircle className="w-5 h-5 text-rose-600 dark:text-[#ff453a]" />
                   ) : null}
                 </div>
               )}
@@ -268,14 +270,14 @@ export const ReflexDrillView: React.FC<{ onFinishDrill: (points: number) => void
 
       {/* Explanation */}
       {isAnswered && (
-        <div className="ios-card p-3.5 animate-spring-in space-y-2.5 border border-[#0a84ff]/30">
-          <p className="text-xs text-white/80 leading-relaxed">
-            <span className="font-bold text-[#0a84ff]">Analyse GPS : </span>
+        <div className="bg-blue-50/80 dark:bg-[#1c1c1e] border border-blue-200 dark:border-[#0a84ff]/30 rounded-2xl p-3.5 animate-spring-in space-y-2.5 shadow-xs">
+          <p className="text-xs text-slate-800 dark:text-white/80 leading-relaxed">
+            <span className="font-bold text-[#007aff] dark:text-[#0a84ff]">Analyse GPS : </span>
             {scenario.explanation}
           </p>
           <button
             onClick={handleNext}
-            className="w-full py-2.5 rounded-xl bg-[#0a84ff] text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md"
+            className="w-full py-2.5 rounded-xl bg-[#007aff] hover:bg-[#0062cc] text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md"
           >
             <span>{currentIndex + 1 < SCENARIOS.length ? 'Suivant' : 'Résultats'}</span>
             <ArrowRight className="w-4 h-4" />

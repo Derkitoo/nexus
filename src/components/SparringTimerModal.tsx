@@ -207,13 +207,13 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
   const modeInfo = getModeDetails();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-spring-in select-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-spring-in select-none">
       {/* Outer Card with Light/Dark adaptiveness */}
-      <div className={`relative w-full ${isFullscreen ? 'max-w-xl h-[94vh]' : 'max-w-md max-h-[92vh]'} bg-[#161618] border border-white/12 rounded-[32px] p-5 shadow-2xl flex flex-col justify-between overflow-hidden transition-all duration-300`}>
+      <div className={`relative w-full ${isFullscreen ? 'max-w-xl h-[94vh]' : 'max-w-md max-h-[92vh]'} bg-white dark:bg-[#161618] border border-slate-200 dark:border-white/12 rounded-[32px] p-5 shadow-2xl flex flex-col justify-between overflow-hidden transition-all duration-300`}>
         
         {/* Flash Screen Warning Rim */}
         {visualFlash === 'round_change' && (
-          <div className="absolute inset-0 border-4 border-white/80 animate-pulse pointer-events-none rounded-[32px] z-30" />
+          <div className="absolute inset-0 border-4 border-slate-900 dark:border-white/80 animate-pulse pointer-events-none rounded-[32px] z-30" />
         )}
         {visualFlash === 'warning_10' && (
           <div className="absolute inset-0 border-4 border-[#ff453a] animate-pulse pointer-events-none rounded-[32px] z-30" />
@@ -223,19 +223,19 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
         )}
 
         {/* 1. Top Header Bar */}
-        <div className="w-full flex items-center justify-between pb-3 border-b border-white/10 shrink-0">
+        <div className="w-full flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/10 shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#0a84ff]/15 border border-[#0a84ff]/30 flex items-center justify-center text-[#0a84ff]">
+            <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-[#0a84ff]/15 border border-blue-200 dark:border-[#0a84ff]/30 flex items-center justify-center text-[#007aff] dark:text-[#0a84ff]">
               <Clock className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-extrabold text-white leading-tight flex items-center gap-1.5">
+              <h3 className="text-sm font-extrabold text-slate-900 dark:text-white leading-tight flex items-center gap-1.5">
                 Chrono Sparring Pro
-                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-[#0a84ff]/20 text-[#0a84ff]">
+                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-blue-100 dark:bg-[#0a84ff]/20 text-[#007aff] dark:text-[#0a84ff]">
                   v2.0
                 </span>
               </h3>
-              <p className="text-[10px] text-white/50">{modeInfo.label}</p>
+              <p className="text-[10px] text-slate-500 dark:text-white/50">{modeInfo.label}</p>
             </div>
           </div>
 
@@ -243,7 +243,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
             {/* Fullscreen / Tatami expand button */}
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="p-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white/70 hover:text-white transition-all active:scale-90"
+              className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white transition-all active:scale-90"
               title={isFullscreen ? 'Réduire' : 'Mode Plein Écran Tatami'}
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -257,8 +257,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
               }}
               className={`p-1.5 rounded-full transition-all active:scale-90 ${
                 activeTab === 'settings' 
-                  ? 'bg-[#0a84ff] text-white' 
-                  : 'bg-white/10 hover:bg-white/15 text-white/70 hover:text-white'
+                  ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs' 
+                  : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="Personnaliser les rounds et options"
             >
@@ -271,7 +271,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                 soundFX.playClick();
                 onClose();
               }}
-              className="p-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white/60 hover:text-white transition-all active:scale-90"
+              className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white transition-all active:scale-90"
             >
               <X className="w-4 h-4" />
             </button>
@@ -286,15 +286,15 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
             <div className="w-full flex items-center justify-between px-1">
               <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 ${
                 phase === 'fight' 
-                  ? 'bg-[#30d158]/20 text-[#30d158] border border-[#30d158]/40 shadow-sm shadow-[#30d158]/20 animate-pulse' 
-                  : 'bg-[#ffd60a]/20 text-[#ffd60a] border border-[#ffd60a]/40 shadow-sm shadow-[#ffd60a]/20'
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/40 shadow-xs animate-pulse' 
+                  : 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/40 shadow-xs'
               }`}>
-                <span className={`w-2 h-2 rounded-full ${phase === 'fight' ? 'bg-[#30d158]' : 'bg-[#ffd60a]'}`} />
+                <span className={`w-2 h-2 rounded-full ${phase === 'fight' ? 'bg-emerald-600 dark:bg-[#30d158]' : 'bg-amber-500 dark:bg-[#ffd60a]'}`} />
                 {phase === 'fight' ? 'COMBAT (SPARRING)' : 'REPOS (REST)'}
               </span>
 
               <div className="flex items-center gap-1">
-                <span className="text-xs font-mono font-bold text-white/70">
+                <span className="text-xs font-mono font-bold text-slate-500 dark:text-white/70">
                   Round {currentRound} {isUnlimitedRounds ? '(Illimité)' : `/ ${totalRounds}`}
                 </span>
               </div>
@@ -302,8 +302,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
 
             {/* Sub-Banner for Thematic / Shark Tank Modes */}
             {sparringMode === 'thematic' && (
-              <div className="w-full py-1.5 px-3 rounded-xl bg-[#0a84ff]/10 border border-[#0a84ff]/25 text-center">
-                <span className="text-[11px] font-bold text-[#0a84ff]">
+              <div className="w-full py-1.5 px-3 rounded-xl bg-blue-50 dark:bg-[#0a84ff]/10 border border-blue-200 dark:border-[#0a84ff]/25 text-center">
+                <span className="text-[11px] font-bold text-blue-700 dark:text-[#0a84ff]">
                   {modeInfo.desc}
                 </span>
               </div>
@@ -317,10 +317,10 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                     key={i}
                     className={`h-1.5 rounded-full transition-all ${
                       i + 1 < currentRound
-                        ? 'w-4 bg-[#30d158]'
+                        ? 'w-4 bg-emerald-600 dark:bg-[#30d158]'
                         : i + 1 === currentRound
-                        ? 'w-6 bg-[#0a84ff]'
-                        : 'w-2 bg-white/20'
+                        ? 'w-6 bg-blue-600 dark:bg-[#0a84ff]'
+                        : 'w-2 bg-slate-200 dark:bg-white/20'
                     }`}
                   />
                 ))}
@@ -337,7 +337,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                   r="45"
                   fill="transparent"
                   strokeWidth="5.5"
-                  className="timer-bg-ring stroke-white/10"
+                  className="timer-bg-ring stroke-slate-200 dark:stroke-white/10"
                 />
                 {/* Active Dynamic Progress Ring */}
                 <circle
@@ -356,11 +356,11 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
 
               {/* Digital Time Centerpiece */}
               <div className="absolute flex flex-col items-center justify-center">
-                <span className={`${isFullscreen ? 'text-6xl' : 'text-5xl'} font-black text-white font-mono tracking-tight drop-shadow-md`}>
+                <span className={`${isFullscreen ? 'text-6xl' : 'text-5xl'} font-black text-slate-900 dark:text-white font-mono tracking-tight drop-shadow-xs`}>
                   {timeFormatted}
                 </span>
 
-                <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 mt-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/50 mt-1">
                   {phase === 'fight' ? `${Math.round(roundDuration / 60)} min Sparring` : `${restDuration}s Récupération`}
                 </span>
 
@@ -368,14 +368,14 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                 <div className="flex items-center gap-2 mt-2">
                   <button
                     onClick={() => handleAdjustTime(-30)}
-                    className="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/15 text-[10px] font-bold text-white/60 active:scale-95 transition-all"
+                    className="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-bold text-slate-600 dark:text-white/60 active:scale-95 transition-all"
                     title="-30 secondes"
                   >
                     -30s
                   </button>
                   <button
                     onClick={() => handleAdjustTime(30)}
-                    className="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/15 text-[10px] font-bold text-white/60 active:scale-95 transition-all"
+                    className="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-bold text-slate-600 dark:text-white/60 active:scale-95 transition-all"
                     title="+30 secondes"
                   >
                     +30s
@@ -386,11 +386,11 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
 
             {/* Finished Alert */}
             {isFinished && (
-              <div className="w-full py-2 px-3 rounded-2xl bg-[#30d158]/20 border border-[#30d158]/40 text-center animate-spring-in">
-                <span className="text-xs font-black text-[#30d158] block">
+              <div className="w-full py-2 px-3 rounded-2xl bg-emerald-50 dark:bg-[#30d158]/20 border border-emerald-200 dark:border-[#30d158]/40 text-center animate-spring-in">
+                <span className="text-xs font-black text-emerald-700 dark:text-[#30d158] block">
                   🎉 Session Terminée avec Succès !
                 </span>
-                <span className="text-[10px] text-white/70">
+                <span className="text-[10px] text-slate-600 dark:text-white/70">
                   {totalRounds} rounds complétés au total.
                 </span>
               </div>
@@ -401,7 +401,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
               {/* Reset Button */}
               <button
                 onClick={handleReset}
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/15 text-white/70 hover:text-white flex items-center justify-center active:scale-90 transition-all border border-white/10"
+                className="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 hover:text-slate-900 dark:text-white/70 dark:hover:text-white flex items-center justify-center active:scale-90 transition-all border border-slate-200 dark:border-white/10 shadow-xs"
                 title="Remise à zéro"
               >
                 <RotateCcw className="w-5 h-5" />
@@ -412,8 +412,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                 onClick={handleTogglePlay}
                 className={`w-16 h-16 rounded-full flex items-center justify-center text-white active:scale-95 transition-all shadow-xl ${
                   isRunning 
-                    ? 'bg-[#ff453a] shadow-[#ff453a]/30 hover:bg-[#ff453a]/90' 
-                    : 'bg-[#30d158] shadow-[#30d158]/30 hover:bg-[#30d158]/90'
+                    ? 'bg-rose-500 shadow-rose-500/30 hover:bg-rose-600' 
+                    : 'bg-emerald-500 shadow-emerald-500/30 hover:bg-emerald-600'
                 }`}
                 title={isRunning ? 'Mettre en pause' : 'Démarrer le chrono'}
               >
@@ -427,7 +427,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
               {/* Skip to Next Phase */}
               <button
                 onClick={handleSkip}
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/15 text-white/70 hover:text-white flex items-center justify-center active:scale-90 transition-all border border-white/10"
+                className="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 hover:text-slate-900 dark:text-white/70 dark:hover:text-white flex items-center justify-center active:scale-90 transition-all border border-slate-200 dark:border-white/10 shadow-xs"
                 title="Passer au round ou repos suivant"
               >
                 <SkipForward className="w-5 h-5" />
@@ -440,7 +440,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
             
             {/* Mode Selector */}
             <div className="space-y-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/50 block">
                 Type de Sparring :
               </span>
               <div className="grid grid-cols-2 gap-1.5">
@@ -467,22 +467,22 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                     }}
                     className={`p-2.5 rounded-2xl text-left border transition-all ${
                       sparringMode === m.id
-                        ? 'bg-[#0a84ff]/20 border-[#0a84ff] text-white'
-                        : 'bg-white/5 hover:bg-white/10 border-white/10 text-white/70'
+                        ? 'bg-blue-50 border-blue-400 text-blue-900 dark:bg-[#0a84ff]/20 dark:border-[#0a84ff] dark:text-white shadow-xs'
+                        : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700 dark:bg-white/5 dark:hover:bg-white/10 dark:border-white/10 dark:text-white/70'
                     }`}
                   >
                     <span className="text-xs font-bold block">{m.label}</span>
-                    <span className="text-[9px] text-white/40 block mt-0.5 leading-tight">{m.desc}</span>
+                    <span className="text-[9px] text-slate-500 dark:text-white/40 block mt-0.5 leading-tight">{m.desc}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Round Duration Customizer */}
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-white">Durée du Round</span>
-                <span className="text-sm font-black font-mono text-[#0a84ff]">
+                <span className="text-xs font-bold text-slate-900 dark:text-white">Durée du Round</span>
+                <span className="text-sm font-black font-mono text-[#007aff] dark:text-[#0a84ff]">
                   {Math.floor(roundDuration / 60)} min {roundDuration % 60 > 0 ? `${roundDuration % 60}s` : ''}
                 </span>
               </div>
@@ -508,8 +508,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                     }}
                     className={`px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap transition-all ${
                       roundDuration === p.sec
-                        ? 'bg-[#0a84ff] text-white'
-                        : 'bg-white/10 text-white/60 hover:text-white'
+                        ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+                        : 'bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 text-slate-700 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     {p.label}
@@ -519,7 +519,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
 
               {/* Fine tuning + / - */}
               <div className="flex items-center justify-between pt-1">
-                <span className="text-[10px] text-white/40">Ajustement fin :</span>
+                <span className="text-[10px] text-slate-500 dark:text-white/40">Ajustement fin :</span>
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => {
@@ -528,11 +528,11 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                       setRoundDuration(n);
                       if (!isRunning && phase === 'fight') setTimeLeft(n);
                     }}
-                    className="p-1 rounded-lg bg-white/10 hover:bg-white/20 text-white/80"
+                    className="p-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-white/80"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-[11px] font-mono font-bold text-white px-2">30s</span>
+                  <span className="text-[11px] font-mono font-bold text-slate-900 dark:text-white px-2">30s</span>
                   <button
                     onClick={() => {
                       soundFX.playClick();
@@ -540,7 +540,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                       setRoundDuration(n);
                       if (!isRunning && phase === 'fight') setTimeLeft(n);
                     }}
-                    className="p-1 rounded-lg bg-white/10 hover:bg-white/20 text-white/80"
+                    className="p-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-white/80"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -549,10 +549,10 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
             </div>
 
             {/* Rest Duration Customizer */}
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-white">Temps de Repos</span>
-                <span className="text-sm font-black font-mono text-[#ffd60a]">
+                <span className="text-xs font-bold text-slate-900 dark:text-white">Temps de Repos</span>
+                <span className="text-sm font-black font-mono text-amber-700 dark:text-[#ffd60a]">
                   {restDuration === 0 ? 'Sans repos' : `${restDuration} sec`}
                 </span>
               </div>
@@ -577,8 +577,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                     }}
                     className={`px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap transition-all ${
                       restDuration === p.sec
-                        ? 'bg-[#ffd60a] text-black font-extrabold'
-                        : 'bg-white/10 text-white/60 hover:text-white'
+                        ? 'bg-amber-500 text-white font-extrabold shadow-xs'
+                        : 'bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 text-slate-700 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     {p.label}
@@ -588,10 +588,10 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
             </div>
 
             {/* Rounds Count */}
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-white">Nombre de Rounds</span>
-                <span className="text-sm font-black font-mono text-white">
+                <span className="text-xs font-bold text-slate-900 dark:text-white">Nombre de Rounds</span>
+                <span className="text-sm font-black font-mono text-slate-900 dark:text-white">
                   {isUnlimitedRounds ? 'Illimité ♾️' : `${totalRounds} Rounds`}
                 </span>
               </div>
@@ -607,8 +607,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                     }}
                     className={`flex-1 py-1 rounded-xl text-xs font-bold transition-all ${
                       !isUnlimitedRounds && totalRounds === num
-                        ? 'bg-white text-black'
-                        : 'bg-white/10 text-white/60 hover:text-white'
+                        ? 'bg-[#007aff] dark:bg-white text-white dark:text-black shadow-xs'
+                        : 'bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 text-slate-700 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     {num}
@@ -621,8 +621,8 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                   }}
                   className={`px-2.5 py-1 rounded-xl text-xs font-bold transition-all ${
                     isUnlimitedRounds
-                      ? 'bg-[#30d158] text-black'
-                      : 'bg-white/10 text-white/60 hover:text-white'
+                      ? 'bg-emerald-600 text-white font-bold'
+                      : 'bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 text-slate-700 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   ♾️
@@ -631,15 +631,15 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
             </div>
 
             {/* Visual Warnings Toggles */}
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-              <span className="text-xs font-bold text-white block">Signaux Visuels Silencieux</span>
+            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-2">
+              <span className="text-xs font-bold text-slate-900 dark:text-white block">Signaux Visuels Silencieux</span>
               
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-white/70">Alerte Orange à 30s</span>
+                <span className="text-[11px] text-slate-600 dark:text-white/70">Alerte Orange à 30s</span>
                 <button
                   onClick={() => setEnableWarning30s(!enableWarning30s)}
                   className={`w-9 h-5 rounded-full transition-all relative ${
-                    enableWarning30s ? 'bg-[#30d158]' : 'bg-white/20'
+                    enableWarning30s ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-white/20'
                   }`}
                 >
                   <div className={`w-3.5 h-3.5 rounded-full bg-white absolute top-0.5 transition-transform ${
@@ -649,11 +649,11 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-white/70">Flash d&apos;urgence à 10s</span>
+                <span className="text-[11px] text-slate-600 dark:text-white/70">Flash d&apos;urgence à 10s</span>
                 <button
                   onClick={() => setEnableWarning10s(!enableWarning10s)}
                   className={`w-9 h-5 rounded-full transition-all relative ${
-                    enableWarning10s ? 'bg-[#30d158]' : 'bg-white/20'
+                    enableWarning10s ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-white/20'
                   }`}
                 >
                   <div className={`w-3.5 h-3.5 rounded-full bg-white absolute top-0.5 transition-transform ${
@@ -669,7 +669,7 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
                 soundFX.playClick();
                 setActiveTab('timer');
               }}
-              className="w-full py-3 rounded-2xl bg-[#0a84ff] text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-98 shadow-lg shadow-[#0a84ff]/30 transition-all"
+              className="w-full py-3 rounded-2xl bg-[#007aff] dark:bg-[#0a84ff] text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-98 shadow-md transition-all"
             >
               <Check className="w-4 h-4" />
               <span>Valider &amp; Lancer</span>
