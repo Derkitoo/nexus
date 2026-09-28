@@ -8,13 +8,10 @@ import {
   RotateCcw, 
   SkipForward, 
   Flame, 
-  Bell, 
-  Volume2, 
   Settings2,
   Clock
 } from 'lucide-react';
 import { soundFX } from '@/utils/audioFeedback';
-import { voiceCopilot } from '@/utils/voiceCopilot';
 import { UserProfile } from '@/types/bjj';
 
 interface SparringTimerModalProps {
@@ -75,13 +72,11 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
   const handlePhaseComplete = () => {
     if (phase === 'fight') {
       soundFX.playBuzzer();
-      if (voiceCopilot.enabled) voiceCopilot.speak('Fin du round. Repos.');
 
       if (currentRound >= totalRounds) {
         setIsRunning(false);
         setIsFinished(true);
         soundFX.playSubmissionChime();
-        if (voiceCopilot.enabled) voiceCopilot.speak('Session de sparring terminée. Bravo !');
       } else {
         setPhase('rest');
         setTimeLeft(restDuration);
@@ -89,7 +84,6 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
     } else {
       // Rest completed -> Next round
       soundFX.playGong();
-      if (voiceCopilot.enabled) voiceCopilot.speak(`Round ${currentRound + 1}. Combat !`);
       setPhase('fight');
       setCurrentRound((r) => r + 1);
       setTimeLeft(roundDuration);
@@ -100,7 +94,6 @@ export const SparringTimerModal: React.FC<SparringTimerModalProps> = ({
     if (!isRunning) {
       if (timeLeft === roundDuration && phase === 'fight') {
         soundFX.playGong();
-        if (voiceCopilot.enabled) voiceCopilot.speak(`Round ${currentRound}. Combat !`);
       } else {
         soundFX.playClick();
       }

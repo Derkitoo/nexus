@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import { UserProfile } from '@/types/bjj';
 import { soundFX } from '@/utils/audioFeedback';
-import { voiceCopilot } from '@/utils/voiceCopilot';
 
 interface BeltPassportModalProps {
   isOpen: boolean;
@@ -127,9 +126,6 @@ export const BeltPassportModal: React.FC<BeltPassportModalProps> = ({
     if (beltIdx < BELT_ORDER.length - 1) {
       const nextBelt = BELT_ORDER[beltIdx + 1];
       soundFX.playSubmissionChime();
-      if (voiceCopilot.enabled) {
-        voiceCopilot.speak(`Félicitations pour votre promotion à la ceinture ${BELT_DATA[nextBelt].nameFr} !`);
-      }
       onUpdateProfile({ belt: nextBelt, stripes: 0 });
       setCelebrating(true);
       setTimeout(() => setCelebrating(false), 3000);

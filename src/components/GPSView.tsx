@@ -16,9 +16,6 @@ import {
   FileEdit, 
   Save, 
   Check, 
-  Volume2, 
-  Volume1, 
-  VolumeX, 
   Navigation,
   Sparkles,
   Award,
@@ -28,7 +25,6 @@ import {
 import { Technique, TacticalSystem } from '@/types/bjj';
 import { TechniqueVideoPreview } from './TechniqueVideoPreview';
 import { soundFX } from '@/utils/audioFeedback';
-import { voiceCopilot } from '@/utils/voiceCopilot';
 
 interface GPSViewProps {
   system: TacticalSystem;
@@ -43,8 +39,6 @@ interface GPSViewProps {
   onOpenFlowModal: () => void;
 }
 
-type AudioMode = 'voice' | 'sfx' | 'mute';
-
 export const GPSView: React.FC<GPSViewProps> = ({
   system,
   currentTechnique,
@@ -58,7 +52,6 @@ export const GPSView: React.FC<GPSViewProps> = ({
   onOpenFlowModal,
 }) => {
   const [sheetMode, setSheetMode] = useState<'actions' | 'details'>('actions');
-  const [audioMode, setAudioMode] = useState<AudioMode>('voice');
   const [isMatMode, setIsMatMode] = useState(false);
   
   // Interactive Checklist Mastery per technique (localStorage)
@@ -69,13 +62,7 @@ export const GPSView: React.FC<GPSViewProps> = ({
   const [isEditingNote, setIsEditingNote] = useState(false);
   const [noteSaved, setNoteSaved] = useState(false);
 
-  // Sync Audio Mode
-  useEffect(() => {
-    soundFX.enabled = audioMode !== 'mute';
-    voiceCopilot.enabled = audioMode === 'voice';
-  }, [audioMode]);
-
-  // When technique changes: vocal announcement & load checklist & notes
+  // When technique changes: load checklist & notes
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedNote = localStorage.getItem(`bjj_note_${currentTechnique.id}`);
@@ -93,27 +80,7 @@ export const GPSView: React.FC<GPSViewProps> = ({
         setCheckedDetails([]);
       }
     }
-
-    // Voice announcement like Apple Maps turn
-    if (voiceCopilot.enabled) {
-      const keyCue = currentTechnique.details[0] || undefined;
-      voiceCopilot.announceTechnique(currentTechnique.name, keyCue);
-    }
   }, [currentTechnique.id, currentTechnique.name, currentTechnique.details]);
-
-  const cycleAudioMode = () => {
-    let next: AudioMode = 'voice';
-    if (audioMode === 'voice') next = 'sfx';
-    else if (audioMode === 'sfx') next = 'mute';
-    else next = 'voice';
-
-    setAudioMode(next);
-    soundFX.enabled = next !== 'mute';
-    voiceCopilot.enabled = next === 'voice';
-
-    if (next !== 'mute') soundFX.playClick();
-    if (next === 'voice') voiceCopilot.speak('Guidage vocal activé.');
-  };
 
   const toggleCheckDetail = (index: number) => {
     soundFX.playClick();
@@ -124,7 +91,6 @@ export const GPSView: React.FC<GPSViewProps> = ({
       }
       if (next.length === currentTechnique.details.length && currentTechnique.details.length > 0) {
         soundFX.playSubmissionChime();
-        if (voiceCopilot.enabled) voiceCopilot.speak('Points clés maîtrisés !');
       }
       return next;
     });
@@ -205,7 +171,6 @@ export const GPSView: React.FC<GPSViewProps> = ({
             <button
               onClick={() => {
                 soundFX.playClick();
-                voiceCopilot.stop();
                 onBackToDashboard();
               }}
               className="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/20 active:scale-95 text-xs font-bold text-white transition-all shrink-0 border border-white/10"
@@ -283,32 +248,6 @@ export const GPSView: React.FC<GPSViewProps> = ({
               title="Mode Tatami Plein Écran (HUD)"
             >
               <Maximize2 className="w-4 h-4 text-[#ffd60a]" />
-            </button>
-
-            <button
-              onClick={cycleAudioMode}
-              className={`w-9 h-9 rounded-full ios-glass-dark flex items-center justify-center active:scale-90 transition-all border shadow-lg ${
-                audioMode === 'voice' 
-                  ? 'border-[#30d158]/50 text-[#30d158]' 
-                  : audioMode === 'sfx'
-                  ? 'border-[#0a84ff]/50 text-[#0a84ff]'
-                  : 'border-white/20 text-white/40'
-              }`}
-              title={
-                audioMode === 'voice' 
-                  ? 'Guidage Vocal Siri + Sons Actif' 
-                  : audioMode === 'sfx' 
-                  ? 'Sons seuls (Bips & Victoire)' 
-                  : 'Audio Muet'
-              }
-            >
-              {audioMode === 'voice' ? (
-                <Volume2 className="w-4 h-4" />
-              ) : audioMode === 'sfx' ? (
-                <Volume1 className="w-4 h-4" />
-              ) : (
-                <VolumeX className="w-4 h-4" />
-              )}
             </button>
           </div>
         </div>
@@ -487,10 +426,8 @@ export const GPSView: React.FC<GPSViewProps> = ({
                     const isTargetFinish = targetTech && (targetTech.category_id === 'submission' || targetTech.category_id === 'sweep');
                     if (isTargetFinish) {
                       soundFX.playSubmissionChime();
-                      voiceCopilot.announceVictory(targetTech?.name || 'la position finale');
                     } else {
                       soundFX.playRouteNav();
-                      voiceCopilot.announceReaction(reaction.condition, targetTech?.name || reaction.nextId);
                     }
                     onSelectReaction(reaction.nextId);
                   }}
@@ -562,22 +499,7 @@ export const GPSView: React.FC<GPSViewProps> = ({
 
             <div className="flex items-center gap-2">
               <button
-                onClick={cycleAudioMode}
-                className={`p-2 rounded-full border ${
-                  audioMode === 'voice' 
-                    ? 'border-[#30d158]/50 text-[#30d158] bg-[#30d158]/10' 
-                    : audioMode === 'sfx'
-                    ? 'border-[#0a84ff]/50 text-[#0a84ff] bg-[#0a84ff]/10'
-                    : 'border-white/20 text-white/40 bg-white/5'
-                }`}
-                title="Audio"
-              >
-                {audioMode === 'voice' ? <Volume2 className="w-4 h-4" /> : audioMode === 'sfx' ? <Volume1 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-              </button>
-
-              <button
                 onClick={() => {
-                  soundFX.playClick();
                   setIsMatMode(false);
                 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/20 text-white text-xs font-bold active:scale-95 border border-white/20 transition-all"
@@ -644,10 +566,8 @@ export const GPSView: React.FC<GPSViewProps> = ({
                         const isTargetFinish = targetTech && (targetTech.category_id === 'submission' || targetTech.category_id === 'sweep');
                         if (isTargetFinish) {
                           soundFX.playSubmissionChime();
-                          voiceCopilot.announceVictory(targetTech?.name || 'la position finale');
                         } else {
                           soundFX.playRouteNav();
-                          voiceCopilot.announceReaction(reaction.condition, targetTech?.name || reaction.nextId);
                         }
                         onSelectReaction(reaction.nextId);
                       }}
