@@ -16,7 +16,7 @@ import { TechniqueListView } from '@/components/TechniqueListView';
 import { TechniqueDetailModal } from '@/components/TechniqueDetailModal';
 import { AppleTabBar, AppleTab } from '@/components/AppleTabBar';
 import { INITIAL_TECHNIQUES, TACTICAL_SYSTEMS } from '@/data/bjjData';
-import { Technique, TacticalSystem, UserProfile } from '@/types/bjj';
+import { Technique, TacticalSystem, UserProfile, TechniqueProgress, MasteryStatus } from '@/types/bjj';
 import { soundFX } from '@/utils/audioFeedback';
 
 export default function Home() {
@@ -38,6 +38,9 @@ export default function Home() {
   // Dynamic systems and techniques registry
   const [systems, setSystems] = useState<TacticalSystem[]>(TACTICAL_SYSTEMS);
   const [techniques, setTechniques] = useState<Record<string, Technique>>(INITIAL_TECHNIQUES);
+  
+  // Technique progress tracking state
+  const [techniqueProgress, setTechniqueProgress] = useState<Record<string, TechniqueProgress>>({});
 
   // User profile state
   const [userProfile, setUserProfile] = useState<UserProfile>({
@@ -73,6 +76,28 @@ export default function Home() {
           setTechniques((prev) => ({ ...prev, ...parsed }));
         } catch {}
       }
+
+      const savedProgress = localStorage.getItem('bjj_technique_progress');
+      if (savedProgress) {
+        try {
+          setTechniqueProgress(JSON.parse(savedProgress));
+        } catch {}
+      } else {
+        const initialSampleProgress: Record<string, TechniqueProgress> = {
+          closed_guard: { techniqueId: 'closed_guard', status: 'mastered', drillReps: 60, sparringSuccessCount: 18, notes: 'Bien casser la posture avec les genoux' },
+          kimura: { techniqueId: 'kimura', status: 'mastered', drillReps: 45, sparringSuccessCount: 12, notes: 'Verrouiller la prise en 4' },
+          hip_bump: { techniqueId: 'hip_bump', status: 'mastered', drillReps: 50, sparringSuccessCount: 14, notes: 'Ouvrir sur le coude droit' },
+          triangle: { techniqueId: 'triangle', status: 'sparring_ready', drillReps: 35, sparringSuccessCount: 8, notes: 'Angle à 90 degrés' },
+          armbar: { techniqueId: 'armbar', status: 'sparring_ready', drillReps: 30, sparringSuccessCount: 6 },
+          omoplata: { techniqueId: 'omoplata', status: 'drilling', drillReps: 20, sparringSuccessCount: 2 },
+          guard_pass_torreando: { techniqueId: 'guard_pass_torreando', status: 'sparring_ready', drillReps: 40, sparringSuccessCount: 9 },
+          guard_pass_knee_slice: { techniqueId: 'guard_pass_knee_slice', status: 'drilling', drillReps: 25, sparringSuccessCount: 3 },
+          single_leg_x: { techniqueId: 'single_leg_x', status: 'drilling', drillReps: 15, sparringSuccessCount: 1 },
+          straight_ankle_lock: { techniqueId: 'straight_ankle_lock', status: 'drilling', drillReps: 20, sparringSuccessCount: 2 },
+        };
+        setTechniqueProgress(initialSampleProgress);
+        localStorage.setItem('bjj_technique_progress', JSON.stringify(initialSampleProgress));
+      }
     }
   }, []);
 
@@ -81,6 +106,83 @@ export default function Home() {
       const next = { ...prev, ...updated };
       if (typeof window !== 'undefined') {
         localStorage.setItem('bjj_user_profile', JSON.stringify(next));
+      }
+      return next;
+    });
+  };
+
+  const handleUpdateTechniqueStatus = (techId: string, status: MasteryStatus) => {
+    setTechniqueProgress((prev) => {
+      const existing = prev[techId] || {
+        techniqueId: techId,
+        status: 'to_learn',
+        drillReps: 0,
+        sparringSuccessCount: 0,
+      };
+      const next = {
+        ...prev,
+        [techId]: {
+          ...existing,
+          status,
+          lastPracticed: new Date().toISOString(),
+        }
+      };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('bjj_technique_progress', JSON.stringify(next));
+      }
+      return next;
+    });
+  };
+
+  const handleUpdateTechniqueReps = (techId: string, deltaDrill: number, deltaSparring: number) => {
+    setTechniqueProgress((prev) => {
+      const existing = prev[techId] || {
+        techniqueId: techId,
+        status: 'to_learn',
+        drillReps: 0,
+        sparringSuccessCount: 0,
+      };
+      const nextDrill = Math.max(0, (existing.drillReps || 0) + deltaDrill);
+      const nextSparring = Math.max(0, (existing.sparringSuccessCount || 0) + deltaSparring);
+      let nextStatus = existing.status;
+      if (nextSparring >= 5 && existing.status !== 'mastered') {
+        nextStatus = 'sparring_ready';
+      }
+      const next = {
+        ...prev,
+        [techId]: {
+          ...existing,
+          status: nextStatus,
+          drillReps: nextDrill,
+          sparringSuccessCount: nextSparring,
+          lastPracticed: new Date().toISOString(),
+        }
+      };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('bjj_technique_progress', JSON.stringify(next));
+      }
+      return next;
+    });
+  };
+
+  const handleUpdateTechniqueNotes = (techId: string, notes: string) => {
+    setTechniqueProgress((prev) => {
+      const existing = prev[techId] || {
+        techniqueId: techId,
+        status: 'to_learn',
+        drillReps: 0,
+        sparringSuccessCount: 0,
+      };
+      const next = {
+        ...prev,
+        [techId]: {
+          ...existing,
+          notes,
+          lastPracticed: new Date().toISOString(),
+        }
+      };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('bjj_technique_progress', JSON.stringify(next));
       }
       return next;
     });
@@ -227,6 +329,8 @@ export default function Home() {
           onOpenRules={() => setIsRulesOpen(true)}
           onOpenBackup={() => setIsBackupOpen(true)}
           onOpenPassport={() => setIsPassportOpen(true)}
+          progressMap={techniqueProgress}
+          onNavigateToTab={handleTabChange}
         />
       )}
 
@@ -236,6 +340,7 @@ export default function Home() {
           techniques={techniques}
           onSelectTechnique={handleOpenTechniqueModal}
           onLaunchGPS={handleLaunchGPS}
+          progressMap={techniqueProgress}
         />
       )}
 
@@ -266,11 +371,17 @@ export default function Home() {
         </div>
       )}
 
-      {/* Tab 4: Journal de Sparring & Stats */}
+      {/* Tab 4: Suivi d'Entraînement & Progression Technique */}
       {activeTab === 'journal' && (
         <SparringJournalView
           techniques={techniques}
           userProfile={userProfile}
+          progressMap={techniqueProgress}
+          onUpdateStatus={handleUpdateTechniqueStatus}
+          onUpdateReps={handleUpdateTechniqueReps}
+          onUpdateNotes={handleUpdateTechniqueNotes}
+          onSelectTechnique={handleOpenTechniqueModal}
+          onLaunchGPS={handleLaunchGPS}
         />
       )}
 
@@ -341,6 +452,9 @@ export default function Home() {
         isOpen={isTechniqueModalOpen}
         onClose={() => setIsTechniqueModalOpen(false)}
         onLaunchInGPS={handleLaunchInGPSFromModal}
+        progressMap={techniqueProgress}
+        onUpdateStatus={handleUpdateTechniqueStatus}
+        onUpdateReps={handleUpdateTechniqueReps}
       />
     </div>
   );

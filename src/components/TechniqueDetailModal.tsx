@@ -7,15 +7,18 @@ import {
   AlertTriangle, 
   Play, 
   Navigation, 
-  ExternalLink,
+  ExternalLink, 
   Shield, 
   RotateCcw, 
   Zap, 
-  Compass,
-  CheckCircle2,
-  Circle
+  Compass, 
+  CheckCircle2, 
+  Circle,
+  Sparkles,
+  Plus,
+  Minus
 } from 'lucide-react';
-import { Technique } from '@/types/bjj';
+import { Technique, TechniqueProgress, MasteryStatus } from '@/types/bjj';
 import { TechniqueVideoPreview } from './TechniqueVideoPreview';
 import { soundFX } from '@/utils/audioFeedback';
 
@@ -24,6 +27,9 @@ interface TechniqueDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   onLaunchInGPS: (techniqueId: string, systemTag?: string) => void;
+  progressMap?: Record<string, TechniqueProgress>;
+  onUpdateStatus?: (techId: string, status: MasteryStatus) => void;
+  onUpdateReps?: (techId: string, deltaDrill: number, deltaSparring: number) => void;
 }
 
 export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
@@ -31,6 +37,9 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
   isOpen,
   onClose,
   onLaunchInGPS,
+  progressMap,
+  onUpdateStatus,
+  onUpdateReps,
 }) => {
   if (!isOpen || !technique) return null;
 
@@ -66,6 +75,8 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
 
   const style = getCategoryStyles(technique.category, technique.category_id);
   const reactions = technique.reactions || [];
+  const currentProgress = progressMap ? progressMap[technique.id] : undefined;
+  const currentStatus: MasteryStatus = currentProgress?.status || 'to_learn';
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in select-none">
@@ -106,6 +117,103 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
               {technique.name}
             </h2>
           </div>
+
+          {/* Mastery Level & Reps Section (Interactive) */}
+          {onUpdateStatus && onUpdateReps && (
+            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#af52de]" />
+                  <span>Mon Niveau de Maîtrise</span>
+                </span>
+                <span className="text-[10px] text-white/50 font-mono">
+                  {currentProgress?.drillReps || 0} drills · {currentProgress?.sparringSuccessCount || 0} sparrings
+                </span>
+              </div>
+
+              {/* Status Segmented Buttons */}
+              <div className="grid grid-cols-4 gap-1 p-0.5 bg-black/40 rounded-xl border border-white/5">
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    onUpdateStatus(technique.id, 'to_learn');
+                  }}
+                  className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    currentStatus === 'to_learn'
+                      ? 'bg-white/20 text-white shadow-sm ring-1 ring-white/30'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  ⚪ Découverte
+                </button>
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    onUpdateStatus(technique.id, 'drilling');
+                  }}
+                  className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    currentStatus === 'drilling'
+                      ? 'bg-[#ffd60a] text-black shadow-sm font-extrabold'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  🟡 Drill
+                </button>
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    onUpdateStatus(technique.id, 'sparring_ready');
+                  }}
+                  className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    currentStatus === 'sparring_ready'
+                      ? 'bg-[#0a84ff] text-white shadow-sm font-extrabold'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  🔵 Sparring
+                </button>
+                <button
+                  onClick={() => {
+                    soundFX.playSubmissionChime();
+                    onUpdateStatus(technique.id, 'mastered');
+                  }}
+                  className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    currentStatus === 'mastered'
+                      ? 'bg-[#af52de] text-white shadow-sm font-extrabold'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  🟣 Réflexe
+                </button>
+              </div>
+
+              {/* Fast Reps Buttons */}
+              <div className="flex items-center justify-between text-xs pt-1 border-t border-white/5">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] text-white/50">Drill:</span>
+                  <button
+                    onClick={() => onUpdateReps(technique.id, 5, 0)}
+                    className="px-2 py-0.5 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-mono font-bold text-[10px]"
+                  >
+                    +5 reps
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] text-white/50">Combat:</span>
+                  <button
+                    onClick={() => {
+                      soundFX.playClick();
+                      onUpdateReps(technique.id, 0, 1);
+                    }}
+                    className="px-2 py-0.5 rounded-lg bg-[#0a84ff]/20 hover:bg-[#0a84ff]/30 text-[#0a84ff] active:scale-95 font-mono font-bold text-[10px]"
+                  >
+                    +1 réussi
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Video Preview / Radar Component */}
           <div className="rounded-2xl overflow-hidden border border-white/10 shadow-lg">

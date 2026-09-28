@@ -33,6 +33,8 @@ interface DashboardViewProps {
   onOpenRules?: () => void;
   onOpenBackup?: () => void;
   onOpenPassport?: () => void;
+  progressMap?: Record<string, import('@/types/bjj').TechniqueProgress>;
+  onNavigateToTab?: (tab: 'explore' | 'techniques' | 'gps' | 'drill' | 'journal') => void;
 }
 
 type FilterType = 'Tous' | 'Favoris' | 'Renversements' | 'Sorties & Défense' | 'Gi' | 'No-Gi' | 'Soumissions';
@@ -48,6 +50,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onOpenRules,
   onOpenBackup,
   onOpenPassport,
+  progressMap,
+  onNavigateToTab,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<FilterType>('Tous');
@@ -99,6 +103,24 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       return true;
     });
   }, [systems, activeFilter, searchQuery, techniques, favoriteIds]);
+
+  const masteryStats = useMemo(() => {
+    const techList = Object.values(techniques);
+    const total = techList.length;
+    let validated = 0;
+    let mastered = 0;
+    techList.forEach((t) => {
+      const p = progressMap?.[t.id];
+      if (p?.status === 'mastered') {
+        mastered++;
+        validated++;
+      } else if (p?.status === 'sparring_ready') {
+        validated++;
+      }
+    });
+    const percent = total > 0 ? Math.round((validated / total) * 100) : 0;
+    return { total, validated, mastered, percent };
+  }, [techniques, progressMap]);
 
   const searchedTechniques = useMemo(() => {
     if (!searchQuery.trim() && activeFilter !== 'Favoris') return [];
@@ -258,6 +280,41 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <span className="text-[10px] font-bold text-white/90">Backup</span>
         </button>
       </div>
+
+      {/* Technique Progress & Training Tracker Widget */}
+      {onNavigateToTab && (
+        <div
+          onClick={() => {
+            soundFX.playClick();
+            onNavigateToTab('journal');
+          }}
+          className="ios-card-interactive p-3.5 flex items-center justify-between cursor-pointer border border-[#0a84ff]/25 bg-gradient-to-r from-[#0a84ff]/10 via-[#1c1c1e] to-[#1c1c1e] group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#0a84ff]/20 border border-[#0a84ff]/30 flex items-center justify-center text-[#0a84ff] shrink-0">
+              <Award className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-bold text-white">
+                  Tableau de Suivi &amp; Maîtrise
+                </span>
+                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-[#0a84ff]/20 text-[#0a84ff]">
+                  {masteryStats.percent}%
+                </span>
+              </div>
+              <p className="text-[11px] text-white/50 mt-0.5">
+                {masteryStats.validated} / {masteryStats.total} techniques validées · Suivre l'avancement
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1 text-[#0a84ff] text-xs font-bold group-hover:translate-x-0.5 transition-transform">
+            <span>Ouvrir</span>
+            <ChevronRight className="w-4 h-4" />
+          </div>
+        </div>
+      )}
 
       {/* Fight IQ Reflex Drill Banner */}
       {onLaunchDrill && (

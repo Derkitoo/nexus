@@ -1,114 +1,241 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Flame, 
   Plus, 
   Award, 
   CheckCircle2, 
   Calendar, 
+  Clock, 
+  Activity, 
   User, 
   TrendingUp,
   Sparkles,
-  Zap
+  Zap,
+  BarChart2,
+  Trash2,
+  Shield,
+  Layers,
+  ChevronRight
 } from 'lucide-react';
-import { Technique, UserProfile } from '@/types/bjj';
+import { Technique, UserProfile, TechniqueProgress, MasteryStatus, TrainingSession, TrainingType, TrainingIntensity } from '@/types/bjj';
+import { TechniqueTrackingBoard } from './TechniqueTrackingBoard';
 import { soundFX } from '@/utils/audioFeedback';
-
-export interface SparringEntry {
-  id: string;
-  date: string;
-  partner: string;
-  partnerBelt: 'White' | 'Blue' | 'Purple' | 'Brown' | 'Black';
-  techniqueSubmitted?: string;
-  sweepLanded?: string;
-  notes: string;
-}
 
 interface SparringJournalViewProps {
   techniques: Record<string, Technique>;
   userProfile: UserProfile;
+  progressMap: Record<string, TechniqueProgress>;
+  onUpdateStatus: (techId: string, status: MasteryStatus) => void;
+  onUpdateReps: (techId: string, deltaDrill: number, deltaSparring: number) => void;
+  onUpdateNotes: (techId: string, notes: string) => void;
+  onSelectTechnique: (technique: Technique) => void;
+  onLaunchGPS: (systemId: string, startingTechniqueId?: string) => void;
 }
 
 export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
   techniques,
   userProfile,
+  progressMap,
+  onUpdateStatus,
+  onUpdateReps,
+  onUpdateNotes,
+  onSelectTechnique,
+  onLaunchGPS,
 }) => {
-  const [entries, setEntries] = useState<SparringEntry[]>([]);
-  const [isAdding, setIsAdding] = useState(false);
+  // Top Segmented Tab: 'techniques' (Tableau de Suivi) or 'sessions' (Sessions d'Entraînement)
+  const [activeSegment, setActiveSegment] = useState<'techniques' | 'sessions'>('techniques');
+  
+  // Training sessions state
+  const [sessions, setSessions] = useState<TrainingSession[]>([]);
+  const [isAddingSession, setIsAddingSession] = useState(false);
 
   // Form state
-  const [partner, setPartner] = useState('');
-  const [partnerBelt, setPartnerBelt] = useState<SparringEntry['partnerBelt']>('Blue');
-  const [techniqueSubmitted, setTechniqueSubmitted] = useState('kimura');
-  const [sweepLanded, setSweepLanded] = useState('hip_bump');
-  const [notes, setNotes] = useState('');
+  const [sessionDate, setSessionDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [trainingType, setTrainingType] = useState<TrainingType>('nogi');
+  const [durationMinutes, setDurationMinutes] = useState(90);
+  const [roundsCount, setRoundsCount] = useState(6);
+  const [intensity, setIntensity] = useState<TrainingIntensity>('hard');
+  const [selectedFocusTechniques, setSelectedFocusTechniques] = useState<string[]>([]);
+  const [partnerNotes, setPartnerNotes] = useState('');
+  const [sparringNotes, setSparringNotes] = useState('');
+  const [submissionLanded, setSubmissionLanded] = useState('');
+  const [sweepLanded, setSweepLanded] = useState('');
 
-  // Load entries from localStorage
+  // Load training sessions from localStorage with legacy migration
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('bjj_sparring_journal');
-      if (saved) {
+      const savedSessions = localStorage.getItem('bjj_training_sessions');
+      if (savedSessions) {
         try {
-          setEntries(JSON.parse(saved));
+          setSessions(JSON.parse(savedSessions));
         } catch {
-          setEntries([]);
+          setSessions([]);
         }
       } else {
-        const initialSample: SparringEntry[] = [
-          {
-            id: 'sample-1',
-            date: 'Hier',
-            partner: 'Lucas (Compétiteur)',
-            partnerBelt: 'Purple',
-            techniqueSubmitted: 'kimura',
-            sweepLanded: 'hip_bump_from_kimura',
-            notes: 'Enchaînement Kimura vers Hip bump passé à la perfection quand il a caché sa main sous la cuisse.'
-          },
-          {
-            id: 'sample-2',
-            date: 'Il y a 3 jours',
-            partner: 'Marc',
-            partnerBelt: 'Blue',
-            techniqueSubmitted: 'triangle',
-            sweepLanded: 'hip_bump',
-            notes: 'Bonne ouverture de genoux contrée par Triangle propre.'
+        // Check for legacy sparring journal entries
+        const legacyJournal = localStorage.getItem('bjj_sparring_journal');
+        if (legacyJournal) {
+          try {
+            const parsed = JSON.parse(legacyJournal);
+            const migrated: TrainingSession[] = parsed.map((item: any, idx: number) => ({
+              id: item.id || `migrated-${idx}-${Date.now()}`,
+              date: item.date === 'Hier' ? '2026-09-27' : '2026-09-28',
+              trainingType: 'nogi',
+              durationMinutes: 90,
+              roundsCount: 5,
+              intensity: 'hard',
+              techniquesWorked: [item.techniqueSubmitted, item.sweepLanded].filter(Boolean),
+              partnerNotes: `${item.partner || 'Partenaire'} (${item.partnerBelt || 'Bleue'})`,
+              sparringNotes: item.notes || '',
+              submissionsLanded: item.techniqueSubmitted ? [item.techniqueSubmitted] : [],
+              sweepsLanded: item.sweepLanded ? [item.sweepLanded] : [],
+            }));
+            setSessions(migrated);
+            localStorage.setItem('bjj_training_sessions', JSON.stringify(migrated));
+          } catch {
+            setSessions([]);
           }
-        ];
-        setEntries(initialSample);
-        localStorage.setItem('bjj_sparring_journal', JSON.stringify(initialSample));
+        } else {
+          // Default initial sample sessions
+          const initialSamples: TrainingSession[] = [
+            {
+              id: 'sample-1',
+              date: '2026-09-27',
+              trainingType: 'nogi',
+              durationMinutes: 90,
+              roundsCount: 6,
+              intensity: 'hard',
+              techniquesWorked: ['kimura', 'hip_bump_from_kimura', 'armbar'],
+              partnerNotes: 'Lucas (Violette)',
+              sparringNotes: 'Très bon rythme en sparring. La feinte de Kimura vers le Hip Bump est passée directement.',
+              submissionsLanded: ['kimura'],
+              sweepsLanded: ['hip_bump_from_kimura'],
+            },
+            {
+              id: 'sample-2',
+              date: '2026-09-25',
+              trainingType: 'gi',
+              durationMinutes: 75,
+              roundsCount: 4,
+              intensity: 'moderate',
+              techniquesWorked: ['triangle', 'guard_pass_torreando', 'omoplata'],
+              partnerNotes: 'Marc (Bleue) & Thomas (Blanche)',
+              sparringNotes: 'Travail spécifique sur la fermeture de garde et ouverture de hanche.',
+              submissionsLanded: ['triangle'],
+              sweepsLanded: [],
+            }
+          ];
+          setSessions(initialSamples);
+          localStorage.setItem('bjj_training_sessions', JSON.stringify(initialSamples));
+        }
       }
     }
   }, []);
 
-  const handleSaveEntry = (e: React.FormEvent) => {
+  const handleSaveSession = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!partner.trim()) return;
 
-    const newEntry: SparringEntry = {
-      id: `entry-${Date.now()}`,
-      date: "Aujourd'hui",
-      partner,
-      partnerBelt,
-      techniqueSubmitted: techniqueSubmitted || undefined,
-      sweepLanded: sweepLanded || undefined,
-      notes,
+    const newSession: TrainingSession = {
+      id: `session-${Date.now()}`,
+      date: sessionDate,
+      trainingType,
+      durationMinutes,
+      roundsCount,
+      intensity,
+      techniquesWorked: selectedFocusTechniques,
+      partnerNotes: partnerNotes.trim() || undefined,
+      sparringNotes: sparringNotes.trim() || undefined,
+      submissionsLanded: submissionLanded ? [submissionLanded] : [],
+      sweepsLanded: sweepLanded ? [sweepLanded] : [],
     };
 
-    const next = [newEntry, ...entries];
-    setEntries(next);
+    const next = [newSession, ...sessions];
+    setSessions(next);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('bjj_sparring_journal', JSON.stringify(next));
+      localStorage.setItem('bjj_training_sessions', JSON.stringify(next));
+    }
+
+    // Auto-update technique progress for landed submissions or sweeps
+    if (submissionLanded) {
+      onUpdateReps(submissionLanded, 0, 1);
+    }
+    if (sweepLanded) {
+      onUpdateReps(sweepLanded, 0, 1);
     }
 
     soundFX.playSubmissionChime();
-    setIsAdding(false);
-    setPartner('');
-    setNotes('');
+    setIsAddingSession(false);
+    setPartnerNotes('');
+    setSparringNotes('');
+    setSelectedFocusTechniques([]);
+    setSubmissionLanded('');
+    setSweepLanded('');
   };
 
-  const totalSubs = entries.filter((e) => e.techniqueSubmitted).length;
-  const totalSweeps = entries.filter((e) => e.sweepLanded).length;
+  const handleDeleteSession = (id: string) => {
+    const next = sessions.filter(s => s.id !== id);
+    setSessions(next);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('bjj_training_sessions', JSON.stringify(next));
+    }
+    soundFX.playClick();
+  };
+
+  // Sessions Volume Statistics
+  const sessionStats = useMemo(() => {
+    const totalSessions = sessions.length;
+    const totalMinutes = sessions.reduce((acc, s) => acc + s.durationMinutes, 0);
+    const totalHours = (totalMinutes / 60).toFixed(1);
+    const totalRounds = sessions.reduce((acc, s) => acc + s.roundsCount, 0);
+    const giSessions = sessions.filter(s => s.trainingType === 'gi').length;
+    const nogiSessions = sessions.filter(s => s.trainingType === 'nogi').length;
+
+    return {
+      totalSessions,
+      totalHours,
+      totalRounds,
+      giSessions,
+      nogiSessions,
+    };
+  }, [sessions]);
+
+  const getTrainingTypeBadge = (type: TrainingType) => {
+    switch (type) {
+      case 'gi':
+        return { label: 'Gi (Kimono)', color: 'bg-[#0a84ff]/15 text-[#0a84ff] border-[#0a84ff]/30' };
+      case 'nogi':
+        return { label: 'No-Gi', color: 'bg-[#af52de]/15 text-[#af52de] border-[#af52de]/30' };
+      case 'open_mat':
+        return { label: 'Open Mat', color: 'bg-[#30d158]/15 text-[#30d158] border-[#30d158]/30' };
+      case 'drills':
+        return { label: 'Drills Spécifiques', color: 'bg-[#ffd60a]/15 text-[#ffd60a] border-[#ffd60a]/30' };
+      case 'competition':
+        return { label: 'Prépa Compétition', color: 'bg-[#ff453a]/15 text-[#ff453a] border-[#ff453a]/30' };
+    }
+  };
+
+  const getIntensityBadge = (int: TrainingIntensity) => {
+    switch (int) {
+      case 'light':
+        return { label: 'Légère', color: 'text-white/60' };
+      case 'moderate':
+        return { label: 'Modérée', color: 'text-[#ffd60a]' };
+      case 'hard':
+        return { label: 'Intense', color: 'text-[#ff9f0a]' };
+      case 'extreme':
+        return { label: 'Extrême 🔥', color: 'text-[#ff453a]' };
+    }
+  };
+
+  const toggleFocusTechnique = (techId: string) => {
+    if (selectedFocusTechniques.includes(techId)) {
+      setSelectedFocusTechniques(selectedFocusTechniques.filter(id => id !== techId));
+    } else {
+      setSelectedFocusTechniques([...selectedFocusTechniques, techId]);
+    }
+  };
 
   return (
     <div className="flex-1 flex flex-col p-4 pb-28 space-y-4 animate-spring-in max-w-md mx-auto w-full">
@@ -116,182 +243,376 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
       <div className="pt-2 px-1 flex items-center justify-between">
         <div>
           <span className="text-[11px] font-bold uppercase tracking-wider text-white/40 block">
-            Suivi des Combats
+            Centre d'Entraînement BJJ
           </span>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Journal de Sparring
+            Suivi &amp; Progression
           </h1>
         </div>
+
+        {activeSegment === 'sessions' && (
+          <button
+            onClick={() => {
+              soundFX.playClick();
+              setIsAddingSession(!isAddingSession);
+            }}
+            className="px-3.5 py-1.5 rounded-full bg-[#0a84ff] text-white text-xs font-bold flex items-center gap-1 active:scale-95 transition-all shadow-md"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Séance</span>
+          </button>
+        )}
+      </div>
+
+      {/* Top Segmented Bar (Apple iOS Native Style) */}
+      <div className="grid grid-cols-2 p-1 bg-black/40 dark:bg-black/40 rounded-2xl border border-white/10 shadow-inner">
+        <button
+          onClick={() => {
+            soundFX.playClick();
+            setActiveSegment('techniques');
+          }}
+          className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+            activeSegment === 'techniques'
+              ? 'bg-white text-black shadow-md font-extrabold'
+              : 'text-white/60 hover:text-white'
+          }`}
+        >
+          <BarChart2 className="w-3.5 h-3.5" />
+          <span>Tableau des Techniques</span>
+        </button>
 
         <button
           onClick={() => {
             soundFX.playClick();
-            setIsAdding(!isAdding);
+            setActiveSegment('sessions');
           }}
-          className="px-3.5 py-1.5 rounded-full bg-[#0a84ff] text-white text-xs font-bold flex items-center gap-1 active:scale-95 transition-all shadow-md"
+          className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+            activeSegment === 'sessions'
+              ? 'bg-white text-black shadow-md font-extrabold'
+              : 'text-white/60 hover:text-white'
+          }`}
         >
-          <Plus className="w-3.5 h-3.5" />
-          <span>Nouveau Round</span>
+          <Calendar className="w-3.5 h-3.5" />
+          <span>Journal des Séances</span>
         </button>
       </div>
 
-      {/* Apple Fitness Activity Summary Rings/Pills */}
-      <div className="grid grid-cols-3 gap-2">
-        <div className="ios-card p-3 text-center space-y-0.5">
-          <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider block">Rounds</span>
-          <span className="text-xl font-black text-white font-mono">{entries.length}</span>
-        </div>
-        <div className="ios-card p-3 text-center space-y-0.5 border border-[#ff453a]/30 bg-[#ff453a]/5">
-          <span className="text-[10px] font-bold text-[#ff453a] uppercase tracking-wider block">Soumissions</span>
-          <span className="text-xl font-black text-[#ff453a] font-mono">{totalSubs}</span>
-        </div>
-        <div className="ios-card p-3 text-center space-y-0.5 border border-[#30d158]/30 bg-[#30d158]/5">
-          <span className="text-[10px] font-bold text-[#30d158] uppercase tracking-wider block">Balayages</span>
-          <span className="text-xl font-black text-[#30d158] font-mono">{totalSweeps}</span>
-        </div>
-      </div>
-
-      {/* Add Entry Form Drawer */}
-      {isAdding && (
-        <form onSubmit={handleSaveEntry} className="ios-card p-4 space-y-3 border border-[#0a84ff]/40 bg-[#0a84ff]/5 animate-spring-in">
-          <div className="flex items-center justify-between pb-1 border-b border-white/10">
-            <span className="text-xs font-bold text-white">Consigner un Round de Sparring</span>
-            <button
-              type="button"
-              onClick={() => setIsAdding(false)}
-              className="text-[11px] text-white/50 hover:text-white"
-            >
-              Annuler
-            </button>
-          </div>
-
-          <div>
-            <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
-              Partenaire &amp; Grade
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                required
-                value={partner}
-                onChange={(e) => setPartner(e.target.value)}
-                placeholder="Prénom du partenaire..."
-                className="flex-1 bg-black/60 text-xs text-white placeholder-white/30 px-3 py-2 rounded-xl border border-white/10 focus:outline-none focus:ring-1 focus:ring-[#0a84ff]"
-              />
-              <select
-                value={partnerBelt}
-                onChange={(e) => setPartnerBelt(e.target.value as SparringEntry['partnerBelt'])}
-                className="bg-black/60 text-xs text-white px-2 py-2 rounded-xl border border-white/10 focus:outline-none"
-              >
-                <option value="White">Blanche</option>
-                <option value="Blue">Bleue</option>
-                <option value="Purple">Violette</option>
-                <option value="Brown">Marron</option>
-                <option value="Black">Noire</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
-                Soumission Validée
-              </label>
-              <select
-                value={techniqueSubmitted}
-                onChange={(e) => setTechniqueSubmitted(e.target.value)}
-                className="w-full bg-black/60 text-xs text-white px-2 py-2 rounded-xl border border-white/10 focus:outline-none truncate"
-              >
-                <option value="">Aucune</option>
-                {Object.values(techniques)
-                  .filter((t) => t.category_id === 'submission' || t.category.includes('Soumission'))
-                  .map((t) => (
-                    <option key={t.id} value={t.id}>{t.name}</option>
-                  ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
-                Balayage Réussi
-              </label>
-              <select
-                value={sweepLanded}
-                onChange={(e) => setSweepLanded(e.target.value)}
-                className="w-full bg-black/60 text-xs text-white px-2 py-2 rounded-xl border border-white/10 focus:outline-none truncate"
-              >
-                <option value="">Aucun</option>
-                {Object.values(techniques)
-                  .filter((t) => t.category_id === 'sweep' || t.category.includes('Renversement'))
-                  .map((t) => (
-                    <option key={t.id} value={t.id}>{t.name}</option>
-                  ))}
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
-              Débrief &amp; Analyse
-            </label>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Réactions de l'adversaire, ouvertures trouvées..."
-              className="w-full bg-black/60 text-xs text-white placeholder-white/30 p-2.5 rounded-xl border border-white/10 focus:outline-none resize-none h-16"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-2.5 rounded-xl bg-[#0a84ff] text-white font-bold text-xs shadow-md active:scale-95 transition-all"
-          >
-            Enregistrer le Round
-          </button>
-        </form>
+      {/* VIEW 1: TABLEAU DE SUIVI DES TECHNIQUES */}
+      {activeSegment === 'techniques' && (
+        <TechniqueTrackingBoard
+          techniques={techniques}
+          progressMap={progressMap}
+          onUpdateStatus={onUpdateStatus}
+          onUpdateReps={onUpdateReps}
+          onUpdateNotes={onUpdateNotes}
+          onSelectTechnique={onSelectTechnique}
+          onLaunchGPS={onLaunchGPS}
+        />
       )}
 
-      {/* Entries List */}
-      <div className="space-y-2 pt-1">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-white/40 px-1">
-          Historique des Sessions ({entries.length})
-        </span>
-
-        {entries.map((entry) => (
-          <div key={entry.id} className="ios-card p-4 space-y-2.5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white">
-                  {entry.partner.charAt(0)}
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-white block leading-tight">{entry.partner}</span>
-                  <span className="text-[10px] text-white/40">Ceinture {entry.partnerBelt} · {entry.date}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                {entry.techniqueSubmitted && (
-                  <span className="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-[#ff453a]/20 text-[#ff453a] border border-[#ff453a]/30">
-                    {techniques[entry.techniqueSubmitted]?.name || entry.techniqueSubmitted}
-                  </span>
-                )}
-                {entry.sweepLanded && (
-                  <span className="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-[#30d158]/20 text-[#30d158] border border-[#30d158]/30">
-                    {techniques[entry.sweepLanded]?.name || entry.sweepLanded}
-                  </span>
-                )}
-              </div>
+      {/* VIEW 2: SESSIONS D'ENTRAÎNEMENT & SPARRING */}
+      {activeSegment === 'sessions' && (
+        <div className="space-y-4">
+          {/* Apple Fitness Activity Summary Rings/Pills */}
+          <div className="grid grid-cols-3 gap-2">
+            <div className="ios-card p-3 text-center space-y-0.5">
+              <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider block">Séances</span>
+              <span className="text-xl font-black text-white font-mono">{sessionStats.totalSessions}</span>
             </div>
-
-            {entry.notes && (
-              <p className="text-xs text-white/80 bg-black/40 p-2.5 rounded-xl border border-white/5 leading-relaxed italic">
-                « {entry.notes} »
-              </p>
-            )}
+            <div className="ios-card p-3 text-center space-y-0.5 border border-[#0a84ff]/30 bg-[#0a84ff]/5">
+              <span className="text-[10px] font-bold text-[#0a84ff] uppercase tracking-wider block">Temps Tatami</span>
+              <span className="text-xl font-black text-[#0a84ff] font-mono">{sessionStats.totalHours}h</span>
+            </div>
+            <div className="ios-card p-3 text-center space-y-0.5 border border-[#30d158]/30 bg-[#30d158]/5">
+              <span className="text-[10px] font-bold text-[#30d158] uppercase tracking-wider block">Rounds</span>
+              <span className="text-xl font-black text-[#30d158] font-mono">{sessionStats.totalRounds}</span>
+            </div>
           </div>
-        ))}
-      </div>
+
+          {/* Add Session Form Drawer */}
+          {isAddingSession && (
+            <form onSubmit={handleSaveSession} className="ios-card p-4 space-y-3.5 border border-[#0a84ff]/40 bg-[#0a84ff]/5 animate-spring-in">
+              <div className="flex items-center justify-between pb-1 border-b border-white/10">
+                <span className="text-xs font-bold text-white">Enregistrer une Séance de Tatami</span>
+                <button
+                  type="button"
+                  onClick={() => setIsAddingSession(false)}
+                  className="text-[11px] text-white/50 hover:text-white"
+                >
+                  Annuler
+                </button>
+              </div>
+
+              {/* Date & Type */}
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    value={sessionDate}
+                    onChange={(e) => setSessionDate(e.target.value)}
+                    className="w-full bg-black/60 text-xs text-white px-2.5 py-2 rounded-xl border border-white/10 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Format
+                  </label>
+                  <select
+                    value={trainingType}
+                    onChange={(e) => setTrainingType(e.target.value as TrainingType)}
+                    className="w-full bg-black/60 text-xs text-white px-2 py-2 rounded-xl border border-white/10 focus:outline-none"
+                  >
+                    <option value="gi">🥋 Gi (Kimono)</option>
+                    <option value="nogi">🩳 No-Gi</option>
+                    <option value="open_mat">🤼 Open Mat</option>
+                    <option value="drills">⚡ Drills</option>
+                    <option value="competition">🏆 Prépa Compétition</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Duration & Rounds & Intensity */}
+              <div className="grid grid-cols-3 gap-2">
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Durée (min)
+                  </label>
+                  <input
+                    type="number"
+                    min="15"
+                    step="5"
+                    value={durationMinutes}
+                    onChange={(e) => setDurationMinutes(Number(e.target.value))}
+                    className="w-full bg-black/60 text-xs text-white px-2.5 py-2 rounded-xl border border-white/10 font-mono focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Rounds
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={roundsCount}
+                    onChange={(e) => setRoundsCount(Number(e.target.value))}
+                    className="w-full bg-black/60 text-xs text-white px-2.5 py-2 rounded-xl border border-white/10 font-mono focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Intensité
+                  </label>
+                  <select
+                    value={intensity}
+                    onChange={(e) => setIntensity(e.target.value as TrainingIntensity)}
+                    className="w-full bg-black/60 text-xs text-white px-1.5 py-2 rounded-xl border border-white/10 focus:outline-none"
+                  >
+                    <option value="light">Légère</option>
+                    <option value="moderate">Modérée</option>
+                    <option value="hard">Intense</option>
+                    <option value="extreme">Extrême 🔥</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Focus Techniques Picker */}
+              <div>
+                <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                  Techniques Clés Travaillées ce jour
+                </label>
+                <div className="max-h-24 overflow-y-auto p-1.5 bg-black/40 rounded-xl border border-white/10 flex flex-wrap gap-1">
+                  {Object.values(techniques).slice(0, 16).map((t) => {
+                    const isSelected = selectedFocusTechniques.includes(t.id);
+                    return (
+                      <button
+                        key={t.id}
+                        type="button"
+                        onClick={() => toggleFocusTechnique(t.id)}
+                        className={`text-[9px] font-bold px-2 py-1 rounded-lg border transition-all ${
+                          isSelected
+                            ? 'bg-[#0a84ff] text-white border-[#0a84ff]'
+                            : 'bg-white/5 text-white/60 border-white/10 hover:bg-white/10'
+                        }`}
+                      >
+                        {t.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Submissions & Sweeps landed during session */}
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Soumission Passée
+                  </label>
+                  <select
+                    value={submissionLanded}
+                    onChange={(e) => setSubmissionLanded(e.target.value)}
+                    className="w-full bg-black/60 text-xs text-white px-2 py-2 rounded-xl border border-white/10 focus:outline-none truncate"
+                  >
+                    <option value="">Aucune</option>
+                    {Object.values(techniques)
+                      .filter((t) => t.category_id === 'submission' || t.category.includes('Soumission'))
+                      .map((t) => (
+                        <option key={t.id} value={t.id}>{t.name}</option>
+                      ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                    Renversement Réussi
+                  </label>
+                  <select
+                    value={sweepLanded}
+                    onChange={(e) => setSweepLanded(e.target.value)}
+                    className="w-full bg-black/60 text-xs text-white px-2 py-2 rounded-xl border border-white/10 focus:outline-none truncate"
+                  >
+                    <option value="">Aucun</option>
+                    {Object.values(techniques)
+                      .filter((t) => t.category_id === 'sweep' || t.category.includes('Renversement'))
+                      .map((t) => (
+                        <option key={t.id} value={t.id}>{t.name}</option>
+                      ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Partner & Débrief */}
+              <div>
+                <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                  Partenaires du Jour
+                </label>
+                <input
+                  type="text"
+                  value={partnerNotes}
+                  onChange={(e) => setPartnerNotes(e.target.value)}
+                  placeholder="Ex: Lucas (Violette), Marc (Bleue)..."
+                  className="w-full bg-black/60 text-xs text-white placeholder-white/30 px-3 py-2 rounded-xl border border-white/10 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-bold text-white/50 uppercase tracking-wider block mb-1">
+                  Débrief &amp; Analyse de la Séance
+                </label>
+                <textarea
+                  value={sparringNotes}
+                  onChange={(e) => setSparringNotes(e.target.value)}
+                  placeholder="Sensations, erreurs observées, points techniques à corriger..."
+                  className="w-full bg-black/60 text-xs text-white placeholder-white/30 p-2.5 rounded-xl border border-white/10 focus:outline-none resize-none h-16"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-2.5 rounded-xl bg-[#0a84ff] text-white font-bold text-xs shadow-md active:scale-95 transition-all"
+              >
+                Valider &amp; Enregistrer la Séance
+              </button>
+            </form>
+          )}
+
+          {/* Sessions List */}
+          <div className="space-y-2.5 pt-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-white/40 px-1">
+              Historique des Entraînements ({sessions.length})
+            </span>
+
+            {sessions.map((session) => {
+              const typeBadge = getTrainingTypeBadge(session.trainingType);
+              const intBadge = getIntensityBadge(session.intensity);
+
+              return (
+                <div key={session.id} className="ios-card p-4 space-y-3 border border-white/10">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider border ${typeBadge.color}`}>
+                          {typeBadge.label}
+                        </span>
+                        <span className="text-[10px] text-white/40 flex items-center gap-1 font-mono">
+                          <Calendar className="w-3 h-3" />
+                          {session.date}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-xs text-white/70">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-[#0a84ff]" />
+                          <strong className="text-white font-mono">{session.durationMinutes}m</strong>
+                        </span>
+                        <span>·</span>
+                        <span className="flex items-center gap-1">
+                          <Activity className="w-3.5 h-3.5 text-[#30d158]" />
+                          <strong className="text-white font-mono">{session.roundsCount} rounds</strong>
+                        </span>
+                        <span>·</span>
+                        <span className={`text-[11px] font-bold ${intBadge.color}`}>
+                          {intBadge.label}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handleDeleteSession(session.id)}
+                      className="p-1.5 text-white/30 hover:text-[#ff453a] transition-colors"
+                      title="Supprimer la séance"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  {/* Highlights pills */}
+                  {((session.submissionsLanded && session.submissionsLanded.length > 0) || 
+                    (session.sweepsLanded && session.sweepsLanded.length > 0) ||
+                    (session.techniquesWorked && session.techniquesWorked.length > 0)) && (
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {session.submissionsLanded?.map((subId) => (
+                        <span key={subId} className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#ff453a]/20 text-[#ff453a] border border-[#ff453a]/30">
+                          🎯 {techniques[subId]?.name || subId}
+                        </span>
+                      ))}
+                      {session.sweepsLanded?.map((swpId) => (
+                        <span key={swpId} className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#30d158]/20 text-[#30d158] border border-[#30d158]/30">
+                          🔄 {techniques[swpId]?.name || swpId}
+                        </span>
+                      ))}
+                      {session.techniquesWorked?.map((techId) => (
+                        <span key={techId} className="text-[9px] font-medium px-2 py-0.5 rounded-full bg-white/5 text-white/70 border border-white/10">
+                          {techniques[techId]?.name || techId}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {session.partnerNotes && (
+                    <div className="text-[11px] text-white/60 flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-white/40" />
+                      <span>Avec : <strong className="text-white">{session.partnerNotes}</strong></span>
+                    </div>
+                  )}
+
+                  {session.sparringNotes && (
+                    <p className="text-xs text-white/80 bg-black/40 p-2.5 rounded-xl border border-white/5 leading-relaxed italic">
+                      « {session.sparringNotes} »
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

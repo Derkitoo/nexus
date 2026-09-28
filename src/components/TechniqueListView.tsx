@@ -23,6 +23,7 @@ interface TechniqueListViewProps {
   techniques: Record<string, Technique>;
   onSelectTechnique: (technique: Technique) => void;
   onLaunchGPS: (systemId: string, startingTechniqueId?: string) => void;
+  progressMap?: Record<string, import('@/types/bjj').TechniqueProgress>;
 }
 
 type CategoryFilter = 'all' | 'defense' | 'sweep' | 'submission' | 'position';
@@ -33,6 +34,7 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
   techniques,
   onSelectTechnique,
   onLaunchGPS,
+  progressMap,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
@@ -377,13 +379,29 @@ export const TechniqueListView: React.FC<TechniqueListViewProps> = ({
                     )}
                   </div>
 
-                  {/* Video indicator badge */}
-                  {tech.video_url && (
-                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#ff453a]/15 text-[#ff453a] border border-[#ff453a]/30 text-[10px] font-semibold">
-                      <Play className="w-2.5 h-2.5 fill-current" />
-                      Vidéo
-                    </div>
-                  )}
+                  <div className="flex items-center gap-1.5">
+                    {/* Mastery status badge */}
+                    {progressMap && progressMap[tech.id] && progressMap[tech.id].status !== 'to_learn' && (
+                      <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${
+                        progressMap[tech.id].status === 'mastered'
+                          ? 'bg-[#af52de]/20 text-[#af52de] border-[#af52de]/40'
+                          : progressMap[tech.id].status === 'sparring_ready'
+                          ? 'bg-[#0a84ff]/20 text-[#0a84ff] border-[#0a84ff]/40'
+                          : 'bg-[#ffd60a]/20 text-[#d97706] dark:text-[#ffd60a] border-[#ffd60a]/40'
+                      }`}>
+                        {progressMap[tech.id].status === 'mastered' ? '🟣 Maîtrisé' :
+                         progressMap[tech.id].status === 'sparring_ready' ? '🔵 Sparring' : '🟡 Drill'}
+                      </span>
+                    )}
+
+                    {/* Video indicator badge */}
+                    {tech.video_url && (
+                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#ff453a]/15 text-[#ff453a] border border-[#ff453a]/30 text-[10px] font-semibold">
+                        <Play className="w-2.5 h-2.5 fill-current" />
+                        Vidéo
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Technique Name */}

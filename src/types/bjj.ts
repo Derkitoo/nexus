@@ -51,3 +51,32 @@ export interface UserProfile {
   drillsCompleted: number;
   favoriteSystem: string;
 }
+
+export type MasteryStatus = 'to_learn' | 'drilling' | 'sparring_ready' | 'mastered';
+
+export interface TechniqueProgress {
+  techniqueId: string;
+  status: MasteryStatus;
+  drillReps: number;
+  sparringSuccessCount: number;
+  notes?: string;
+  lastPracticed?: string;
+}
+
+export type TrainingType = 'gi' | 'nogi' | 'open_mat' | 'drills' | 'competition';
+export type TrainingIntensity = 'light' | 'moderate' | 'hard' | 'extreme';
+
+export interface TrainingSession {
+  id: string;
+  date: string;
+  trainingType: TrainingType;
+  durationMinutes: number;
+  roundsCount: number;
+  intensity: TrainingIntensity;
+  techniquesWorked: string[];
+  partnerNotes?: string;
+  sparringNotes?: string;
+  submissionsLanded?: string[];
+  sweepsLanded?: string[];
+}
+
