@@ -270,8 +270,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'mastered' ? 'all' : 'mastered')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'mastered' 
-                ? 'bg-purple-100 border-purple-400 ring-2 ring-purple-400/50 shadow-sm' 
-                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
+                ? 'bg-purple-100 border-purple-400 ring-2 ring-purple-400/50 dark:bg-purple-500/20 dark:border-purple-400 shadow-sm' 
+                : 'bg-purple-50/70 border-purple-200/80 hover:bg-purple-100/60 dark:bg-white/5 dark:border-white/5 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[10px] font-bold text-purple-900 dark:text-[#af52de] uppercase block truncate">Maîtrisées</span>
@@ -282,8 +282,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'sparring_ready' ? 'all' : 'sparring_ready')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'sparring_ready' 
-                ? 'bg-blue-100 border-blue-400 ring-2 ring-blue-400/50 shadow-sm' 
-                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
+                ? 'bg-blue-100 border-blue-400 ring-2 ring-blue-400/50 dark:bg-blue-500/20 dark:border-blue-400 shadow-sm' 
+                : 'bg-blue-50/70 border-blue-200/80 hover:bg-blue-100/60 dark:bg-white/5 dark:border-white/5 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[10px] font-bold text-blue-900 dark:text-[#0a84ff] uppercase block truncate">Validées</span>
@@ -294,8 +294,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'drilling' ? 'all' : 'drilling')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'drilling' 
-                ? 'bg-amber-100 border-amber-400 ring-2 ring-amber-400/50 shadow-sm' 
-                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
+                ? 'bg-amber-100 border-amber-400 ring-2 ring-amber-400/50 dark:bg-amber-500/20 dark:border-amber-400 shadow-sm' 
+                : 'bg-amber-50/70 border-amber-200/80 hover:bg-amber-100/60 dark:bg-white/5 dark:border-white/5 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[10px] font-bold text-amber-950 dark:text-[#ffd60a] uppercase block truncate">En Drill</span>
@@ -306,8 +306,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'to_learn' ? 'all' : 'to_learn')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'to_learn' 
-                ? 'bg-slate-200 border-slate-400 ring-2 ring-slate-400/50 shadow-sm' 
-                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
+                ? 'bg-slate-200 border-slate-400 ring-2 ring-slate-400/50 dark:bg-white/20 dark:border-white/40 shadow-sm' 
+                : 'bg-slate-100/70 border-slate-200/80 hover:bg-slate-200/60 dark:bg-white/5 dark:border-white/5 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[10px] font-bold text-slate-700 dark:text-white/70 uppercase block truncate">À Découvrir</span>

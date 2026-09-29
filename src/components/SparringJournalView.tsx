@@ -333,11 +333,11 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
           {isAddingSession && (
             <form onSubmit={handleSaveSession} className="ios-card p-4 space-y-3.5 border border-blue-200 dark:border-[#0a84ff]/40 bg-blue-50/40 dark:bg-[#0a84ff]/5 animate-spring-in shadow-xs">
               <div className="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-white/10">
-                <span className="text-xs font-bold text-[#1c1c1e] dark:text-white">Enregistrer une Séance de Tatami</span>
+                <span className="text-xs font-bold text-slate-900 dark:text-white">Enregistrer une Séance de Tatami</span>
                 <button
                   type="button"
                   onClick={() => setIsAddingSession(false)}
-                  className="text-[11px] text-[#8e8e93] hover:text-[#1c1c1e] dark:hover:text-white"
+                  className="text-[11px] text-slate-500 hover:text-slate-900 dark:text-white/60 dark:hover:text-white font-bold"
                 >
                   Annuler
                 </button>
@@ -346,7 +346,7 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
               {/* Date & Type */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
                     Date
                   </label>
                   <input
@@ -354,18 +354,18 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                     required
                     value={sessionDate}
                     onChange={(e) => setSessionDate(e.target.value)}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-2.5 py-2 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-2.5 py-2 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
                     Format
                   </label>
                   <select
                     value={trainingType}
                     onChange={(e) => setTrainingType(e.target.value as TrainingType)}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-2 py-2 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-2 py-2 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-xs"
                   >
                     <option value="gi">🥋 Gi (Kimono)</option>
                     <option value="nogi">🩳 No-Gi</option>
@@ -379,7 +379,7 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
               {/* Duration & Rounds & Intensity */}
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
                     Durée (min)
                   </label>
                   <input
@@ -388,12 +388,12 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                     step="5"
                     value={durationMinutes}
                     onChange={(e) => setDurationMinutes(Number(e.target.value))}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-2.5 py-2 rounded-xl border border-black/10 dark:border-white/10 font-mono focus:outline-none"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-2.5 py-2 rounded-xl border border-slate-300 dark:border-white/10 font-mono focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
                     Rounds
                   </label>
                   <input
@@ -401,18 +401,18 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                     min="0"
                     value={roundsCount}
                     onChange={(e) => setRoundsCount(Number(e.target.value))}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-2.5 py-2 rounded-xl border border-black/10 dark:border-white/10 font-mono focus:outline-none"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-2.5 py-2 rounded-xl border border-slate-300 dark:border-white/10 font-mono focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
                     Intensité
                   </label>
                   <select
                     value={intensity}
                     onChange={(e) => setIntensity(e.target.value as TrainingIntensity)}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-1.5 py-2 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-1.5 py-2 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none focus:ring-1 focus:ring-[#007aff] shadow-xs"
                   >
                     <option value="light">Légère</option>
                     <option value="moderate">Modérée</option>
@@ -424,10 +424,10 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
 
               {/* Focus Techniques Picker */}
               <div>
-                <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                <label className="text-[10px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
                   Techniques Clés Travaillées ce jour
                 </label>
-                <div className="max-h-24 overflow-y-auto p-1.5 bg-[#f2f2f7] dark:bg-black/40 rounded-xl border border-black/10 dark:border-white/10 flex flex-wrap gap-1">
+                <div className="max-h-24 overflow-y-auto p-1.5 bg-slate-100 dark:bg-black/40 rounded-xl border border-slate-200 dark:border-white/10 flex flex-wrap gap-1">
                   {Object.values(techniques).slice(0, 16).map((t) => {
                     const isSelected = selectedFocusTechniques.includes(t.id);
                     return (
@@ -437,8 +437,8 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                         onClick={() => toggleFocusTechnique(t.id)}
                         className={`text-[9px] font-bold px-2 py-1 rounded-lg border transition-all ${
                           isSelected
-                            ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white border-transparent'
-                            : 'bg-white dark:bg-white/5 text-[#1c1c1e] dark:text-white/60 border-black/5 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10'
+                            ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white border-transparent shadow-xs'
+                            : 'bg-white dark:bg-white/5 text-slate-800 dark:text-white/70 border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
                         }`}
                       >
                         {t.name}
