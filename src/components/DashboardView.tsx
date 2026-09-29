@@ -235,10 +235,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           }}
           className="ios-card-interactive p-2.5 flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-all group"
         >
-          <div className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-700 border border-amber-200 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/60 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
             <Clock className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold text-slate-800 dark:text-white/90">Chrono</span>
+          <span className="text-[11px] font-semibold text-slate-700 dark:text-white/90">Chrono</span>
         </button>
 
         <button
@@ -248,10 +248,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           }}
           className="ios-card-interactive p-2.5 flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-all group"
         >
-          <div className="w-9 h-9 rounded-2xl bg-purple-100 text-purple-700 border border-purple-200 dark:bg-[#bf5af2]/15 dark:text-[#bf5af2] dark:border-[#bf5af2]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 border border-purple-200/60 dark:bg-[#bf5af2]/15 dark:text-[#bf5af2] dark:border-[#bf5af2]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
             <Scale className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold text-slate-800 dark:text-white/90">Règles</span>
+          <span className="text-[11px] font-semibold text-slate-700 dark:text-white/90">Règles</span>
         </button>
 
         <button
@@ -261,10 +261,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           }}
           className="ios-card-interactive p-2.5 flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-all group"
         >
-          <div className="w-9 h-9 rounded-2xl bg-blue-100 text-blue-700 border border-blue-200 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/60 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
             <Award className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold text-slate-800 dark:text-white/90">Passeport</span>
+          <span className="text-[11px] font-semibold text-slate-700 dark:text-white/90">Passeport</span>
         </button>
 
         <button
@@ -274,10 +274,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           }}
           className="ios-card-interactive p-2.5 flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-all group"
         >
-          <div className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/60 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30 flex items-center justify-center group-hover:scale-105 transition-transform">
             <Database className="w-4 h-4" />
           </div>
-          <span className="text-[10px] font-bold text-slate-800 dark:text-white/90">Backup</span>
+          <span className="text-[11px] font-semibold text-slate-700 dark:text-white/90">Backup</span>
         </button>
       </div>
 
@@ -288,22 +288,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             soundFX.playClick();
             onNavigateToTab('journal');
           }}
-          className="ios-card-interactive p-3.5 flex items-center justify-between cursor-pointer border border-blue-200/80 hover:border-blue-300 bg-blue-50/70 dark:bg-[#0a84ff]/10 dark:border-[#0a84ff]/25 group transition-all"
+          className="ios-card-interactive p-4 flex items-center justify-between cursor-pointer group transition-all"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-100 dark:bg-[#0a84ff]/20 border border-blue-200 dark:border-[#0a84ff]/30 flex items-center justify-center text-[#007aff] dark:text-[#0a84ff] shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-blue-50 dark:bg-[#0a84ff]/15 border border-blue-200/60 dark:border-[#0a84ff]/30 flex items-center justify-center text-[#007aff] dark:text-[#0a84ff] shrink-0">
               <Award className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-slate-900 dark:text-white">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">
                   Tableau de Suivi &amp; Maîtrise
                 </span>
-                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-[#0a84ff]/20 text-[#007aff] dark:text-[#0a84ff]">
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-[#0a84ff]/20 text-[#007aff] dark:text-[#0a84ff] border border-blue-200/60 dark:border-transparent">
                   {masteryStats.percent}%
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-white/60 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-white/60 mt-0.5">
                 {masteryStats.validated} / {masteryStats.total} techniques validées · Suivre l'avancement
               </p>
             </div>
@@ -320,22 +320,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {onLaunchDrill && (
         <div
           onClick={onLaunchDrill}
-          className="ios-card-interactive p-4 flex items-center justify-between cursor-pointer border border-amber-200/80 hover:border-amber-300 bg-amber-50/70 dark:bg-[#ffd60a]/10 dark:border-[#ffd60a]/25 group transition-all"
+          className="ios-card-interactive p-4 flex items-center justify-between cursor-pointer group transition-all"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-amber-100 dark:bg-[#ffd60a]/20 border border-amber-200 dark:border-[#ffd60a]/30 flex items-center justify-center text-amber-700 dark:text-[#ffd60a] shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-amber-50 dark:bg-[#ffd60a]/15 border border-amber-200/60 dark:border-[#ffd60a]/30 flex items-center justify-center text-amber-600 dark:text-[#ffd60a] shrink-0">
               <Timer className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-slate-900 dark:text-white">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">
                   Mode Réflexe Sous Pression
                 </span>
-                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-[#ffd60a]/20 text-amber-800 dark:text-[#ffd60a]">
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-[#ffd60a]/20 text-amber-700 dark:text-[#ffd60a] border border-amber-200/60 dark:border-transparent">
                   6s
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-white/60 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-white/60 mt-0.5">
                 Automatisez vos réactions face aux counters
               </p>
             </div>
@@ -345,7 +345,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       )}
 
       {/* Recommended Routes Section with "+ Nouveau Flow" Button */}
-      <div className="space-y-2 pt-1">
+      <div className="space-y-2.5 pt-1">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-2">
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/40">
@@ -362,7 +362,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 soundFX.playClick();
                 onOpenCustomModal();
               }}
-              className="text-[11px] font-bold text-emerald-700 dark:text-[#30d158] hover:opacity-80 flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-[#30d158]/10 border border-emerald-200 dark:border-[#30d158]/25 active:scale-95 transition-all"
+              className="text-[11px] font-bold text-[#007aff] dark:text-[#0a84ff] hover:opacity-80 flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-[#0a84ff]/10 border border-blue-200/60 dark:border-[#0a84ff]/25 active:scale-95 transition-all shadow-xs"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Nouveau Flow</span>
@@ -383,16 +383,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   soundFX.playRouteNav();
                   onLaunchGPS(sys.id, sys.rootTechniqueId);
                 }}
-                className="ios-card-interactive p-4 flex flex-col justify-between cursor-pointer group shadow-xs"
+                className="ios-card-interactive p-4 flex flex-col justify-between cursor-pointer group"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${
-                      sys.id.includes('guard_escapes') ? 'bg-amber-100 text-amber-700 border border-amber-200 dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/30' :
-                      sys.id.includes('sweeps') ? 'bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/30' :
-                      isClosedGuard ? 'bg-blue-100 text-blue-700 border border-blue-200 dark:bg-[#0a84ff]/20 dark:text-[#0a84ff] dark:border-[#0a84ff]/30' :
-                      isAshi ? 'bg-rose-100 text-rose-700 border border-rose-200 dark:bg-[#ff453a]/20 dark:text-[#ff453a] dark:border-[#ff453a]/30' :
-                      'bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/30'
+                      sys.id.includes('guard_escapes') ? 'bg-amber-50 text-amber-700 border border-amber-200/60 dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/30' :
+                      sys.id.includes('sweeps') ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/30' :
+                      isClosedGuard ? 'bg-blue-50 text-blue-700 border border-blue-200/60 dark:bg-[#0a84ff]/20 dark:text-[#0a84ff] dark:border-[#0a84ff]/30' :
+                      isAshi ? 'bg-rose-50 text-rose-700 border border-rose-200/60 dark:bg-[#ff453a]/20 dark:text-[#ff453a] dark:border-[#ff453a]/30' :
+                      'bg-emerald-50 text-emerald-700 border border-emerald-200/60 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/30'
                     }`}>
                       {sys.id.includes('guard_escapes') ? <ShieldCheck className="w-5 h-5" /> :
                        sys.id.includes('sweeps') ? <RotateCcw className="w-5 h-5" /> :
@@ -407,7 +407,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           {sys.name}
                         </h3>
                       </div>
-                      <p className="text-xs text-slate-600 dark:text-white/60 leading-relaxed mt-1 line-clamp-2">
+                      <p className="text-xs text-slate-500 dark:text-white/60 leading-relaxed mt-1 line-clamp-2">
                         {sys.description}
                       </p>
                     </div>
@@ -415,9 +415,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                   <button
                     onClick={(e) => toggleFavorite(e, sys.id)}
-                    className="p-1 text-slate-400 dark:text-white/30 hover:text-[#d97706] dark:hover:text-[#ffd60a] shrink-0"
+                    className="p-1 text-slate-400 dark:text-white/30 hover:text-amber-500 dark:hover:text-[#ffd60a] shrink-0"
                   >
-                    <Star className={`w-4 h-4 ${isFav ? 'text-[#d97706] fill-[#d97706] dark:text-[#ffd60a] dark:fill-[#ffd60a]' : ''}`} />
+                    <Star className={`w-4 h-4 ${isFav ? 'text-amber-500 fill-amber-500 dark:text-[#ffd60a] dark:fill-[#ffd60a]' : ''}`} />
                   </button>
                 </div>
 

@@ -57,7 +57,7 @@ html.dark {
 
 body {
   background-color: #f2f2f7;
-  color: #1c1c1e;
+  color: #0f172a;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,7 +68,7 @@ body {
 
 html.dark body {
   background-color: #000000;
-  color: #f5f5f7;
+  color: #f8fafc;
 }
 
 /* Apple Frosted Glass Materials (Light mode default) */
@@ -76,38 +76,38 @@ html.dark body {
   background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(25px) saturate(180%);
   -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 html.dark .ios-glass {
-  background-color: rgba(28, 28, 30, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(28, 28, 30, 0.75);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .ios-glass-dark {
   background-color: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(30px) saturate(190%);
   -webkit-backdrop-filter: blur(30px) saturate(190%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 html.dark .ios-glass-dark {
   background-color: rgba(18, 18, 20, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .ios-glass-sheet {
   background-color: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(35px) saturate(200%);
   -webkit-backdrop-filter: blur(35px) saturate(200%);
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.06);
+  border-top-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.06);
 }
 html.dark .ios-glass-sheet {
   background-color: rgba(22, 22, 26, 0.92);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.15);
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
 }
 
-/* Apple Inset Grouped Card (Light mode default) */
+/* Apple Inset Grouped Card (Light mode default: crisp white with subtle border) */
 .ios-card {
   background-color: #ffffff;
   border-radius: 20px;
@@ -116,7 +116,7 @@ html.dark .ios-glass-sheet {
 }
 html.dark .ios-card {
   background-color: #1c1c1e;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: none;
 }
 
@@ -128,17 +128,17 @@ html.dark .ios-card {
   transition: transform 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
 }
 .ios-card-interactive:active {
-  transform: scale(0.98);
-  background-color: #f2f2f7;
+  transform: scale(0.985);
+  background-color: #f8fafc;
   border-color: rgba(0, 0, 0, 0.12);
 }
 html.dark .ios-card-interactive {
   background-color: #1c1c1e;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: none;
 }
 html.dark .ios-card-interactive:active {
-  transform: scale(0.98);
+  transform: scale(0.985);
   background-color: #242426;
   border-color: rgba(255, 255, 255, 0.15);
 }
@@ -151,7 +151,7 @@ html.dark .ios-card-interactive:active {
   margin: 0 auto;
   position: relative;
   background-color: #f2f2f7;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.06);
   transition: background-color 0.25s ease;
 }
 
@@ -166,7 +166,7 @@ html.dark .tactical-viewport-container {
     margin: 20px auto;
     min-height: calc(100vh - 40px);
     border-radius: 44px;
-    border: 8px solid #e5e5ea;
+    border: 8px solid #e2e8f0;
     overflow: hidden;
   }
   html.dark .tactical-viewport-container {
@@ -178,7 +178,7 @@ html.dark .tactical-viewport-container {
 @keyframes appleSpringIn {
   0% {
     opacity: 0;
-    transform: translateY(12px) scale(0.98);
+    transform: translateY(10px) scale(0.98);
   }
   100% {
     opacity: 1;
@@ -187,7 +187,7 @@ html.dark .tactical-viewport-container {
 }
 
 .animate-spring-in {
-  animation: appleSpringIn 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  animation: appleSpringIn 0.25s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
 }
 
 /* Hide scrollbars cleanly */
@@ -197,308 +197,4 @@ html.dark .tactical-viewport-container {
 * {
   scrollbar-width: none;
   -webkit-tap-highlight-color: transparent;
-}
-
-/* ==========================================================================
-   Apple iOS Light Mode Overrides (DEFAULT THEME)
-   ========================================================================== */
-
-/* 1. Frosted Glass Materials */
-html:not(.dark) .ios-glass {
-  background-color: rgba(255, 255, 255, 0.88) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-html:not(.dark) .ios-glass-dark {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-html:not(.dark) .ios-glass-sheet {
-  background-color: rgba(255, 255, 255, 0.94) !important;
-  border-top-color: rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* 2. Inset Grouped Cards */
-html:not(.dark) .ios-card,
-html:not(.dark) .ios-card-interactive {
-  background-color: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.07) !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
-}
-
-html:not(.dark) .ios-card-interactive:active {
-  background-color: #f6f6f9 !important;
-}
-
-/* 3. Surface & Background mapping */
-html:not(.dark) .bg-black {
-  background-color: #f2f2f7 !important;
-}
-
-html:not(.dark) .bg-\[\#1c1c1e\],
-html:not(.dark) .bg-\[\#161618\],
-html:not(.dark) .bg-\[\#0d0d0f\],
-html:not(.dark) .bg-\[\#18181b\],
-html:not(.dark) .bg-\[\#121214\],
-html:not(.dark) .bg-slate-900,
-html:not(.dark) .bg-slate-950 {
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-html:not(.dark) .bg-slate-800 {
-  background-color: #f2f2f7 !important;
-}
-
-html:not(.dark) .border-slate-700,
-html:not(.dark) .border-slate-800 {
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-html:not(.dark) .text-slate-400,
-html:not(.dark) .text-slate-300,
-html:not(.dark) .text-slate-200 {
-  color: #636366 !important;
-}
-
-html:not(.dark) .timer-bg-ring {
-  stroke: #e5e5ea !important;
-}
-
-html:not(.dark) .bg-\[\#2c2c2e\] {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-html:not(.dark) [class*="p-1 rounded-2xl bg-[#1c1c1e]"],
-html:not(.dark) [class*="bg-[#1c1c1e] p-1"] {
-  background-color: #e5e5ea !important;
-}
-
-html:not(.dark) .bg-white\/5 {
-  background-color: rgba(0, 0, 0, 0.04) !important;
-}
-
-html:not(.dark) .bg-white\/10 {
-  background-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-html:not(.dark) .bg-white\/15 {
-  background-color: rgba(0, 0, 0, 0.09) !important;
-}
-
-html:not(.dark) .bg-white\/20 {
-  background-color: rgba(0, 0, 0, 0.12) !important;
-}
-
-html:not(.dark) .hover\:bg-white\/5:hover {
-  background-color: rgba(0, 0, 0, 0.03) !important;
-}
-
-html:not(.dark) .hover\:bg-white\/10:hover {
-  background-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-html:not(.dark) .hover\:bg-white\/15:hover {
-  background-color: rgba(0, 0, 0, 0.09) !important;
-}
-
-html:not(.dark) .hover\:bg-white\/20:hover {
-  background-color: rgba(0, 0, 0, 0.12) !important;
-}
-
-html:not(.dark) .active\:bg-white\/10:active {
-  background-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-/* 4. Text Contrast */
-html:not(.dark) .text-white {
-  color: #1c1c1e !important;
-}
-
-/* Preserve crisp white text inside filled colored buttons, badges, and chips */
-html:not(.dark) .bg-\[\#007aff\],
-html:not(.dark) .bg-\[\#0a84ff\],
-html:not(.dark) .bg-\[\#30d158\],
-html:not(.dark) .bg-\[\#ff453a\],
-html:not(.dark) .bg-blue-600,
-html:not(.dark) .bg-blue-500,
-html:not(.dark) .bg-emerald-600,
-html:not(.dark) .bg-rose-600,
-html:not(.dark) .bg-purple-600,
-html:not(.dark) [class*="bg-[#007aff]"] .text-white,
-html:not(.dark) [class*="bg-[#0a84ff]"] .text-white,
-html:not(.dark) [class*="bg-blue-600"] .text-white,
-html:not(.dark) button.bg-\[\#007aff\],
-html:not(.dark) button.bg-\[\#0a84ff\],
-html:not(.dark) button[class*="bg-[#007aff]"] *,
-html:not(.dark) button[class*="bg-[#0a84ff]"] *,
-html:not(.dark) button[class*="bg-blue-600"] * {
-  color: #ffffff !important;
-}
-
-html:not(.dark) .text-white\/90 {
-  color: #2c2c2e !important;
-}
-
-html:not(.dark) .text-white\/80 {
-  color: #3a3a3c !important;
-}
-
-html:not(.dark) .text-white\/70 {
-  color: #48484a !important;
-}
-
-html:not(.dark) .text-white\/60 {
-  color: #636366 !important;
-}
-
-html:not(.dark) .text-white\/50,
-html:not(.dark) .text-white\/40 {
-  color: #8e8e93 !important;
-}
-
-html:not(.dark) .text-white\/30,
-html:not(.dark) .text-white\/20 {
-  color: #aeaeb2 !important;
-}
-
-/* 5. Borders & Separators */
-html:not(.dark) .border-white\/5,
-html:not(.dark) .border-white\/8,
-html:not(.dark) .border-white\/10,
-html:not(.dark) .border-white\/12,
-html:not(.dark) .border-white\/15,
-html:not(.dark) .border-white\/20,
-html:not(.dark) .border-white\/25,
-html:not(.dark) .border-white\/30 {
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-html:not(.dark) .hover\:border-white\/25:hover,
-html:not(.dark) .hover\:border-white\/30:hover {
-  border-color: rgba(0, 0, 0, 0.18) !important;
-}
-
-html:not(.dark) .divide-white\/5 > :not([hidden]) ~ :not([hidden]),
-html:not(.dark) .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
-  border-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-/* 6. Form Controls: Inputs, Textareas, Selects */
-html:not(.dark) input,
-html:not(.dark) textarea,
-html:not(.dark) select {
-  background-color: #e5e5ea !important;
-  color: #000000 !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-html:not(.dark) input:focus,
-html:not(.dark) textarea:focus,
-html:not(.dark) select:focus {
-  background-color: #ffffff !important;
-  border-color: #007aff !important;
-}
-
-html:not(.dark) input::placeholder,
-html:not(.dark) textarea::placeholder {
-  color: #8e8e93 !important;
-}
-
-html:not(.dark) select option {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* 7. Home Indicator Bar */
-html:not(.dark) .home-indicator,
-html:not(.dark) .w-32.h-1.bg-white\/20 {
-  background-color: rgba(0, 0, 0, 0.25) !important;
-}
-
-/* 8. Vibrant & Accessible Accent Badges in Light Mode */
-html:not(.dark) .text-\[\#ffd60a\] {
-  color: #b45309 !important; /* Accessible dark amber */
-}
-
-html:not(.dark) .bg-\[\#ffd60a\]\/15,
-html:not(.dark) .bg-\[\#ffd60a\]\/20 {
-  background-color: rgba(217, 119, 6, 0.12) !important;
-}
-
-html:not(.dark) .border-\[\#ffd60a\]\/30 {
-  border-color: rgba(217, 119, 6, 0.28) !important;
-}
-
-html:not(.dark) .text-\[\#30d158\] {
-  color: #15803d !important; /* Accessible forest emerald */
-}
-
-html:not(.dark) .bg-\[\#30d158\]\/15,
-html:not(.dark) .bg-\[\#30d158\]\/20 {
-  background-color: rgba(34, 197, 94, 0.12) !important;
-}
-
-html:not(.dark) .border-\[\#30d158\]\/30 {
-  border-color: rgba(34, 197, 94, 0.28) !important;
-}
-
-html:not(.dark) .text-\[\#ff453a\] {
-  color: #dc2626 !important; /* Accessible crimson */
-}
-
-html:not(.dark) .bg-\[\#ff453a\]\/15,
-html:not(.dark) .bg-\[\#ff453a\]\/20 {
-  background-color: rgba(239, 68, 68, 0.12) !important;
-}
-
-html:not(.dark) .border-\[\#ff453a\]\/30 {
-  border-color: rgba(239, 68, 68, 0.28) !important;
-}
-
-/* 9. Modal Backdrops in Light Mode */
-html:not(.dark) .bg-black\/60,
-html:not(.dark) .bg-black\/70,
-html:not(.dark) .bg-black\/80,
-html:not(.dark) .bg-black\/85,
-html:not(.dark) .bg-black\/90,
-html:not(.dark) .bg-slate-950\/85 {
-  background-color: rgba(0, 0, 0, 0.45) !important;
-  backdrop-filter: blur(16px) !important;
-}
-
-html:not(.dark) input.bg-black\/60,
-html:not(.dark) select.bg-black\/60,
-html:not(.dark) textarea.bg-black\/60 {
-  background-color: #f2f2f7 !important;
-  color: #1c1c1e !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
-}
-
-/* 10. Inner Containers & Form Elements with dark utility classes in Light Mode */
-html:not(.dark) div.bg-black\/30,
-html:not(.dark) div.bg-black\/40,
-html:not(.dark) div.bg-black\/50,
-html:not(.dark) div.bg-black\/60 {
-  background-color: #f2f2f7 !important;
-  border-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-html:not(.dark) p.bg-black\/40,
-html:not(.dark) p.bg-black\/30 {
-  background-color: #f2f2f7 !important;
-  color: #1c1c1e !important;
-  border-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-/* Fallback: Ensure gradients with via-[#1c1c1e] or to-[#1c1c1e] never turn black in light mode */
-html:not(.dark) .via-\[\#1c1c1e\] {
-  --tw-gradient-via: #ffffff !important;
-}
-html:not(.dark) .to-\[\#1c1c1e\] {
-  --tw-gradient-to: #ffffff !important;
 }

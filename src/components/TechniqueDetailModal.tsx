@@ -47,28 +47,28 @@ export const TechniqueDetailModal: React.FC<TechniqueDetailModalProps> = ({
     const c = (catId || category).toLowerCase();
     if (c.includes('submission') || c.includes('soumission') || c.includes('attaque')) {
       return {
-        badge: 'bg-[#ff453a]/20 text-[#ff453a] border border-[#ff453a]/30',
-        dot: 'bg-[#ff453a]',
+        badge: 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-[#ff453a]/20 dark:text-[#ff453a] dark:border-[#ff453a]/30',
+        dot: 'bg-rose-500 dark:bg-[#ff453a]',
         label: 'Attaque / Soumission'
       };
     }
     if (c.includes('sweep') || c.includes('renversement') || c.includes('balayage')) {
       return {
-        badge: 'bg-[#30d158]/20 text-[#30d158] border border-[#30d158]/30',
-        dot: 'bg-[#30d158]',
+        badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#30d158]/20 dark:text-[#30d158] dark:border-[#30d158]/30',
+        dot: 'bg-emerald-500 dark:bg-[#30d158]',
         label: 'Renversement / Balayage'
       };
     }
     if (c.includes('pass') || c.includes('sortie') || c.includes('défense') || c.includes('ouverture')) {
       return {
-        badge: 'bg-[#ffd60a]/20 text-[#ffd60a] border border-[#ffd60a]/30',
-        dot: 'bg-[#ffd60a]',
+        badge: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
+        dot: 'bg-amber-500 dark:bg-[#ffd60a]',
         label: 'Sortie de Garde / Défense'
       };
     }
     return {
-      badge: 'bg-[#0a84ff]/20 text-[#0a84ff] border border-[#0a84ff]/30',
-      dot: 'bg-[#0a84ff]',
+      badge: 'bg-blue-50 text-[#007aff] border-blue-200 dark:bg-[#0a84ff]/20 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
+      dot: 'bg-[#007aff] dark:bg-[#0a84ff]',
       label: 'Position de Contrôle'
     };
   };

@@ -270,8 +270,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'mastered' ? 'all' : 'mastered')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'mastered' 
-                ? 'bg-purple-100 border-purple-300 dark:bg-[#af52de]/20 dark:border-[#af52de] ring-1 ring-purple-300' 
-                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
+                ? 'bg-purple-50 border-purple-200 ring-1 ring-purple-300 dark:bg-[#af52de]/20 dark:border-[#af52de]' 
+                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[9px] font-bold text-purple-700 dark:text-[#af52de] uppercase block truncate">Maîtrisées</span>
@@ -282,8 +282,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'sparring_ready' ? 'all' : 'sparring_ready')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'sparring_ready' 
-                ? 'bg-blue-100 border-blue-300 dark:bg-[#0a84ff]/20 dark:border-[#0a84ff] ring-1 ring-blue-300' 
-                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
+                ? 'bg-blue-50 border-blue-200 ring-1 ring-blue-300 dark:bg-[#0a84ff]/20 dark:border-[#0a84ff]' 
+                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[9px] font-bold text-blue-700 dark:text-[#0a84ff] uppercase block truncate">Validées</span>
@@ -294,8 +294,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'drilling' ? 'all' : 'drilling')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'drilling' 
-                ? 'bg-amber-100 border-amber-300 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a] ring-1 ring-amber-300' 
-                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
+                ? 'bg-amber-50 border-amber-200 ring-1 ring-amber-300 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a]' 
+                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
             <span className="text-[9px] font-bold text-amber-700 dark:text-[#ffd60a] uppercase block truncate">En Drill</span>
@@ -306,11 +306,11 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'to_learn' ? 'all' : 'to_learn')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'to_learn' 
-                ? 'bg-slate-200 border-slate-400 text-slate-900 dark:bg-white/20 dark:border-white/40 ring-1 ring-slate-300' 
-                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/10'
+                ? 'bg-slate-100 border-slate-300 ring-1 ring-slate-300 text-slate-800 dark:bg-white/20 dark:border-white/40' 
+                : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
-            <span className="text-[9px] font-bold text-slate-600 dark:text-white/50 uppercase block truncate">À Découvrir</span>
+            <span className="text-[9px] font-bold text-slate-500 dark:text-white/50 uppercase block truncate">À Découvrir</span>
             <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.toLearnCount}</span>
           </button>
         </div>
@@ -481,7 +481,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onUpdateStatus(tech.id, 'to_learn');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
                       status === 'to_learn'
                         ? 'bg-white dark:bg-white/20 text-slate-800 dark:text-white shadow-xs font-bold border border-slate-200/80 dark:border-transparent'
                         : 'text-slate-500 dark:text-white/40 hover:text-slate-800 dark:hover:text-white/70 hover:bg-slate-200/50'
@@ -494,9 +494,9 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onUpdateStatus(tech.id, 'drilling');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
                       status === 'drilling'
-                        ? 'bg-amber-100 text-amber-900 border border-amber-300/80 dark:bg-amber-500/25 dark:text-amber-200 dark:border-amber-500/40 shadow-xs font-bold'
+                        ? 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/25 dark:text-amber-200 dark:border-amber-500/40 shadow-xs font-bold'
                         : 'text-slate-500 dark:text-white/40 hover:text-amber-700 dark:hover:text-amber-300 hover:bg-amber-50/50'
                     }`}
                   >
@@ -507,9 +507,9 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onUpdateStatus(tech.id, 'sparring_ready');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
                       status === 'sparring_ready'
-                        ? 'bg-blue-100 text-blue-900 border border-blue-300/80 dark:bg-blue-500/25 dark:text-blue-200 dark:border-blue-500/40 shadow-xs font-bold'
+                        ? 'bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/25 dark:text-blue-200 dark:border-blue-500/40 shadow-xs font-bold'
                         : 'text-slate-500 dark:text-white/40 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50/50'
                     }`}
                   >
@@ -520,9 +520,9 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playSubmissionChime();
                       onUpdateStatus(tech.id, 'mastered');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-bold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
                       status === 'mastered'
-                        ? 'bg-purple-100 text-purple-900 border border-purple-300/80 dark:bg-purple-500/25 dark:text-purple-200 dark:border-purple-500/40 shadow-xs font-bold'
+                        ? 'bg-purple-50 text-purple-800 border border-purple-200 dark:bg-purple-500/25 dark:text-purple-200 dark:border-purple-500/40 shadow-xs font-bold'
                         : 'text-slate-500 dark:text-white/40 hover:text-purple-700 dark:hover:text-purple-300 hover:bg-purple-50/50'
                     }`}
                   >

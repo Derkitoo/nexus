@@ -155,7 +155,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
             const isNoGiLegal = rule.nogiStatus === 'legal';
 
             return (
-              <div key={idx} className="ios-card p-3 space-y-1.5 border border-slate-200 dark:border-white/5 bg-slate-50/60 dark:bg-[#1c1c1e]">
+              <div key={idx} className="ios-card p-3 space-y-1.5 border border-slate-200/80 dark:border-white/5 bg-white dark:bg-[#1c1c1e] shadow-xs">
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
                     {rule.technique}
@@ -201,7 +201,7 @@ export const IBJJFRulesModal: React.FC<IBJJFRulesModalProps> = ({
             soundFX.playClick();
             onClose();
           }}
-          className="mt-2 w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white transition-all active:scale-95"
+          className="mt-2 w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white transition-all active:scale-95"
         >
           Fermer l&apos;Aide-Mémoire
         </button>

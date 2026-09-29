@@ -31,23 +31,23 @@ export const Header: React.FC<HeaderProps> = ({
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-40 ios-glass border-b border-white/10 px-4 pt-3 pb-2.5">
+    <header className="sticky top-0 z-40 bg-white/85 dark:bg-[#161618]/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 px-4 pt-3 pb-2.5 transition-colors">
       <div className="flex items-center justify-between">
         {/* Brand with Apple Maps / OpenRoute Vibe */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#0a84ff] flex items-center justify-center shadow-lg shadow-[#0a84ff]/30 text-white shrink-0">
+          <div className="w-8 h-8 rounded-full bg-[#007aff] dark:bg-[#0a84ff] flex items-center justify-center shadow-md shadow-[#007aff]/20 text-white shrink-0">
             <Compass className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-1.5 leading-none">
-              <span className="font-extrabold text-[15px] tracking-tight text-white">
+              <span className="font-extrabold text-[15px] tracking-tight text-slate-900 dark:text-white">
                 BJJ Nexus
               </span>
-              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#0a84ff]/20 text-[#0a84ff] border border-[#0a84ff]/30 uppercase tracking-wide">
+              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-[#0a84ff]/20 text-[#007aff] dark:text-[#0a84ff] border border-blue-200/80 dark:border-[#0a84ff]/30 uppercase tracking-wide">
                 GPS
               </span>
             </div>
-            <p className="text-[10px] text-white/50 tracking-tight mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-white/50 tracking-tight mt-0.5">
               Tactical Navigation
             </p>
           </div>
@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 active:scale-95 transition-all border border-white/10 flex items-center justify-center text-white/80 shadow-xs"
+            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 active:scale-95 transition-all border border-slate-200/80 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-white/80 shadow-xs"
             title={theme === 'light' ? 'Activer le mode Sombre' : 'Activer le mode Clair'}
           >
             {theme === 'light' ? (
@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
                 soundFX.playClick();
                 onOpenTimer();
               }}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/15 active:scale-95 transition-all border border-white/10 flex items-center justify-center text-[#ffd60a] shadow-xs"
+              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 active:scale-95 transition-all border border-slate-200/80 dark:border-white/10 flex items-center justify-center text-amber-600 dark:text-[#ffd60a] shadow-xs"
               title="Chronomètre de Sparring IBJJF"
             >
               <Clock className="w-4 h-4" />
@@ -87,18 +87,18 @@ export const Header: React.FC<HeaderProps> = ({
               soundFX.playClick();
               onOpenPassport?.();
             }}
-            className="flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full bg-white/10 hover:bg-white/15 active:scale-95 transition-all border border-white/10 shadow-sm"
+            className="flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 active:scale-95 transition-all border border-slate-200/80 dark:border-white/10 shadow-xs"
             title="Ouvrir le Passeport & Progression"
           >
-            <div className={`w-4 h-3 rounded-xs ${currentBelt.bg} flex items-center justify-end overflow-hidden`}>
+            <div className={`w-4 h-3 rounded-xs ${currentBelt.bg} flex items-center justify-end overflow-hidden shadow-xs`}>
               <div className="w-1.5 h-full bg-black flex items-center justify-center gap-[1px]">
                 {[...Array(userProfile.stripes)].map((_, i) => (
                   <div key={i} className="w-[1px] h-full bg-white" />
                 ))}
               </div>
             </div>
-            <span className="text-[11px] font-bold text-white/90">{userProfile.belt}</span>
-            <ChevronDown className="w-3 h-3 text-white/40" />
+            <span className="text-[11px] font-bold text-slate-800 dark:text-white/90">{userProfile.belt}</span>
+            <ChevronDown className="w-3 h-3 text-slate-400 dark:text-white/40" />
           </button>
         </div>
       </div>

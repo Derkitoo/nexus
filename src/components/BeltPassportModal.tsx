@@ -161,7 +161,7 @@ export const BeltPassportModal: React.FC<BeltPassportModalProps> = ({
         {/* Content */}
         <div className="overflow-y-auto py-3 space-y-4 flex-1 pr-0.5">
           {/* Authentic BJJ Belt Visual Card (Apple Wallet Style) */}
-          <div className="relative overflow-hidden rounded-2xl p-4 border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#1c1c1e] shadow-xs">
+          <div className="relative overflow-hidden rounded-2xl p-4 border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#1c1c1e] shadow-xs">
             {celebrating && (
               <div className="absolute inset-0 bg-[#0a84ff]/20 backdrop-blur-xs flex items-center justify-center z-20 animate-spring-in">
                 <span className="text-sm font-black text-white px-4 py-2 rounded-full bg-[#0a84ff] shadow-xl flex items-center gap-1.5">
@@ -245,7 +245,7 @@ export const BeltPassportModal: React.FC<BeltPassportModalProps> = ({
           )}
 
           {/* Belt Requirements Checklist */}
-          <div className="ios-card p-4 space-y-2.5 border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#1c1c1e] shadow-xs">
+          <div className="ios-card p-4 space-y-2.5 border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#1c1c1e] shadow-xs">
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/40 flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-[#007aff] dark:text-[#0a84ff]" />
               Compétences clés du grade
@@ -263,11 +263,11 @@ export const BeltPassportModal: React.FC<BeltPassportModalProps> = ({
 
           {/* Activity Metrics */}
           <div className="grid grid-cols-2 gap-2">
-            <div className="ios-card p-3 text-center space-y-0.5 border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#1c1c1e] shadow-xs">
+            <div className="ios-card p-3 text-center space-y-0.5 border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#1c1c1e] shadow-xs">
               <span className="text-[10px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-wider block">Drills Réussis</span>
               <span className="text-lg font-black text-[#007aff] dark:text-[#0a84ff] font-mono">{userProfile.drillsCompleted}</span>
             </div>
-            <div className="ios-card p-3 text-center space-y-0.5 border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#1c1c1e] shadow-xs">
+            <div className="ios-card p-3 text-center space-y-0.5 border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#1c1c1e] shadow-xs">
               <span className="text-[10px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-wider block">Système Favori</span>
               <span className="text-xs font-bold text-slate-900 dark:text-white truncate block">{userProfile.favoriteSystem}</span>
             </div>
@@ -279,7 +279,7 @@ export const BeltPassportModal: React.FC<BeltPassportModalProps> = ({
             soundFX.playClick();
             onClose();
           }}
-          className="mt-2 w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white transition-all active:scale-95"
+          className="mt-2 w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 dark:bg-white/10 dark:hover:bg-white/15 dark:text-white transition-all active:scale-95"
         >
           Fermer le Passeport
         </button>
