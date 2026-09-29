@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* Apple iOS Light Palette (DEFAULT THEME) */
   --ios-bg: #f2f2f7;

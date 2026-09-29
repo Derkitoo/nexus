@@ -204,28 +204,28 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
   const getTrainingTypeBadge = (type: TrainingType) => {
     switch (type) {
       case 'gi':
-        return { label: 'Gi (Kimono)', color: 'bg-[#007aff]/10 dark:bg-[#0a84ff]/15 text-[#007aff] dark:text-[#0a84ff] border-[#007aff]/30 dark:border-[#0a84ff]/30' };
+        return { label: 'Gi (Kimono)', color: 'bg-blue-100 text-blue-900 border-blue-300 font-bold dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30' };
       case 'nogi':
-        return { label: 'No-Gi', color: 'bg-[#af52de]/10 dark:bg-[#af52de]/15 text-[#8944ab] dark:text-[#af52de] border-[#af52de]/30' };
+        return { label: 'No-Gi', color: 'bg-purple-100 text-purple-900 border-purple-300 font-bold dark:bg-[#af52de]/15 dark:text-[#af52de] dark:border-[#af52de]/30' };
       case 'open_mat':
-        return { label: 'Open Mat', color: 'bg-[#34c759]/12 dark:bg-[#30d158]/15 text-[#15803d] dark:text-[#30d158] border-[#30d158]/30' };
+        return { label: 'Open Mat', color: 'bg-emerald-100 text-emerald-950 border-emerald-300 font-bold dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30' };
       case 'drills':
-        return { label: 'Drills Spécifiques', color: 'bg-[#ffd60a]/20 text-[#b45309] dark:text-[#ffd60a] border-[#ffd60a]/30' };
+        return { label: 'Drills Spécifiques', color: 'bg-amber-100 text-amber-950 border-amber-300 font-bold dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/30' };
       case 'competition':
-        return { label: 'Prépa Compétition', color: 'bg-[#ff3b30]/12 dark:bg-[#ff453a]/15 text-[#dc2626] dark:text-[#ff453a] border-[#ff453a]/30' };
+        return { label: 'Prépa Compétition', color: 'bg-rose-100 text-rose-950 border-rose-300 font-bold dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30' };
     }
   };
 
   const getIntensityBadge = (int: TrainingIntensity) => {
     switch (int) {
       case 'light':
-        return { label: 'Légère', color: 'text-[#8e8e93] dark:text-white/60' };
+        return { label: 'Légère', color: 'text-slate-600 dark:text-white/60 font-bold' };
       case 'moderate':
-        return { label: 'Modérée', color: 'text-[#d97706] dark:text-[#ffd60a]' };
+        return { label: 'Modérée', color: 'text-amber-800 dark:text-[#ffd60a] font-bold' };
       case 'hard':
-        return { label: 'Intense', color: 'text-[#ea580c] dark:text-[#ff9f0a]' };
+        return { label: 'Intense', color: 'text-orange-800 dark:text-[#ff9f0a] font-bold' };
       case 'extreme':
-        return { label: 'Extrême 🔥', color: 'text-[#dc2626] dark:text-[#ff453a]' };
+        return { label: 'Extrême 🔥', color: 'text-rose-800 dark:text-[#ff453a] font-black' };
     }
   };
 
@@ -451,45 +451,45 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
               {/* Submissions & Sweeps landed during session */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/50 uppercase tracking-wider block mb-1">
                     Soumission Passée
                   </label>
                   <select
                     value={submissionLanded}
                     onChange={(e) => setSubmissionLanded(e.target.value)}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-2 py-2 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none truncate"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-2 py-2 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none truncate"
                   >
                     <option value="">Aucune</option>
                     {Object.values(techniques)
-                      .filter((t) => t.category_id === 'submission' || t.category.includes('Soumission'))
-                      .map((t) => (
-                        <option key={t.id} value={t.id}>{t.name}</option>
-                      ))}
+                        .filter((t) => t.category_id === 'submission' || t.category.includes('Soumission'))
+                        .map((t) => (
+                          <option key={t.id} value={t.id}>{t.name}</option>
+                        ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-bold text-slate-700 dark:text-white/50 uppercase tracking-wider block mb-1">
                     Renversement Réussi
                   </label>
                   <select
                     value={sweepLanded}
                     onChange={(e) => setSweepLanded(e.target.value)}
-                    className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white px-2 py-2 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none truncate"
+                    className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white px-2 py-2 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none truncate"
                   >
                     <option value="">Aucun</option>
                     {Object.values(techniques)
-                      .filter((t) => t.category_id === 'sweep' || t.category.includes('Renversement'))
-                      .map((t) => (
-                        <option key={t.id} value={t.id}>{t.name}</option>
-                      ))}
+                        .filter((t) => t.category_id === 'sweep' || t.category.includes('Renversement'))
+                        .map((t) => (
+                          <option key={t.id} value={t.id}>{t.name}</option>
+                        ))}
                   </select>
                 </div>
               </div>
 
               {/* Partner & Débrief */}
               <div>
-                <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                <label className="text-[10px] font-bold text-slate-700 dark:text-white/50 uppercase tracking-wider block mb-1">
                   Partenaires du Jour
                 </label>
                 <input
@@ -497,19 +497,19 @@ export const SparringJournalView: React.FC<SparringJournalViewProps> = ({
                   value={partnerNotes}
                   onChange={(e) => setPartnerNotes(e.target.value)}
                   placeholder="Ex: Lucas (Violette), Marc (Bleue)..."
-                  className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white placeholder-[#8e8e93] dark:placeholder-white/30 px-3 py-2 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none"
+                  className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 px-3 py-2 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-[#8e8e93] dark:text-white/50 uppercase tracking-wider block mb-1">
+                <label className="text-[10px] font-bold text-slate-700 dark:text-white/50 uppercase tracking-wider block mb-1">
                   Débrief &amp; Analyse de la Séance
                 </label>
                 <textarea
                   value={sparringNotes}
                   onChange={(e) => setSparringNotes(e.target.value)}
                   placeholder="Sensations, erreurs observées, points techniques à corriger..."
-                  className="w-full bg-[#f2f2f7] dark:bg-black/60 text-xs text-[#1c1c1e] dark:text-white placeholder-[#8e8e93] dark:placeholder-white/30 p-2.5 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none resize-none h-16"
+                  className="w-full bg-white dark:bg-black/60 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 p-2.5 rounded-xl border border-slate-300 dark:border-white/10 focus:outline-none resize-none h-16"
                 />
               </div>
 

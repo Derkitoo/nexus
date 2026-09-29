@@ -142,30 +142,30 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
       case 'mastered':
         return {
           label: 'Maîtrisé',
-          color: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#af52de]/15 dark:text-[#af52de] dark:border-[#af52de]/30',
+          color: 'bg-purple-100 text-purple-900 border-purple-300 font-bold dark:bg-[#af52de]/20 dark:text-[#af52de] dark:border-[#af52de]/40',
           dot: 'bg-purple-600 dark:bg-[#af52de]',
           icon: Sparkles,
         };
       case 'sparring_ready':
         return {
           label: 'Validé Sparring',
-          color: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
+          color: 'bg-blue-100 text-blue-900 border-blue-300 font-bold dark:bg-[#0a84ff]/20 dark:text-[#0a84ff] dark:border-[#0a84ff]/40',
           dot: 'bg-blue-600 dark:bg-[#0a84ff]',
           icon: CheckCircle2,
         };
       case 'drilling':
         return {
           label: 'En Drill',
-          color: 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
-          dot: 'bg-amber-500 dark:bg-[#ffd60a]',
+          color: 'bg-amber-100 text-amber-950 border-amber-300 font-bold dark:bg-[#ffd60a]/20 dark:text-[#ffd60a] dark:border-[#ffd60a]/40',
+          dot: 'bg-amber-600 dark:bg-[#ffd60a]',
           icon: Zap,
         };
       case 'to_learn':
       default:
         return {
           label: 'À Découvrir',
-          color: 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-white/10 dark:text-white/60 dark:border-white/10',
-          dot: 'bg-slate-400 dark:bg-white/40',
+          color: 'bg-slate-100 text-slate-800 border-slate-300 font-bold dark:bg-white/10 dark:text-white/80 dark:border-white/20',
+          dot: 'bg-slate-500 dark:bg-white/40',
           icon: Circle,
         };
     }
@@ -175,27 +175,27 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
     const c = (catId || category).toLowerCase();
     if (c.includes('submission') || c.includes('soumission') || c.includes('attaque')) {
       return {
-        badge: 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30',
+        badge: 'bg-rose-50 text-rose-800 font-bold border border-rose-300 dark:bg-[#ff453a]/15 dark:text-[#ff453a] dark:border-[#ff453a]/30',
         label: 'Soumission',
         icon: Zap,
       };
     }
     if (c.includes('sweep') || c.includes('renversement') || c.includes('balayage')) {
       return {
-        badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30',
+        badge: 'bg-emerald-50 text-emerald-800 font-bold border border-emerald-300 dark:bg-[#30d158]/15 dark:text-[#30d158] dark:border-[#30d158]/30',
         label: 'Renversement',
         icon: RotateCcw,
       };
     }
     if (c.includes('pass') || c.includes('sortie') || c.includes('défense') || c.includes('ouverture')) {
       return {
-        badge: 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
+        badge: 'bg-amber-50 text-amber-950 font-bold border border-amber-300 dark:bg-[#ffd60a]/15 dark:text-[#ffd60a] dark:border-[#ffd60a]/30',
         label: 'Sortie / Défense',
         icon: Shield,
       };
     }
     return {
-      badge: 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
+      badge: 'bg-blue-50 text-blue-900 font-bold border border-blue-300 dark:bg-[#0a84ff]/15 dark:text-[#0a84ff] dark:border-[#0a84ff]/30',
       label: 'Position',
       icon: BookOpen,
     };
@@ -226,7 +226,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
               <Award className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-white/40 block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-white/60 block">
                 Niveau Global de Maîtrise
               </span>
               <h2 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -239,7 +239,7 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             <span className="text-2xl font-black text-[#007aff] dark:text-[#0a84ff] font-mono leading-none">
               {stats.progressPercent}%
             </span>
-            <span className="text-[10px] font-medium text-slate-500 dark:text-white/50 block mt-0.5">
+            <span className="text-[11px] font-bold text-slate-600 dark:text-white/60 block mt-0.5">
               {stats.masteredCount + stats.sparringCount} / {stats.total} validées
             </span>
           </div>
@@ -270,62 +270,62 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setStatusFilter(statusFilter === 'mastered' ? 'all' : 'mastered')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'mastered' 
-                ? 'bg-purple-50 border-purple-200 ring-1 ring-purple-300 dark:bg-[#af52de]/20 dark:border-[#af52de]' 
+                ? 'bg-purple-100 border-purple-400 ring-2 ring-purple-400/50 shadow-sm' 
                 : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
-            <span className="text-[9px] font-bold text-purple-700 dark:text-[#af52de] uppercase block truncate">Maîtrisées</span>
-            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.masteredCount}</span>
+            <span className="text-[10px] font-bold text-purple-900 dark:text-[#af52de] uppercase block truncate">Maîtrisées</span>
+            <span className="text-base font-black text-slate-900 dark:text-white font-mono">{stats.masteredCount}</span>
           </button>
 
           <button 
             onClick={() => setStatusFilter(statusFilter === 'sparring_ready' ? 'all' : 'sparring_ready')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'sparring_ready' 
-                ? 'bg-blue-50 border-blue-200 ring-1 ring-blue-300 dark:bg-[#0a84ff]/20 dark:border-[#0a84ff]' 
+                ? 'bg-blue-100 border-blue-400 ring-2 ring-blue-400/50 shadow-sm' 
                 : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
-            <span className="text-[9px] font-bold text-blue-700 dark:text-[#0a84ff] uppercase block truncate">Validées</span>
-            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.sparringCount}</span>
+            <span className="text-[10px] font-bold text-blue-900 dark:text-[#0a84ff] uppercase block truncate">Validées</span>
+            <span className="text-base font-black text-slate-900 dark:text-white font-mono">{stats.sparringCount}</span>
           </button>
 
           <button 
             onClick={() => setStatusFilter(statusFilter === 'drilling' ? 'all' : 'drilling')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'drilling' 
-                ? 'bg-amber-50 border-amber-200 ring-1 ring-amber-300 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a]' 
+                ? 'bg-amber-100 border-amber-400 ring-2 ring-amber-400/50 shadow-sm' 
                 : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
-            <span className="text-[9px] font-bold text-amber-700 dark:text-[#ffd60a] uppercase block truncate">En Drill</span>
-            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.drillingCount}</span>
+            <span className="text-[10px] font-bold text-amber-950 dark:text-[#ffd60a] uppercase block truncate">En Drill</span>
+            <span className="text-base font-black text-slate-900 dark:text-white font-mono">{stats.drillingCount}</span>
           </button>
 
           <button 
             onClick={() => setStatusFilter(statusFilter === 'to_learn' ? 'all' : 'to_learn')}
             className={`p-2 rounded-xl text-center transition-all border ${
               statusFilter === 'to_learn' 
-                ? 'bg-slate-100 border-slate-300 ring-1 ring-slate-300 text-slate-800 dark:bg-white/20 dark:border-white/40' 
+                ? 'bg-slate-200 border-slate-400 ring-2 ring-slate-400/50 shadow-sm' 
                 : 'bg-white dark:bg-white/5 border-slate-200/80 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs'
             }`}
           >
-            <span className="text-[9px] font-bold text-slate-500 dark:text-white/50 uppercase block truncate">À Découvrir</span>
-            <span className="text-sm font-black text-slate-900 dark:text-white font-mono">{stats.toLearnCount}</span>
+            <span className="text-[10px] font-bold text-slate-700 dark:text-white/70 uppercase block truncate">À Découvrir</span>
+            <span className="text-base font-black text-slate-900 dark:text-white font-mono">{stats.toLearnCount}</span>
           </button>
         </div>
 
         {/* Cumulative Reps Counters */}
         <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-white/5 text-[11px]">
-          <span className="text-slate-600 dark:text-white/50 flex items-center gap-1.5">
+          <span className="text-slate-700 dark:text-white/70 font-semibold flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-amber-600 dark:text-[#ffd60a]" />
             <span>Répétitions Drill :</span>
-            <strong className="text-slate-900 dark:text-white font-mono">{stats.totalDrillReps}</strong>
+            <strong className="text-slate-900 dark:text-white font-mono font-black">{stats.totalDrillReps}</strong>
           </span>
-          <span className="text-slate-600 dark:text-white/50 flex items-center gap-1.5">
+          <span className="text-slate-700 dark:text-white/70 font-semibold flex items-center gap-1.5">
             <Flame className="w-3.5 h-3.5 text-rose-600 dark:text-[#ff453a]" />
             <span>Passées en combat :</span>
-            <strong className="text-slate-900 dark:text-white font-mono">{stats.totalSparringLandings}</strong>
+            <strong className="text-slate-900 dark:text-white font-mono font-black">{stats.totalSparringLandings}</strong>
           </span>
         </div>
       </div>
@@ -352,14 +352,14 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
           )}
         </div>
 
-        {/* Category Pills - Harmonious Apple iOS Design */}
+        {/* Category Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
           <button
             onClick={() => setCategoryFilter('all')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
               categoryFilter === 'all'
-                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
-                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+                : 'bg-white dark:bg-white/5 text-slate-800 dark:text-white/80 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
             Toutes ({techniqueList.length})
@@ -368,44 +368,44 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
             onClick={() => setCategoryFilter('defense')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'defense'
-                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
-                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+                : 'bg-white dark:bg-white/5 text-slate-800 dark:text-white/80 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <Shield className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+            <Shield className={`w-3.5 h-3.5 ${categoryFilter === 'defense' ? 'text-white' : 'text-amber-600 dark:text-amber-400'}`} />
             <span>Sorties &amp; Défenses</span>
           </button>
           <button
             onClick={() => setCategoryFilter('sweep')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'sweep'
-                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
-                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+                : 'bg-white dark:bg-white/5 text-slate-800 dark:text-white/80 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <RotateCcw className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+            <RotateCcw className={`w-3.5 h-3.5 ${categoryFilter === 'sweep' ? 'text-white' : 'text-emerald-600 dark:text-emerald-400'}`} />
             <span>Renversements</span>
           </button>
           <button
             onClick={() => setCategoryFilter('submission')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'submission'
-                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
-                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+                : 'bg-white dark:bg-white/5 text-slate-800 dark:text-white/80 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <Zap className="w-3 h-3 text-rose-600 dark:text-rose-400" />
+            <Zap className={`w-3.5 h-3.5 ${categoryFilter === 'submission' ? 'text-white' : 'text-rose-600 dark:text-rose-400'}`} />
             <span>Soumissions</span>
           </button>
           <button
             onClick={() => setCategoryFilter('position')}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
               categoryFilter === 'position'
-                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs font-bold'
-                : 'bg-white dark:bg-white/5 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
+                ? 'bg-[#007aff] dark:bg-[#0a84ff] text-white shadow-xs'
+                : 'bg-white dark:bg-white/5 text-slate-800 dark:text-white/80 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10'
             }`}
           >
-            <BookOpen className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+            <BookOpen className={`w-3.5 h-3.5 ${categoryFilter === 'position' ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
             <span>Positions</span>
           </button>
         </div>
@@ -450,15 +450,15 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${catStyle.badge}`}>
                       {catStyle.label}
                     </span>
-                    <span className="text-[10px] text-slate-500 dark:text-white/40 font-mono">
+                    <span className="text-[11px] text-slate-700 dark:text-white/60 font-mono font-semibold">
                       Ceinture {tech.belt_level || 'Blanche'}
                     </span>
-                    <span className="text-[10px] text-slate-500 dark:text-white/40">
-                      {tech.is_gi && tech.is_nogi ? 'Gi & No-Gi' : tech.is_gi ? 'Gi' : 'No-Gi'}
+                    <span className="text-[11px] text-slate-700 dark:text-white/60 font-semibold">
+                      · {tech.is_gi && tech.is_nogi ? 'Gi & No-Gi' : tech.is_gi ? 'Gi' : 'No-Gi'}
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">
+                  <h3 className="text-sm font-black text-slate-900 dark:text-white leading-tight">
                     {tech.name}
                   </h3>
                 </div>
@@ -470,21 +470,21 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                 </div>
               </div>
 
-              {/* 1-Tap Mastery Status Selector (Harmonious Apple iOS Native Style) */}
+              {/* 1-Tap Mastery Status Selector */}
               <div>
-                <label className="text-[10px] font-bold text-slate-500 dark:text-white/40 uppercase tracking-wider block mb-1">
-                  Niveau d'Avancement
+                <label className="text-[11px] font-bold text-slate-700 dark:text-white/60 uppercase tracking-wider block mb-1">
+                  Niveau d&apos;Avancement
                 </label>
-                <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/5">
+                <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10">
                   <button
                     onClick={() => {
                       soundFX.playClick();
                       onUpdateStatus(tech.id, 'to_learn');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[11px] transition-all text-center ${
                       status === 'to_learn'
-                        ? 'bg-white dark:bg-white/20 text-slate-800 dark:text-white shadow-xs font-bold border border-slate-200/80 dark:border-transparent'
-                        : 'text-slate-500 dark:text-white/40 hover:text-slate-800 dark:hover:text-white/70 hover:bg-slate-200/50'
+                        ? 'bg-white dark:bg-white/20 text-slate-900 dark:text-white shadow-xs font-black border border-slate-300 dark:border-transparent'
+                        : 'text-slate-700 dark:text-white/60 font-semibold hover:text-slate-900 dark:hover:text-white hover:bg-white/60'
                     }`}
                   >
                     ⚪ Découverte
@@ -494,10 +494,10 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onUpdateStatus(tech.id, 'drilling');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[11px] transition-all text-center ${
                       status === 'drilling'
-                        ? 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/25 dark:text-amber-200 dark:border-amber-500/40 shadow-xs font-bold'
-                        : 'text-slate-500 dark:text-white/40 hover:text-amber-700 dark:hover:text-amber-300 hover:bg-amber-50/50'
+                        ? 'bg-amber-100 text-amber-950 border border-amber-400 dark:bg-amber-500/25 dark:text-amber-200 dark:border-amber-500/40 shadow-xs font-black'
+                        : 'text-slate-700 dark:text-white/60 font-semibold hover:text-amber-950 dark:hover:text-amber-300 hover:bg-amber-50'
                     }`}
                   >
                     🟡 Drill
@@ -507,10 +507,10 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onUpdateStatus(tech.id, 'sparring_ready');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[11px] transition-all text-center ${
                       status === 'sparring_ready'
-                        ? 'bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/25 dark:text-blue-200 dark:border-blue-500/40 shadow-xs font-bold'
-                        : 'text-slate-500 dark:text-white/40 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50/50'
+                        ? 'bg-blue-100 text-blue-950 border border-blue-400 dark:bg-blue-500/25 dark:text-blue-200 dark:border-blue-500/40 shadow-xs font-black'
+                        : 'text-slate-700 dark:text-white/60 font-semibold hover:text-blue-950 dark:hover:text-blue-300 hover:bg-blue-50'
                     }`}
                   >
                     🔵 Sparring
@@ -520,10 +520,10 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playSubmissionChime();
                       onUpdateStatus(tech.id, 'mastered');
                     }}
-                    className={`py-1.5 px-1 rounded-lg text-[10px] font-semibold transition-all text-center ${
+                    className={`py-1.5 px-1 rounded-lg text-[11px] transition-all text-center ${
                       status === 'mastered'
-                        ? 'bg-purple-50 text-purple-800 border border-purple-200 dark:bg-purple-500/25 dark:text-purple-200 dark:border-purple-500/40 shadow-xs font-bold'
-                        : 'text-slate-500 dark:text-white/40 hover:text-purple-700 dark:hover:text-purple-300 hover:bg-purple-50/50'
+                        ? 'bg-purple-100 text-purple-950 border border-purple-400 dark:bg-purple-500/25 dark:text-purple-200 dark:border-purple-500/40 shadow-xs font-black'
+                        : 'text-slate-700 dark:text-white/60 font-semibold hover:text-purple-950 dark:hover:text-purple-300 hover:bg-purple-50'
                     }`}
                   >
                     🟣 Réflexe
@@ -534,12 +534,12 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
               {/* Reps Counters & Actions Row */}
               <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100 dark:border-white/5 flex-wrap">
                 {/* Drill Reps counter */}
-                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-xl border border-slate-200/80 dark:border-white/5">
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-white/50">Drill:</span>
+                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-xl border border-slate-200 dark:border-white/5">
+                  <span className="text-[11px] font-bold text-slate-700 dark:text-white/70">Drill:</span>
                   <button
                     onClick={() => onUpdateReps(tech.id, -5, 0)}
                     disabled={(progress?.drillReps || 0) <= 0}
-                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-slate-700 dark:text-white border border-slate-200 dark:border-white/10 shadow-xs"
+                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-slate-800 dark:text-white border border-slate-300 dark:border-white/10 shadow-xs"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
@@ -548,19 +548,19 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                   </span>
                   <button
                     onClick={() => onUpdateReps(tech.id, 5, 0)}
-                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 active:scale-95 flex items-center justify-center text-slate-700 dark:text-white border border-slate-200 dark:border-white/10 shadow-xs"
+                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 active:scale-95 flex items-center justify-center text-slate-800 dark:text-white border border-slate-300 dark:border-white/10 shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
                 </div>
 
                 {/* Sparring Lands counter */}
-                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-xl border border-slate-200/80 dark:border-white/5">
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-white/50">Sparring:</span>
+                <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-xl border border-slate-200 dark:border-white/5">
+                  <span className="text-[11px] font-bold text-slate-700 dark:text-white/70">Combat:</span>
                   <button
                     onClick={() => onUpdateReps(tech.id, 0, -1)}
                     disabled={(progress?.sparringSuccessCount || 0) <= 0}
-                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-slate-700 dark:text-white border border-slate-200 dark:border-white/10 shadow-xs"
+                    className="w-5 h-5 rounded-md bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white/20 disabled:opacity-30 flex items-center justify-center text-slate-800 dark:text-white border border-slate-300 dark:border-white/10 shadow-xs"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
@@ -588,8 +588,8 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                     title="Ajouter une note personnelle"
                     className={`p-1.5 rounded-xl border transition-all ${
                       progress?.notes 
-                        ? 'bg-amber-100 border-amber-300 text-amber-800 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a]/40 dark:text-[#ffd60a]' 
-                        : 'bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/60 hover:text-slate-800 dark:hover:text-white'
+                        ? 'bg-amber-100 border-amber-300 text-amber-900 dark:bg-[#ffd60a]/20 dark:border-[#ffd60a]/40 dark:text-[#ffd60a]' 
+                        : 'bg-white dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     <Edit3 className="w-3.5 h-3.5" />
@@ -600,9 +600,9 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playClick();
                       onSelectTechnique(tech);
                     }}
-                    className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-800 dark:text-white text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-slate-200 dark:border-transparent"
+                    className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 text-slate-800 dark:text-white text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-slate-300 dark:border-transparent"
                   >
-                    <Play className="w-3 h-3 text-[#ff3b30] dark:text-[#ff453a]" />
+                    <Play className="w-3 h-3 text-[#ff3b30] fill-[#ff3b30]" />
                     <span>Fiche</span>
                   </button>
 
@@ -611,9 +611,9 @@ export const TechniqueTrackingBoard: React.FC<TechniqueTrackingBoardProps> = ({
                       soundFX.playRouteNav();
                       handleLaunchInGPS(tech);
                     }}
-                    className="px-2.5 py-1.5 rounded-xl bg-blue-50 dark:bg-[#0a84ff]/20 hover:bg-blue-100 dark:hover:bg-[#0a84ff]/30 text-blue-700 dark:text-[#0a84ff] text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all border border-blue-200 dark:border-transparent"
+                    className="px-2.5 py-1.5 rounded-xl bg-[#007aff] hover:bg-[#0062cc] text-white text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all shadow-xs"
                   >
-                    <Navigation className="w-3 h-3" />
+                    <Navigation className="w-3 h-3 fill-white" />
                     <span>GPS</span>
                   </button>
                 </div>
