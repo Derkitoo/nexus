@@ -20,10 +20,12 @@ import {
   Sparkles,
   Award,
   Maximize2,
-  Minimize2
+  Minimize2,
+  Radio
 } from 'lucide-react';
 import { Technique, TacticalSystem } from '@/types/bjj';
 import { TechniqueVideoPreview } from './TechniqueVideoPreview';
+import { TacticalRadarHUD } from './TacticalRadarHUD';
 import { soundFX } from '@/utils/audioFeedback';
 
 interface GPSViewProps {
@@ -51,7 +53,7 @@ export const GPSView: React.FC<GPSViewProps> = ({
   onBackToDashboard,
   onOpenFlowModal,
 }) => {
-  const [sheetMode, setSheetMode] = useState<'actions' | 'details'>('actions');
+  const [sheetMode, setSheetMode] = useState<'actions' | 'radar' | 'details'>('actions');
   const [isMatMode, setIsMatMode] = useState(false);
   
   // Interactive Checklist Mastery per technique (localStorage)
@@ -213,10 +215,27 @@ export const GPSView: React.FC<GPSViewProps> = ({
           <TechniqueVideoPreview
             technique={currentTechnique}
             categoryBadgeColor={currentStyles.dot}
+            allTechniques={allTechniques}
+            onSelectReaction={onSelectReaction}
           />
 
           {/* Floating Apple Maps Map Controls (Right Edge) */}
           <div className="absolute top-3 right-3 flex flex-col gap-2 z-20">
+            <button
+              onClick={() => {
+                soundFX.playClick();
+                setSheetMode(sheetMode === 'radar' ? 'actions' : 'radar');
+              }}
+              className={`w-9 h-9 rounded-full backdrop-blur-md flex items-center justify-center active:scale-90 transition-all border shadow-md ${
+                sheetMode === 'radar'
+                  ? 'bg-emerald-600 text-white border-emerald-500'
+                  : 'bg-white/90 dark:bg-[#1c1c1e]/90 text-emerald-600 dark:text-emerald-400 border-slate-200/80 dark:border-white/20'
+              }`}
+              title="Activer le Radar Tactique"
+            >
+              <Radio className="w-4 h-4" />
+            </button>
+
             <button
               onClick={() => {
                 soundFX.playClick();
@@ -259,25 +278,47 @@ export const GPSView: React.FC<GPSViewProps> = ({
             className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all ${
               sheetMode === 'actions'
                 ? 'bg-white dark:bg-[#2c2c2e] text-slate-900 dark:text-white shadow-xs'
-                : 'text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white'
+                : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Décisions ({reactions.length})
+          </button>
+          <button
+            onClick={() => setSheetMode('radar')}
+            className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+              sheetMode === 'radar'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Radio className="w-3.5 h-3.5 text-emerald-500" />
+            <span>Radar Tactique</span>
           </button>
           <button
             onClick={() => setSheetMode('details')}
             className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
               sheetMode === 'details'
                 ? 'bg-white dark:bg-[#2c2c2e] text-slate-900 dark:text-white shadow-xs'
-                : 'text-slate-500 dark:text-white/50 hover:text-slate-900 dark:hover:text-white'
+                : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <span>Checklist &amp; Débrief</span>
+            <span>Points Clés</span>
             <span className="text-[10px] font-mono text-emerald-600 dark:text-[#30d158] font-bold">
               {masteryPercent}%
             </span>
           </button>
         </div>
+
+        {/* Radar Mode Content */}
+        {sheetMode === 'radar' && (
+          <div className="mt-3 space-y-3 animate-spring-in">
+            <TacticalRadarHUD
+              technique={currentTechnique}
+              allTechniques={allTechniques}
+              onSelectReaction={onSelectReaction}
+            />
+          </div>
+        )}
 
         {/* Details Mode Content */}
         {sheetMode === 'details' && (
